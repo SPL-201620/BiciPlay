@@ -6,5 +6,5 @@ public interface RecorridosIndiviuales {
 	public boolean iniciaRecorrido (Ruta ruta);
 	public boolean registrarPosicion (Ruta ruta);
 	public boolean terminaRecorrido (Ruta ruta);
-
+	
 }
