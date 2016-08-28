@@ -185,49 +185,8 @@
 [info] 
 [info] (Server started, use Ctrl+D to stop and go back to the console...)
 [info] 
-[error] p.c.s.n.PlayRequestHandler - Exception caught in Netty
-[info] java.security.PrivilegedActionException: null
-[info] 	at java.security.AccessController.doPrivileged(Native Method)
-[info] 	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:40)
-[info] 	at play.runsupport.Reloader.reload(Reloader.scala:337)
-[info] 	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:123)
-[info] 	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:121)
-[info] 	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
-[info] 	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
-[info] 	at java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1402)
-[info] 	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
-[info] 	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
-[info] Caused by: java.util.concurrent.TimeoutException: Futures timed out after [300000 milliseconds]
-[info] 	at scala.concurrent.impl.Promise$DefaultPromise.ready(Promise.scala:219)
-[info] 	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:223)
-[info] 	at scala.concurrent.Await$$anonfun$result$1.apply(package.scala:190)
-[info] 	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:53)
-[info] 	at scala.concurrent.Await$.result(package.scala:190)
-[info] 	at play.forkrun.ForkRun$$anonfun$askForReload$1.apply(ForkRun.scala:128)
-[info] 	at play.forkrun.ForkRun$$anonfun$askForReload$1.apply(ForkRun.scala:126)
-[info] 	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:339)
-[info] 	at play.runsupport.Reloader$$anon$3.run(Reloader.scala:44)
-[info] 	at java.security.AccessController.doPrivileged(Native Method)
-[error] p.c.s.n.PlayRequestHandler - Exception caught in Netty
-[info] java.security.PrivilegedActionException: null
-[info] 	at java.security.AccessController.doPrivileged(Native Method)
-[info] 	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:40)
-[info] 	at play.runsupport.Reloader.reload(Reloader.scala:337)
-[info] 	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:123)
-[info] 	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:121)
-[info] 	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
-[info] 	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
-[info] 	at java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1402)
-[info] 	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
-[info] 	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
-[info] Caused by: java.util.concurrent.TimeoutException: Futures timed out after [300000 milliseconds]
-[info] 	at scala.concurrent.impl.Promise$DefaultPromise.ready(Promise.scala:219)
-[info] 	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:223)
-[info] 	at scala.concurrent.Await$$anonfun$result$1.apply(package.scala:190)
-[info] 	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:53)
-[info] 	at scala.concurrent.Await$.result(package.scala:190)
-[info] 	at play.forkrun.ForkRun$$anonfun$askForReload$1.apply(ForkRun.scala:128)
-[info] 	at play.forkrun.ForkRun$$anonfun$askForReload$1.apply(ForkRun.scala:126)
-[info] 	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:339)
-[info] 	at play.runsupport.Reloader$$anon$3.run(Reloader.scala:44)
-[info] 	at java.security.AccessController.doPrivileged(Native Method)
+[info] Compiling 6 Scala sources and 10 Java sources to C:\Users\lenovo\Documents\GitHub\BiciPlay\target\scala-2.11\classes...
+[info] 'compiler-interface' not yet compiled for Scala 2.11.7. Compiling...
+[info]   Compilation completed in 16.302 s
+[info] application - ApplicationTimer demo: Starting application at 2016-08-28T21:32:50.632Z
+[info] play.api.Play - Application started (Dev)

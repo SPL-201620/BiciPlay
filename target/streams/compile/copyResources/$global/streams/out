@@ -1,4 +1,4 @@
-[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/play-java/conf/application.conf,/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/play-java/target/scala-2.11/classes/application.conf)[0m
-[0m[[0mdebug[0m] [0m	(/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/play-java/conf/logback.xml,/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/play-java/target/scala-2.11/classes/logback.xml)[0m
-[0m[[0mdebug[0m] [0m	(/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/play-java/conf/routes,/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/play-java/target/scala-2.11/classes/routes)[0m
+[debug] Copy resource mappings: 
+[debug] 	(C:\Users\lenovo\Documents\GitHub\BiciPlay\conf\application.conf,C:\Users\lenovo\Documents\GitHub\BiciPlay\target\scala-2.11\classes\application.conf)
+[debug] 	(C:\Users\lenovo\Documents\GitHub\BiciPlay\conf\logback.xml,C:\Users\lenovo\Documents\GitHub\BiciPlay\target\scala-2.11\classes\logback.xml)
+[debug] 	(C:\Users\lenovo\Documents\GitHub\BiciPlay\conf\routes,C:\Users\lenovo\Documents\GitHub\BiciPlay\target\scala-2.11\classes\routes)

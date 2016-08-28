@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/Proyecto BiciPlay/BiciPlay/conf/routes
-// @DATE:Sun Aug 28 12:34:38 COT 2016
+// @SOURCE:C:/Users/lenovo/Documents/GitHub/BiciPlay/conf/routes
+// @DATE:Sun Aug 28 16:32:14 COT 2016
 
 
 package router {
