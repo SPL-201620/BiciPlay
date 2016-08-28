@@ -7,15 +7,15 @@
 		revision="1.0-SNAPSHOT"
 		conf="fork-run"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool, fork-run"
-		date="20160828121721"/>
+		date="20160828123438"/>
 	<dependencies>
 		<module organisation="com.typesafe.play" name="fork-run_2.11">
-			<revision name="2.5.6" status="release" pubdate="20160823172828" resolver="public" artresolver="public" homepage="https://playframework.com" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="0">
+			<revision name="2.5.6" status="release" pubdate="20160823172828" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://playframework.com" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="0">
 				<license name="Apache-2.0" url="http://www.apache.org/licenses/LICENSE-2.0.html"/>
-				<metadata-artifact status="successful" details="" size="2055" time="460" location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run_2.11/ivy-2.5.6.xml" searched="true" original-local-location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run_2.11/ivy-2.5.6.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/fork-run_2.11/2.5.6/fork-run_2.11-2.5.6.pom"/>
+				<metadata-artifact status="no" details="" size="2991" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run_2.11/ivy-2.5.6.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/fork-run_2.11/2.5.6/fork-run_2.11-2.5.6.pom"/>
 				<caller organisation="play-java" name="play-java_2.11" conf="fork-run" rev="2.5.6" rev-constraint-default="2.5.6" rev-constraint-dynamic="2.5.6" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="fork-run_2.11" type="jar" ext="jar" status="successful" details="" size="99456" time="1070" location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run_2.11/jars/fork-run_2.11-2.5.6.jar">
+					<artifact name="fork-run_2.11" type="jar" ext="jar" status="no" details="" size="99456" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run_2.11/jars/fork-run_2.11-2.5.6.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/play/fork-run_2.11/2.5.6/fork-run_2.11-2.5.6.jar"/>
 					</artifact>
 				</artifacts>
@@ -82,12 +82,12 @@
 			</revision>
 		</module>
 		<module organisation="com.typesafe.play" name="fork-run-protocol_2.11">
-			<revision name="2.5.6" status="release" pubdate="20160823172833" resolver="public" artresolver="public" homepage="https://playframework.com" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="2">
+			<revision name="2.5.6" status="release" pubdate="20160823172833" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://playframework.com" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="2">
 				<license name="Apache-2.0" url="http://www.apache.org/licenses/LICENSE-2.0.html"/>
-				<metadata-artifact status="successful" details="" size="2717" time="488" location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run-protocol_2.11/ivy-2.5.6.xml" searched="true" original-local-location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run-protocol_2.11/ivy-2.5.6.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/fork-run-protocol_2.11/2.5.6/fork-run-protocol_2.11-2.5.6.pom"/>
+				<metadata-artifact status="no" details="" size="3340" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run-protocol_2.11/ivy-2.5.6.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/fork-run-protocol_2.11/2.5.6/fork-run-protocol_2.11-2.5.6.pom"/>
 				<caller organisation="com.typesafe.play" name="fork-run_2.11" conf="default, compile, runtime, master" rev="2.5.6" rev-constraint-default="2.5.6" rev-constraint-dynamic="2.5.6" callerrev="2.5.6"/>
 				<artifacts>
-					<artifact name="fork-run-protocol_2.11" type="jar" ext="jar" status="successful" details="" size="396781" time="1857" location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run-protocol_2.11/jars/fork-run-protocol_2.11-2.5.6.jar">
+					<artifact name="fork-run-protocol_2.11" type="jar" ext="jar" status="no" details="" size="396781" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/fork-run-protocol_2.11/jars/fork-run-protocol_2.11-2.5.6.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/play/fork-run-protocol_2.11/2.5.6/fork-run-protocol_2.11-2.5.6.jar"/>
 					</artifact>
 				</artifacts>
@@ -245,36 +245,36 @@
 			</revision>
 		</module>
 		<module organisation="com.typesafe.play" name="run-support_2.11">
-			<revision name="2.5.6" status="release" pubdate="20160823172807" resolver="public" artresolver="public" homepage="https://playframework.com" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="3">
+			<revision name="2.5.6" status="release" pubdate="20160823172807" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://playframework.com" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="3">
 				<license name="Apache-2.0" url="http://www.apache.org/licenses/LICENSE-2.0.html"/>
-				<metadata-artifact status="successful" details="" size="2908" time="485" location="/Users/jose/.ivy2/cache/com.typesafe.play/run-support_2.11/ivy-2.5.6.xml" searched="true" original-local-location="/Users/jose/.ivy2/cache/com.typesafe.play/run-support_2.11/ivy-2.5.6.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/run-support_2.11/2.5.6/run-support_2.11-2.5.6.pom"/>
+				<metadata-artifact status="no" details="" size="3468" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/run-support_2.11/ivy-2.5.6.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/run-support_2.11/2.5.6/run-support_2.11-2.5.6.pom"/>
 				<caller organisation="com.typesafe.play" name="fork-run-protocol_2.11" conf="compile, runtime" rev="2.5.6" rev-constraint-default="2.5.6" rev-constraint-dynamic="2.5.6" callerrev="2.5.6"/>
 				<artifacts>
-					<artifact name="run-support_2.11" type="jar" ext="jar" status="successful" details="" size="156473" time="1173" location="/Users/jose/.ivy2/cache/com.typesafe.play/run-support_2.11/jars/run-support_2.11-2.5.6.jar">
+					<artifact name="run-support_2.11" type="jar" ext="jar" status="no" details="" size="156473" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/run-support_2.11/jars/run-support_2.11-2.5.6.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/play/run-support_2.11/2.5.6/run-support_2.11-2.5.6.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="com.typesafe.play" name="twirl-compiler_2.11">
-			<revision name="1.1.1" status="release" pubdate="20150514000027" resolver="public" artresolver="public" homepage="https://github.com/playframework/twirl" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="6">
+			<revision name="1.1.1" status="release" pubdate="20150514000027" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/playframework/twirl" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="6">
 				<license name="Apache-2.0" url="http://www.apache.org/licenses/LICENSE-2.0.html"/>
-				<metadata-artifact status="successful" details="" size="2064" time="442" location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-compiler_2.11/ivy-1.1.1.xml" searched="true" original-local-location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-compiler_2.11/ivy-1.1.1.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/twirl-compiler_2.11/1.1.1/twirl-compiler_2.11-1.1.1.pom"/>
+				<metadata-artifact status="no" details="" size="3003" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-compiler_2.11/ivy-1.1.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/twirl-compiler_2.11/1.1.1/twirl-compiler_2.11-1.1.1.pom"/>
 				<caller organisation="com.typesafe.play" name="run-support_2.11" conf="compile, runtime" rev="1.1.1" rev-constraint-default="1.1.1" rev-constraint-dynamic="1.1.1" callerrev="2.5.6"/>
 				<artifacts>
-					<artifact name="twirl-compiler_2.11" type="jar" ext="jar" status="successful" details="" size="111434" time="870" location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-compiler_2.11/jars/twirl-compiler_2.11-1.1.1.jar">
+					<artifact name="twirl-compiler_2.11" type="jar" ext="jar" status="no" details="" size="111434" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-compiler_2.11/jars/twirl-compiler_2.11-1.1.1.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/play/twirl-compiler_2.11/1.1.1/twirl-compiler_2.11-1.1.1.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="com.typesafe.play" name="twirl-parser_2.11">
-			<revision name="1.1.1" status="release" pubdate="20150514000042" resolver="public" artresolver="public" homepage="https://github.com/playframework/twirl" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="13">
+			<revision name="1.1.1" status="release" pubdate="20150514000042" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/playframework/twirl" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="13">
 				<license name="Apache-2.0" url="http://www.apache.org/licenses/LICENSE-2.0.html"/>
-				<metadata-artifact status="successful" details="" size="2587" time="466" location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-parser_2.11/ivy-1.1.1.xml" searched="true" original-local-location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-parser_2.11/ivy-1.1.1.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/twirl-parser_2.11/1.1.1/twirl-parser_2.11-1.1.1.pom"/>
+				<metadata-artifact status="no" details="" size="3187" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-parser_2.11/ivy-1.1.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/twirl-parser_2.11/1.1.1/twirl-parser_2.11-1.1.1.pom"/>
 				<caller organisation="com.typesafe.play" name="twirl-compiler_2.11" conf="compile, runtime" rev="1.1.1" rev-constraint-default="1.1.1" rev-constraint-dynamic="1.1.1" callerrev="1.1.1"/>
 				<artifacts>
-					<artifact name="twirl-parser_2.11" type="jar" ext="jar" status="successful" details="" size="292233" time="1410" location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-parser_2.11/jars/twirl-parser_2.11-1.1.1.jar">
+					<artifact name="twirl-parser_2.11" type="jar" ext="jar" status="no" details="" size="292233" time="0" location="/Users/jose/.ivy2/cache/com.typesafe.play/twirl-parser_2.11/jars/twirl-parser_2.11-1.1.1.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/play/twirl-parser_2.11/1.1.1/twirl-parser_2.11-1.1.1.jar"/>
 					</artifact>
 				</artifacts>

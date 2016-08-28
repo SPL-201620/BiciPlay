@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/play-java/conf/routes
-// @DATE:Sun Aug 28 12:10:17 COT 2016
+// @SOURCE:/Users/jose/Documents/DatosMac/Jose/Universidad/2016-2/Fábricas/Proyecto BiciPlay/BiciPlay/conf/routes
+// @DATE:Sun Aug 28 12:34:38 COT 2016
 
 package controllers;
 
