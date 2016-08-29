@@ -65,3 +65,25 @@ server.pid
 .sbtserver/connections/play-fork-run-7b5d0d5b-ae06-4dac-a1e1-99a53e783ed6.log
 
 .sbtserver/connections/play-fork-run-7b5d0d5b-ae06-4dac-a1e1-99a53e783ed6.log.01
+
+.idea/modules/root.iml
+
+.idea/modules/root.iml
+
+.idea/play2_settings.xml
+
+.sbtserver/connections/master.log
+
+.sbtserver/connections/play-fork-run-5f759243-4482-4bbd-9f79-4b0b8a6088d0.log
+
+.sbtserver/connections/play-fork-run-5f759243-4482-4bbd-9f79-4b0b8a6088d0.log.01
+
+.sbtserver/connections/play-fork-run-5f759243-4482-4bbd-9f79-4b0b8a6088d0.log.02
+
+.sbtserver/connections/play-fork-run-ab82b347-7013-45af-a840-ab1093634eb0.log
+
+.sbtserver/master.log
+
+.sbtserver/previous.log
+
+project/.sbtserver
