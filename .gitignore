@@ -69,8 +69,6 @@ server.pid
 
 .idea/modules/root.iml
 
-.idea/play2_settings.xml
-
 project/.sbtserver
 
 *.cache
