@@ -1,0 +1,16 @@
+New log file opened at Sun Aug 28 21:34:38 COT 2016 by 74272@Joses-MacBook-Pro-2.local
+Taking next connection to: 51821
+New client attempting to connect on port: 51822-51821
+  Address = /192.168.0.7:51821
+This client on port 51822 has uuid 85e04ca7-4d8d-4199-8fa7-c8e08ef32fca configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-85e04ca7-4d8d-4199-8fa7-c8e08ef32fca
+Taking next connection to: 51821
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51821
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 74272@Joses-MacBook-Pro-2.local logs at Sun Aug 28 21:40:38 COT 2016, goodbye.

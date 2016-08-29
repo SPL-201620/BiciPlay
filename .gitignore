@@ -45,23 +45,4 @@ crashlytics-build.properties
 fabric.properties
 
 
-# Ignore Play! working directory #
-bin/
-/db
-.eclipse
-/lib/
-/logs/
-/modules
-/project/target
-/project/project
-/target
-tmp/
-test-result
-server.pid
-*.eml
-/dist/
-.cache
-*.log
-*.log.01
-*.log.02
 
