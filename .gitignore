@@ -60,3 +60,8 @@ server.pid
 *.eml
 /dist/
 .cache
+.sbtserver/master.log.01
+
+.sbtserver/connections/play-fork-run-7b5d0d5b-ae06-4dac-a1e1-99a53e783ed6.log
+
+.sbtserver/connections/play-fork-run-7b5d0d5b-ae06-4dac-a1e1-99a53e783ed6.log.01
