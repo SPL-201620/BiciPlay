@@ -74,5 +74,3 @@ server.pid
 project/.sbtserver
 
 *.cache
-
-*.class
