@@ -65,16 +65,3 @@ server.pid
 *.log.01
 *.log.02
 
-.idea/modules/root.iml
-
-.idea/modules/root.iml
-
-project/.sbtserver
-
-*.cache
-
-/.idea
-/.idea_modules
-/.classpath
-/.project
-/.settings
