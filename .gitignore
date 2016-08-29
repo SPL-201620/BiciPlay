@@ -87,3 +87,5 @@ server.pid
 .sbtserver/previous.log
 
 project/.sbtserver
+
+.sbtserver/connections/play-fork-run-7462cf24-d2d8-4350-a243-ad8a4fe596bf.log
