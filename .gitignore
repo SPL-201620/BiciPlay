@@ -71,3 +71,7 @@ server.pid
 .idea/play2_settings.xml
 
 project/.sbtserver
+
+*.cache
+
+*.class
