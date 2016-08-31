@@ -9,7 +9,8 @@ public interface IConfigurador {
 
     public Configuracion crearConfiguracion();
     public boolean crearPieza (Pieza pieza);
-    public boolean agregarPieza(int idPieza);
+    public boolean agregarPieza(int idPieza, int idConfiguracion);
     public List<Pieza> darPiezas();
+    public boolean esConfiguracionCorrecta(int idConfiguracion);
 
 }
