@@ -4,6 +4,8 @@ import play.mvc.*;
 
 import views.html.*;
 
+import java.io.File;
+
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
@@ -17,7 +19,7 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok().sendFile(new File("public/index.html"));
     }
 
 }
