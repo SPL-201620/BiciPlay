@@ -1,0 +1,62 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "cupiexamenes",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "timezone":"America/Bogota",
+    "logging":false,
+    "server":{
+      "http":{
+        "port": 8000
+      },
+      "https":{
+        "port": 8081
+      }
+    },
+    "session":{
+      "secret": "1U28s0Gjisj27a8Shfhuihdfnjcnudi)L"
+    }
+  },
+  "test": {
+    "username": "user",
+    "password": "pass",
+    "database": "database",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "timezone":"America/Bogota",
+    "logging":false,
+    "server":{
+      "http":{
+        "port": 8000
+      },
+      "https":{
+        "port": 8081
+      }
+    },
+    "session":{
+      "secret": "1U28s0Gjisj27a8Shfhuihdfnjcnudi)L"
+    }
+  },
+  "production": {
+    "username": "user",
+    "password": "pass",
+    "database": "database",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "timezone":"America/Bogota",
+    "logging":false,
+    "server":{
+      "http":{
+        "port": 8000
+      },
+      "https":{
+        "port": 8081
+      }
+    },
+    "session":{
+      "secret": "1U28s0Gjisj27a8Shfhuihdfnjcnudi)L"
+    }
+  }
+}

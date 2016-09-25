@@ -1,0 +1,36 @@
+<div layout="row">
+    <span flex="20"></span>
+    <div flex="60" ng-cloak>
+        <md-toolbar md-scroll-shrink>
+            <div class="md-toolbar-tools">
+                <h3>
+                    <span>Pregunta {{pregunta.numero}}</span>
+                </h3>
+                <span flex></span>
+                <h3>
+                    {{pregunta.porcentaje}}%
+                </h3>
+            </div>
+        </md-toolbar>
+        <md-content flex>
+            <h3>Enunciado</h3>
+            <span>{{pregunta.enunciado}}</span>
+            <div ui-ace="{
+                theme:'eclipse',
+                mode:'java',
+                require: ['ace/ext/language_tools'],
+                advanced: {
+                    enableSnippets: true,
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true
+                }
+            }"></div>
+            <div layout="row">
+                <span flex></span>
+                <md-button class="md-raised md-primary">Compilar</md-button>
+                <md-button class="md-raised">Enviar</md-button>
+            </div>
+        </md-content>
+    </div>
+    <span flex="20"></span>
+</div>

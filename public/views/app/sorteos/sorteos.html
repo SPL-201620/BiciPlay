@@ -1,0 +1,40 @@
+<md-button ng-click="showForm = !showForm" class="md-raised md-primary">Crear resultado sorteo</md-button>
+<md-content class="md-padding" layout="row" layout-align="center center">
+    <md-card md-theme-watch flex-gt-sm="33" flex="66" ng-if="showForm">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Nuevo sorteo</span>
+            </md-card-title-text>
+        </md-card-title>
+        <section class="md-padding" layout="column">
+            <md-input-container>
+                <label>Fecha</label>
+                <md-datepicker ng-model="sorteo.fecha" required></md-datepicker>
+            </md-input-container>
+            <md-input-container>
+                <label>Código lotería</label>
+                <input ng-model="sorteo.codigoLoteria" required ng-pattern="/^[0-9]{3}$/" maxlength="3">
+                <div ng-messages="sorteo.codigoLoteria.$error">
+                    <div ng-message="pattern">El códogo de lotería debe tener 3 números</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Número ganador</label>
+                <input ng-model="sorteo.numeroGanador" ng-pattern="/^[0-9]*$/" maxlength="6" required>
+                <div ng-messages="sorteo.numeroGanador.$error">
+                    <div ng-message="pattern">Sólo pueden ser números</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Número de sorteo</label>
+                <input ng-model="sorteo.numeroSorteo" ng-pattern="/^[0-9]*$/" maxlength="6" required>
+                <div ng-messages="sorteo.numeroSorteo.$error">
+                    <div ng-message="pattern">Sólo pueden ser números</div>
+                </div>
+            </md-input-container>
+        </section>
+        <md-card-actions layout="column" layout-align="center">
+            <md-button ng-click="save(sorteo)" class="md-raised md-primary">Crear resultado sorteo</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>

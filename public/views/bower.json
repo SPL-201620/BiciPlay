@@ -1,0 +1,26 @@
+{
+  "name": "CupiExamenes",
+  "homepage": "https://github.com/josemiguesuarez/lit-cursera",
+  "authors": [
+    "Carlos Felipe Agudelo <cf.agudelo12@uniandes.edu.co>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.1.1",
+    "angular": "^1.5.8",
+    "jquery": "^3.1.0",
+    "moment": "^2.15.0",
+    "angular-route": "^1.5.8",
+    "angular-ui-ace": "^0.2.3"
+  }
+}
