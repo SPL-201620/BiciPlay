@@ -4,8 +4,16 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
+
+# ejemplo  postman GET
+GET     /api/usuarios/registroGet                      controllers.usuarios.UsuariosController.registroGet
+
+# ejemplo  postman POST
+POST     /api/usuarios/registroPost                    controllers.usuarios.UsuariosController.registroPost
+
+# Control para el registro de usuario
+POST     /api/usuarios/registro                    controllers.usuarios.UsuariosController.registro
+
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
