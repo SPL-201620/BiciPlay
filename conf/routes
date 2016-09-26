@@ -12,7 +12,13 @@ GET     /api/usuarios/registroGet                      controllers.usuarios.Usua
 POST     /api/usuarios/registroPost                    controllers.usuarios.UsuariosController.registroPost
 
 # Control para el registro de usuario
-POST     /api/usuarios/registro                    controllers.usuarios.UsuariosController.registro
+POST     /api/usuarios/registro                        controllers.usuarios.UsuariosController.registro
+
+# Control para el login
+POST     /api/usuarios/login                           controllers.usuarios.UsuariosController.login
+
+# Control para el
+GET     /api/usuarios/loggedin                         controllers.usuarios.UsuariosController.loggedin
 
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message

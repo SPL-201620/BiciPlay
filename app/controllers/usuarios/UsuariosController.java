@@ -16,6 +16,8 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class UsuariosController extends Controller {
+    public final static String ID_USUARIO="idUsuario";
+    public final static String ROL_USUARIO="rol";
 
     @Inject
     public UsuariosController(Counter counter) {
@@ -52,12 +54,39 @@ public class UsuariosController extends Controller {
         } else {
             String name = json.findPath("name").textValue();
             String correo = json.findPath("correo").textValue();
-            String contraseña = json.findPath("contraseña").textValue();
-            if(name == null | correo == null | contraseña == null) {
+            String contrasena = json.findPath("contrasena").textValue();
+            if(name == null || correo == null || contrasena == null) {
                 return badRequest("Missing parameter");
             } else {
                 return ok("OK");
             }
+        }
+    }
+    public Result login() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            String correo = json.findPath("correo").textValue();
+            String contrasena = json.findPath("contrasena").textValue();
+            if(correo == null || contrasena == null) {
+                return badRequest("Missing parameter");
+            } else {
+                session().clear();
+                //TODO el id y demas datos deben ser de la BD
+                session(ID_USUARIO, "100");
+                session(ROL_USUARIO, "admin");
+                return ok("ok prueba loggedin" ); //TODO se debe rtornar todos los datos de la base de datos
+                //TODO identificar el rol del usuario
+            }
+        }
+    }
+    public Result loggedin() {
+        if (session(ID_USUARIO)==null) {
+            return ok("0");
+        }else {
+            //TODO ir a BD igual que el loguin
+            return ok("ok prueba loggedin");
         }
     }
 }
