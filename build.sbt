@@ -12,5 +12,7 @@ libraryDependencies ++= Seq(
   javaWs
 )
 
+libraryDependencies += filters
+
 
 fork in run := true

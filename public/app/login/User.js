@@ -1,7 +1,7 @@
 /*jslint node: true */
 angular.module('app').service('User', userService);
 
-function userService($rootScope, $window, $location, $http, EventHandler) {
+function userService($rootScope, $window, $location, Http) {
     var user = null;
     var self = this;
 
@@ -10,21 +10,24 @@ function userService($rootScope, $window, $location, $http, EventHandler) {
         return user;
     };
     self.login = function(userLogin, callback) {
-        $http.post('/login', userLogin).success(function(data, status, headers, config) {
-            user = data;
+        Http.post('usuarios/loggedin', userLogin).then(function(res) {
+            user = res.data;
             callback();
-        }).error(EventHandler.error);
+        });
     };
-    self.checkLoggedin = function(userLogin) {
-        $http.get('/loggedin').success(function(data, status, headers, config) {
+    self.checkLoggedin = function(callback) {
+        Http.get('usuarios/loggedin').then(function(res) {
+            var data = res.data;
+            console.log("Data", data)
             if (data !== '0') {
                 user = data;
             }
+            callback(data);
         });
     };
     self.logout = function() {
-        $http.post('/logout', {}).success(function(data, status, headers, config) {
+        Http.post('/logout', {}).then(function(res) {
             user = data;
-        }).error(EventHandler.error);
+        });
     };
 }
