@@ -10,7 +10,7 @@ function userService($rootScope, $window, $location, Http) {
         return user;
     };
     self.login = function(userLogin, callback) {
-        Http.post('usuarios/loggedin', userLogin).then(function(res) {
+        Http.post('usuarios/login', userLogin).then(function(res) {
             user = res.data;
             callback();
         });
@@ -26,7 +26,7 @@ function userService($rootScope, $window, $location, Http) {
         });
     };
     self.logout = function() {
-        Http.post('/logout', {}).then(function(res) {
+        Http.post('usuarios/logout', {}).then(function(res) {
             user = data;
         });
     };

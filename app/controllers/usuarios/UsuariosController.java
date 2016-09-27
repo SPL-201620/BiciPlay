@@ -67,8 +67,8 @@ public class UsuariosController extends Controller {
         if(json == null) {
             return badRequest("Expecting Json data");
         } else {
-            String correo = json.findPath("correo").textValue();
-            String contrasena = json.findPath("contrasena").textValue();
+            String correo = json.findPath("username").textValue();
+            String contrasena = json.findPath("password").textValue();
             if(correo == null || contrasena == null) {
                 return badRequest("Missing parameter");
             } else {

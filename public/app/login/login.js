@@ -27,7 +27,9 @@ app.controller('LoginCtrl', function($rootScope, $scope, $http, $location, $rout
                 .ok('Aceptar')
             );
         } else {
-            User.login(credenciales);
+            User.login(credenciales, function () {
+              $route.reload();
+            });
         }
 
 

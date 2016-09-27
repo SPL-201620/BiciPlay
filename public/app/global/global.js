@@ -29,7 +29,7 @@ app.directive('dirGlobal', function(){
               $mdDialog.alert()
               .clickOutsideToClose(true)
               .title('Mensaje de error')
-              .textContent(error.message)
+              .textContent(error)
               .ariaLabel('Alert Dialog')
               .ok('Aceptar')
           );

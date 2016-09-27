@@ -1,6 +1,7 @@
 var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, User) {
     var deferred = $q.defer();
     User.checkLoggedin(function(user) {
+      console.log("user:", user);
         if (user === '0') {
             $timeout(function() {
                 deferred.reject();
@@ -11,6 +12,7 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, User) {
         } else {
             $timeout(deferred.resolve, 0);
             console.log("Usurario:", user)
+            $location.url('/main');
         }
     });
 };
@@ -28,7 +30,7 @@ app.config(function($routeProvider, $httpProvider, $mdThemingProvider) {
                 loggedin: checkLoggedin
             }
         })
-        .when('/apuestas', {
+        .when('/main', {
             controller: 'ApuestasCtrl',
             templateUrl: 'app/apuestas/apuestas.html',
             /*resolve: {
