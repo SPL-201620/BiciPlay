@@ -24,7 +24,7 @@ GET     /api/usuarios/loggedin                          controllers.usuarios.Usu
 GET     /api/usuarios/logout                            controllers.usuarios.UsuariosController.logout
 
 # Control para el registro de usuario
-POST     /api/usuarios/buscarAmigos                     controllers.usuarios.UsuariosController.buscarAmigos
+GET     /api/usuarios/darAmigos                         controllers.usuarios.UsuariosController.darAmigos
 
 # Control para el registro de usuario
 POST     /api/usuarios/buscarUsuarios                   controllers.usuarios.UsuariosController.buscarUsuarios
