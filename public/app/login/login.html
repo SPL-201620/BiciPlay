@@ -1,23 +1,98 @@
-<md-content class="md-padding" layout="row" layout-align="center center">
-    <md-card md-theme-watch flex-gt-sm="33" flex="66">
+<md-content class="md-padding"
+    layout="row"
+    layout-align="center center"
+    ng-show="!showRegistro">
+    <md-card md-theme-watch
+        flex-gt-sm="33"
+        flex="66">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">Ingreso</span>
                 <span class="md-subhead">Digite sus credenciales</span>
             </md-card-title-text>
         </md-card-title>
-        <section layout="column" layout-align="center center">
+        <section class="md-padding"
+            layout="column">
             <md-input-container>
                 <label>Usuario</label>
-                <input ng-model="userLogin.username">
+                <input ng-model="userLogin.username"
+                    required>
+                <div ng-messages="userLogin.username.$error">
+                    <div ng-message="pattern">El campo de usuario no puede quedar vacío</div>
+                </div>
             </md-input-container>
             <md-input-container>
                 <label>Contraseña</label>
-                <input ng-model="userLogin.password" type="password">
+                <input ng-model="userLogin.password"
+                    type="password"
+                    ng-keyup="keyUpListener($event, userLogin)"
+                    required>
+                <div ng-messages="userLogin.username.$error">
+                    <div ng-message="pattern">El campo de contraseña no puede quedar vacío</div>
+                </div>
             </md-input-container>
         </section>
-        <md-card-actions layout="column" layout-align="center">
-            <md-button ng-click="login(userLogin)">Ingresar</md-button>
+        <md-card-actions layout="column"
+            layout-align="center">
+            <md-button ng-click="login(userLogin)"
+                class="md-raised md-primary">Ingresar</md-button>
+            <md-button ng-click="showRegistro = !showRegistro">Registro</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
+
+<md-content class="md-padding"
+    layout="row"
+    layout-align="center center"
+    ng-show="showRegistro">
+    <md-card md-theme-watch
+        flex-gt-sm="33"
+        flex="66">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Registro</span>
+                <span class="md-subhead">Ingrese sus datos</span>
+            </md-card-title-text>
+        </md-card-title>
+        <section class="md-padding"
+            layout="column">
+            <md-input-container>
+                <label>Nombre</label>
+                <input ng-model="userRegistro.name"
+                    required>
+            </md-input-container>
+            <md-input-container>
+                <label>Correo</label>
+                <input required
+                    type="email"
+                    name="clientEmail"
+                    ng-model="userRegistro.email"
+                    minlength="10"
+                    maxlength="100"
+                    ng-pattern="/^.+@.+\..+$/" />
+
+                <div ng-messages="clientEmail.email.$error"
+                    role="alert">
+                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                        Su correo debe tener entre 10 y 100 caracteres y debe tener el formato de una dirección de correo
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Contraseña</label>
+                <input ng-model="userRegistro.password"
+                    type="password">
+            </md-input-container>
+            <md-input-container>
+                <label>Confirmación de contraseña</label>
+                <input ng-model="userRegistro.password2"
+                    type="password">
+            </md-input-container>
+        </section>
+        <md-card-actions layout="column"
+            layout-align="center">
+            <md-button ng-click="registrar(userRegistro)"
+                class="md-raised md-primary">Registrar</md-button>
         </md-card-actions>
     </md-card>
 </md-content>

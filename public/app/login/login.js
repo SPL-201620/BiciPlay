@@ -9,33 +9,22 @@ app.controller('LoginCtrl', function($rootScope, $scope, $http, $location, $rout
         var username = credenciales.username;
         var password = credenciales.password;
 
-        if (!username || username === "" || username === null) {
-            errorMessage = 'Debe ingresar su usuario para realizar la autenticación';
-        } else if (!password || password === "" || password === null) {
-            errorMessage = 'Debe ingresar su contraseña para realizar la autenticación';
+        if (username && username !== "" && username !== null && password && password !== "" && password !== null) {
+          User.login(credenciales).then(function () {
+            $route.reload();
+          });
         }
+    };
 
-
-
-        if (errorMessage) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Error en formulario de ingreso')
-                .textContent(errorMessage)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Aceptar')
-            );
-        } else {
-            User.login(credenciales);
-        }
-
-
-
+    $scope.registrar = function(credenciales){
+        User.registrar(credenciales);
     };
 
     $scope.keyUpListener = function($event, credenciales) {
         if ($event.keyCode === 13) {
+          if($scope.showRegistro)
+            $scope.login(credenciales);
+          else
             $scope.login(credenciales);
         }
     };
