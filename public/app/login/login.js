@@ -17,7 +17,9 @@ app.controller('LoginCtrl', function($rootScope, $scope, $http, $location, $rout
     };
 
     $scope.registrar = function(credenciales){
-        User.registrar(credenciales);
+        User.registrar(credenciales).then(function () {
+          $route.reload();
+        });
     };
 
     $scope.keyUpListener = function($event, credenciales) {

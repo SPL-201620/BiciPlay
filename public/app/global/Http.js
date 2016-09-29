@@ -3,12 +3,14 @@
 		var errorListeners = [];
 		this.serverUrl = 'http://localhost:9000/api/';
 		this.post = function(relativRoute, body) {
-			dev("POST" + this.serverUrl + relativRoute);
-			return $http.post(this.serverUrl + relativRoute, body).error(EventHandler.error);
+			var url = "POST " + this.serverUrl + relativRoute;
+			dev(url);
+			return $http.post(this.serverUrl + relativRoute, body).error(EventHandler.error(url));
 		};
 		this.get = function(relativRoute) {
-			dev("GET" + this.serverUrl + relativRoute);
-			return $http.get(this.serverUrl + relativRoute).error(EventHandler.error);
+			var url = "GET " + this.serverUrl + relativRoute;
+			dev(url);
+			return $http.get(this.serverUrl + relativRoute).error(EventHandler.error(url));
 		};
 
 		function dev(message){

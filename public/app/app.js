@@ -4,7 +4,7 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, User) {
         if (user) {
             $timeout(deferred.resolve, 0);
             console.log("Usurario:", user);
-            $location.url('/main');
+            $location.url('/home');
 
         } else {
             console.log("El usuario no se encuentra logueado:");
@@ -31,9 +31,9 @@ app.config(function($routeProvider, $httpProvider, $mdThemingProvider) {
                 loggedin: checkLoggedin
             }
         })
-        .when('/main', {
-            controller: 'ApuestasCtrl',
-            templateUrl: 'app/apuestas/apuestas.html',
+        .when('/home', {
+            controller: 'HomeCtrl',
+            templateUrl: 'app/home/home.html',
             /*resolve: {
             	loggedin: checkLoggedin
             }*/

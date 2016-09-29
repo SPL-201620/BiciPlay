@@ -4,7 +4,7 @@
   		restrict: 'E',
   		scope: {
   		},
-  		templateUrl: 'app/admin-horario/celdaHorarioReal.html',
+  		templateUrl: 'app/amigos/dir-amigos.html',
   		controller: controller
   	};
   });
