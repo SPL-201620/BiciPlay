@@ -6,19 +6,31 @@
 GET     /                           controllers.HomeController.index
 
 # ejemplo  postman GET
-GET     /api/usuarios/registroGet                      controllers.usuarios.UsuariosController.registroGet
+GET     /api/usuarios/registroGet                       controllers.usuarios.UsuariosController.registroGet
 
 # ejemplo  postman POST
-POST     /api/usuarios/registroPost                    controllers.usuarios.UsuariosController.registroPost
+POST     /api/usuarios/registroPost                     controllers.usuarios.UsuariosController.registroPost
 
 # Control para el registro de usuario
-POST     /api/usuarios/registro                        controllers.usuarios.UsuariosController.registro
+POST     /api/usuarios/registro                         controllers.usuarios.UsuariosController.registro
 
 # Control para el login
-POST     /api/usuarios/login                           controllers.usuarios.UsuariosController.login
+POST     /api/usuarios/login                            controllers.usuarios.UsuariosController.login
 
-# Control para el
-GET     /api/usuarios/loggedin                         controllers.usuarios.UsuariosController.loggedin
+# Control para la validacion de login
+GET     /api/usuarios/loggedin                          controllers.usuarios.UsuariosController.loggedin
+
+# Control para el cerrar sesion
+GET     /api/usuarios/logout                            controllers.usuarios.UsuariosController.logout
+
+# Control para el registro de usuario
+POST     /api/usuarios/buscarAmigos                     controllers.usuarios.UsuariosController.buscarAmigos
+
+# Control para el registro de usuario
+POST     /api/usuarios/buscarUsuarios                   controllers.usuarios.UsuariosController.buscarUsuarios
+
+# Control para el registro de usuario
+POST     /api/usuarios/agregarAmigo                     controllers.usuarios.UsuariosController.agregarAmigo
 
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message

@@ -1,6 +1,9 @@
 package controllers.usuarios;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.Counter;
@@ -74,9 +77,12 @@ public class UsuariosController extends Controller {
             } else {
                 session().clear();
                 //TODO el id y demas datos deben ser de la BD
+                ObjectNode datos = Json.newObject();
                 session(ID_USUARIO, "100");
                 session(ROL_USUARIO, "admin");
-                return ok("ok prueba loggedin" ); //TODO se debe rtornar todos los datos de la base de datos
+                datos.put("id","100");
+                datos.put("nomre","Daniel");
+                return ok(datos); //TODO se debe rtornar todos los datos de la base de datos
                 //TODO identificar el rol del usuario
             }
         }
@@ -87,6 +93,68 @@ public class UsuariosController extends Controller {
         }else {
             //TODO ir a BD igual que el loguin
             return ok("ok prueba loggedin");
+        }
+    }
+    public Result logout() {
+        JsonNode json = request().body().asJson();
+            session().clear();
+            return ok("OK");
+    }
+    public Result buscarAmigos() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            String name = json.findPath("name").textValue();
+            if(name == null) {
+                return badRequest("Digite un nombre para buscar");
+            } else {
+                ObjectNode dato1 = Json.newObject();
+                dato1.put("id","100");
+                dato1.put("name","Joel");
+                ObjectNode dato2 = Json.newObject();
+                dato2.put("id","200");
+                dato2.put("name","Jose");
+                ArrayNode amigos = Json.newArray();
+                amigos.add(dato1);
+                amigos.add(dato2);
+                return ok(amigos);
+            }
+        }
+    }
+    public Result buscarUsuarios() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            String name = json.findPath("name").textValue();
+            if(name == null) {
+                return badRequest("Digite un nombre para buscar");
+            } else {
+                ObjectNode dato1 = Json.newObject();
+                dato1.put("id","100");
+                dato1.put("name","Joel");
+                ObjectNode dato2 = Json.newObject();
+                dato2.put("id","200");
+                dato2.put("name","Jose");
+                ArrayNode amigos = Json.newArray();
+                amigos.add(dato1);
+                amigos.add(dato2);
+                return ok(amigos);
+            }
+        }
+    }
+    public Result agregarAmigo() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            String id = json.findPath("id").textValue();
+            if(id == null) {
+                return badRequest("no ha seleccionado un usuario para agregar");
+            } else {
+                return ok("OK");
+            }
         }
     }
 }
