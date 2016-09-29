@@ -1,19 +1,29 @@
 <md-list flex>
-<md-list-item class="md-2-line" ng-click="null">
-    <!--img ng-src="{{todos[0].face}}?20"
+    <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Amigos</h1>
+    </md-toolbar>
+    <md-input-container>
+        <label>Buscar</label>
+        <input ng-model="busqueda">
+    </md-input-container>
+    <md-list-item class="md-2-line"
+        ng-click="null">
+        <!--img ng-src="{{todos[0].face}}?20"
         class="md-avatar"
         alt="{{todos[0].who}}" /-->
-    <div class="md-list-item-text" >
-        <h3>Amigo1</h3>
-        <p>Secondary text</p>
-    </div>
-</md-list-item>
-<md-list-item class="md-2-line" ng-click="null">
-    <!--img ng-src="{{todos[0].face}}?20"
+        <div class="md-list-item-text">
+            <h3>Amigo1</h3>
+            <p>Secondary text</p>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line"
+        ng-click="null">
+        <!--img ng-src="{{todos[0].face}}?20"
         class="md-avatar"
         alt="{{todos[0].who}}" /-->
-    <div class="md-list-item-text">
-        <h3>Amigo2</h3>
-        <p>Secondary text</p>
-    </div>
-</md-list-item>
+        <div class="md-list-item-text">
+            <h3>Amigo2</h3>
+            <p>Secondary text</p>
+        </div>
+    </md-list-item>
+</md-list>
