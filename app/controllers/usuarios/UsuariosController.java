@@ -3,6 +3,7 @@ package controllers.usuarios;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Usuario;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -10,6 +11,11 @@ import services.Counter;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  * This controller demonstrates how to use dependency injection to
@@ -21,6 +27,9 @@ import javax.inject.Singleton;
 public class UsuariosController extends Controller {
     public final static String ID_USUARIO="idUsuario";
     public final static String ROL_USUARIO="rol";
+
+    private static final String PERSISTENCE_UNIT_NAME = "defaultPersistenceUnit";
+    private static EntityManagerFactory factory;
 
     @Inject
     public UsuariosController(Counter counter) {
@@ -58,9 +67,31 @@ public class UsuariosController extends Controller {
             String name = json.findPath("name").textValue();
             String email = json.findPath("email").textValue();
             String password = json.findPath("password").textValue();
+
+
             if(name == null || email == null || password == null) {
                 return badRequest("Missing parameter");
             } else {
+                factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+                EntityManager em = factory.createEntityManager();
+                // Read the existing entries and write to console
+                //Query q = em.createQuery("SELECT u FROM Usuario u");
+                /*List<Usuario> userList = q.getResultList();
+                for (Usuario user : userList) {
+                    System.out.println(user.getName());
+                }
+                System.out.println("Size: " + userList.size());*/
+
+                // Create new user
+                em.getTransaction().begin();
+                Usuario user = new Usuario();
+                user.setName("Tom Johnson");
+                user.setLogin("tomj");
+                user.setPassword("pass");
+                em.persist(user);
+                em.getTransaction().commit();
+
+                em.close();
                 return retornoSesion();
             }
         }
