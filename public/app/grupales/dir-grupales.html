@@ -3,7 +3,7 @@
         <h1 class="md-toolbar-tools">Recorridos grupales</h1>
         <span flex></span>
         <md-button class="md-raised">
-          Agegar
+            Agregar
         </md-button>
     </div>
 </md-toolbar>
@@ -23,3 +23,57 @@
         </div>
     </md-list-item>
 </md-list>
+
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Nuevo recorrido</span>
+            <span class="md-subhead">Ingrese los datos del nuevo recorrido</span>
+        </md-card-title-text>
+    </md-card-title>
+    <section class="md-padding"
+        layout="column">
+        <md-input-container>
+            <label>Nombre</label>
+            <input ng-model="recorridoActual.nombre"
+                required>
+        </md-input-container>
+        <md-input-container>
+            <label>Punto de inicio</label>
+            <input ng-model="recorridoActual.inicio"
+                required>
+        </md-input-container>
+        <md-input-container>
+            <label>Punto de llegada</label>
+            <input ng-model="recorridoActual.destino"
+                required>
+        </md-input-container>
+        <div layout-gt-xs="row">
+            <md-input-container class="md-block" flex-gt-xs>
+                <label>Se realiza cada</label>
+                <input ng-model="recorridoActual.frecuencia"
+                    required>
+            </md-input-container>
+            <md-input-container class="md-block"
+                flex-gt-xs>
+                <label>Unidad de frecuencia</label>
+                <md-select ng-model="recorridoActual.unidadFrecuencia">
+                    <md-option ng-repeat="unidadFrecuencia in unidadesFrecuencia"
+                        value="{{unidadFrecuencia.value}}">
+                        {{unidadFrecuencia.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-input-container>
+            <label>Primer día</label>
+            <md-datepicker ng-model="recorridoActual.submissionDate"></md-datepicker>
+        </md-input-container>
+    </section>
+    <md-card-actions layout="column"
+        layout-align="center">
+        <md-button ng-click="crearRecorrido(recorridoActual)"
+            class="md-raised md-primary">Registrar</md-button>
+    </md-card-actions>
+</md-card>
+<div id="map" style="width:400px; height:400px"></div>

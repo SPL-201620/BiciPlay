@@ -46,6 +46,19 @@ function initMap() {
 
   function controller($scope, $timeout) {
     initMap();
+    $scope.unidadesFrecuencia = [{
+      name: "días",
+      value: "days"
+    },{
+      name: "semanas",
+      value: "weeks"
+    },{
+      name: "meses",
+      value: "months"
+    },{
+      name: "años",
+      value: "years"
+    }];
 
   }
 })();
