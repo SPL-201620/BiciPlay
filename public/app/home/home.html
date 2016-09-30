@@ -2,29 +2,47 @@
 
   <section layout="row" flex>
 
-    <md-sidenav class="md-sidenav-left" md-component-id="left"
-                md-disable-backdrop md-whiteframe="4">
+    <md-sidenav
+        class="md-sidenav-left"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-whiteframe="4">
 
       <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
+        <h1 class="md-toolbar-tools">Menú</h1>
       </md-toolbar>
-
-      <md-content layout-margin>
-        <p>
-          This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
-        </p>
-        <md-button ng-click="toggleLeft()" class="md-accent">
-          Close this Sidenav
-        </md-button>
-      </md-content>
-
+      <md-list flex>
+          <md-list-item class="md-2-line"
+              ng-click="setView('Grupales')">
+              <div class="md-list-item-text">
+                  <h3>Recorridos grupales</h3>
+                  <p>Planea recorridos grupales</p>
+              </div>
+          </md-list-item>
+          <md-list-item class="md-2-line"
+              ng-click="setView('Individuales')">
+              <div class="md-list-item-text">
+                  <h3>Recorridos individuales</h3>
+                  <p>Haz un seguimiento a tus recorridos</p>
+              </div>
+          </md-list-item>
+      </md-list>
     </md-sidenav>
 
-    <md-content flex layout-padding>
+      <div flex>
+          <dir-grupales></dir-grupales>
+
+      </div>
+
+    <md-sidenav
+        class="md-sidenav-left"
+        md-component-id="right"
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-whiteframe="4">
 
       <dir-amigos></dir-amigos>
 
-    </md-content>
+    </md-sidenav>
 
   </section>
 

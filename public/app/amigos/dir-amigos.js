@@ -11,9 +11,9 @@
 
 
   function controller($scope, Amigos) {
-  	Amigos.getAmigos().then(function(amigosP){
-      $scope.amigos = amigosP;
-    });
+  	//Amigos.getAmigos().then(function(amigosP){
+      //$scope.amigos = amigosP;
+    //});
 
   }
 })();
