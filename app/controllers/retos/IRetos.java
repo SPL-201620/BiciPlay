@@ -1,7 +1,7 @@
 package controllers.retos;
 
 import controllers.recorridos.RecorridoIndividual;
-import controllers.usuarios.Usuario;
+import models.Usuario;
 
 import java.util.List;
 

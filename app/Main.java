@@ -46,6 +46,7 @@ public class Main {
                     System.out.println("  " + o);
                 }
             }
+            System.out.println("OK");
         } finally {
             session.close();
         }

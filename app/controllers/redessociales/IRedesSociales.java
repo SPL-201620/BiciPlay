@@ -1,6 +1,8 @@
 package controllers.redessociales;
 
-import controllers.usuarios.Usuario;
+
+
+import models.Usuario;
 
 import java.util.List;
 
