@@ -72,26 +72,11 @@ public class UsuariosController extends Controller {
             if(name == null || email == null || password == null) {
                 return badRequest("Missing parameter");
             } else {
-                factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-                EntityManager em = factory.createEntityManager();
-                // Read the existing entries and write to console
-                //Query q = em.createQuery("SELECT u FROM Usuario u");
-                /*List<Usuario> userList = q.getResultList();
-                for (Usuario user : userList) {
-                    System.out.println(user.getName());
-                }
-                System.out.println("Size: " + userList.size());*/
-
-                // Create new user
-                em.getTransaction().begin();
-                Usuario user = new Usuario();
-                user.setName("Tom Johnson");
-                user.setLogin("tomj");
-                user.setPassword("pass");
-                em.persist(user);
-                em.getTransaction().commit();
-
-                em.close();
+                Usuario usuarioNuevo = new Usuario();
+                usuarioNuevo.login =email;
+                usuarioNuevo.name = name;
+                usuarioNuevo.password = password;
+                usuarioNuevo.save();
                 return retornoSesion();
             }
         }
