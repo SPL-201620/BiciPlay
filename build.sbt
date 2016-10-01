@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
 libraryDependencies += filters
 // https://mvnrepository.com/artifact/postgresql/postgresql
 libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1206-jdbc42"
+libraryDependencies += "com.google.code.gson" % "gson" % "2.7"
 
 
 fork in run := true

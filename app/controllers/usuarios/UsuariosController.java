@@ -3,6 +3,8 @@ package controllers.usuarios;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.Usuario;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -27,6 +29,7 @@ import java.util.List;
 public class UsuariosController extends Controller {
     public final static String ID_USUARIO="idUsuario";
     public final static String ROL_USUARIO="rol";
+    private final static Gson GSON = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     private static final String PERSISTENCE_UNIT_NAME = "defaultPersistenceUnit";
     private static EntityManagerFactory factory;
@@ -73,11 +76,13 @@ public class UsuariosController extends Controller {
                 return badRequest("Missing parameter");
             } else {
                 Usuario usuarioNuevo = new Usuario();
-                usuarioNuevo.login =email;
+                usuarioNuevo.email =email;
                 usuarioNuevo.name = name;
                 usuarioNuevo.password = password;
                 usuarioNuevo.save();
-                return retornoSesion();
+                crearSession(usuarioNuevo.id);
+                Usuario usuario =  Usuario.find.byId((long)usuarioNuevo.id);
+                return ok(GSON.toJson(usuario));
             }
         }
     }
@@ -85,40 +90,41 @@ public class UsuariosController extends Controller {
         JsonNode json = request().body().asJson();
         if(json == null) {
             return badRequest("Expecting Json data");
-        } else {
-            String email = json.findPath("username").textValue();
-            String password = json.findPath("password").textValue();
-            if(email == null || password == null) {
-                return badRequest("Missing parameter");
-            } else {
-                return retornoSesion();
-            }
         }
+
+        String email = json.findPath("username").textValue();
+        String password = json.findPath("password").textValue();
+        if(email == null || password == null) {
+            return badRequest("Missing parameter");
+        }
+
+        Usuario usuario =  Usuario.find.where().eq("email", email).findUnique();
+        if(usuario == null || usuario.password != password){
+            return badRequest("Credenciales incorrectas");
+        }
+
+        crearSession(usuario.id);
+        return ok(GSON.toJson(usuario));
     }
-    private Result retornoSesion() {
+    private void crearSession(long idUsuario){
         session().clear();
-        //TODO el id y demas datos deben ser de la BD
-        ObjectNode datos = Json.newObject();
-        session(ID_USUARIO, "100");
+        session(ID_USUARIO, "" + idUsuario);
         session(ROL_USUARIO, "admin");
-        datos.put("id","100");
-        datos.put("nomre","Daniel");
-        return ok(datos); //TODO se debe rtornar todos los datos de la base de datos
-        //TODO identificar el rol del usuario
     }
 
     public Result loggedin() {
-        if (session(ID_USUARIO)==null) {
-            return ok("0");
+        String idUsuario = session(ID_USUARIO);
+        if (idUsuario==null) {
+            return ok("null");
         }else {
-            //TODO ir a BD igual que el loguin
-            return ok("ok prueba loggedin");
+            Usuario usuario =  Usuario.find.byId(Long.parseLong(idUsuario));
+            return ok( GSON.toJson(usuario));
         }
     }
     public Result logout() {
         JsonNode json = request().body().asJson();
-            session().clear();
-            return ok("OK");
+        session().clear();
+        return ok("OK");
     }
     public Result darAmigos() {
         String usuarioId =  session(ID_USUARIO);

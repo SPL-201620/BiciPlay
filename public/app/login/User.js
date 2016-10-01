@@ -23,7 +23,7 @@ angular.module('app').service('User', function ($rootScope, $window, $location, 
         return Http.get('usuarios/loggedin').then(function(res) {
             var data = res.data;
             console.log("Data", data);
-            if (data !== '0') {
+            if (data !== 'null') {
                 user = data;
             }
             return user;

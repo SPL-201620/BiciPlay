@@ -2,19 +2,28 @@ package models;
 
 import javax.persistence.*;
 import com.avaje.ebean.Model;
+import com.google.gson.annotations.Expose;
 
 @Entity
 @Table(name="usuario")
 public class Usuario extends Model{
 
     @Id
+    @Expose
     @SequenceGenerator(name="identifier", sequenceName="users_id_seq", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="identifier")
-    private int id;
+    public int id;
 
-    public String name = null;
-    public String login = null;
-    public String password = null;
+    @Expose
+    public String name;
+    @Expose
+    public String email;
+
+    public String password;
+    @Expose
+    public String foto;
+
+
     public static Finder<Long, Usuario> find = new Finder<Long,Usuario>(Usuario.class);
 
 }
