@@ -5,12 +5,16 @@
 		this.post = function(relativRoute, body) {
 			var url = "POST " + this.serverUrl + relativRoute;
 			dev(url);
-			return $http.post(this.serverUrl + relativRoute, body).error(EventHandler.error(url));
+			return $http.post(this.serverUrl + relativRoute, body, {
+				withCredentials: true
+			}).error(EventHandler.error(url));
 		};
 		this.get = function(relativRoute) {
 			var url = "GET " + this.serverUrl + relativRoute;
 			dev(url);
-			return $http.get(this.serverUrl + relativRoute).error(EventHandler.error(url));
+			return $http.get(this.serverUrl + relativRoute, {
+				withCredentials: true
+			}).error(EventHandler.error(url));
 		};
 
 		function dev(message){
