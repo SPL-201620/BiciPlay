@@ -1,7 +1,5 @@
 package controllers.usuarios;
 
-import models.Usuario;
-
 /**
  * Created by jose on 8/30/16.
  */

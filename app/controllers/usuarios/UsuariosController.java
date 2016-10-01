@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import models.Usuario;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -13,11 +12,7 @@ import services.Counter;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import java.util.List;
 
 /**
  * This controller demonstrates how to use dependency injection to
@@ -99,7 +94,7 @@ public class UsuariosController extends Controller {
         }
 
         Usuario usuario =  Usuario.find.where().eq("email", email).findUnique();
-        if(usuario == null || usuario.password != password){
+        if(usuario == null || !usuario.password.equals(password)){
             return badRequest("Credenciales incorrectas");
         }
 

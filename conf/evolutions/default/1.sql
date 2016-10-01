@@ -3,6 +3,15 @@
 
 # --- !Ups
 
+create table ubicacion (
+  id                            integer not null,
+  lat                           float,
+  lng                           float,
+  nombre                        varchar(255),
+  constraint pk_ubicacion primary key (id)
+);
+create sequence ubicacion_seq;
+
 create table usuario (
   id                            integer not null,
   name                          varchar(255),
@@ -11,11 +20,14 @@ create table usuario (
   foto                          varchar(255),
   constraint pk_usuario primary key (id)
 );
-create sequence users_id_seq increment by 1;
+create sequence usuario_seq;
 
 
 # --- !Downs
 
+drop table if exists ubicacion cascade;
+drop sequence if exists ubicacion_seq;
+
 drop table if exists usuario cascade;
-drop sequence if exists users_id_seq;
+drop sequence if exists usuario_seq;
 

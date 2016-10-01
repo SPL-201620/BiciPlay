@@ -1,7 +1,7 @@
 package controllers.recorridos;
 
 import controllers.ruta.Ruta;
-import models.Usuario;
+import controllers.usuarios.Usuario;
 
 import java.util.Date;
 import java.util.List;

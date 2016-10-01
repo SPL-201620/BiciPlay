@@ -1,4 +1,4 @@
-package models;
+package controllers.usuarios;
 
 import javax.persistence.*;
 import com.avaje.ebean.Model;
@@ -10,8 +10,7 @@ public class Usuario extends Model{
 
     @Id
     @Expose
-    @SequenceGenerator(name="identifier", sequenceName="users_id_seq", allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="identifier")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     public int id;
 
     @Expose
