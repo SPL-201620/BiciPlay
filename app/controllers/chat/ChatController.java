@@ -44,16 +44,17 @@ public class ChatController extends Controller {
             String mensaje =  json.findPath("mensaje").textValue();
             Date fecha=new Date();
 
-                Chat chatNuevo = new Chat();
-                chatNuevo.receptor =receptor;
-                chatNuevo.emisor = emisor;
-                chatNuevo.mensaje=mensaje;
-                chatNuevo.fechaHora=fecha;
-                chatNuevo.save();
-                return ok("Oks");
+            Chat chatNuevo = new Chat();
+            chatNuevo.receptor =receptor;
+            chatNuevo.emisor = emisor;
+            chatNuevo.mensaje=mensaje;
+            chatNuevo.fechaHora=fecha;
+            chatNuevo.save();
+            return ok("Oks");
 
         }
     }
+
 
 
     public Result leerMensaje() {
@@ -63,18 +64,18 @@ public class ChatController extends Controller {
         } else {
             int  emisor =  getUsuarioLogIn();
             int receptor = json.findPath("receptor").asInt();
-                         List<Chat> mensajes = Chat.find.where().or(Expr.and(Expr.eq("receptor",receptor),Expr.eq("emisor",emisor))
-                        ,Expr.and(Expr.eq("emisor",receptor),Expr.eq("receptor",emisor))).findList();
+            List<Chat> mensajes = Chat.find.where().or(Expr.and(Expr.eq("receptor",receptor),Expr.eq("emisor",emisor))
+                    ,Expr.and(Expr.eq("emisor",receptor),Expr.eq("receptor",emisor))).findList();
 
-                return ok(GSON.toJson(mensajes));
+            return ok(GSON.toJson(mensajes));
 
         }
     }
 
 
     public int getUsuarioLogIn(){
-        return 1;
-       // return Integer.valueOf(session(ID_USUARIO));
+       // return 1;
+         return Integer.valueOf(session(ID_USUARIO));
 
 
     }

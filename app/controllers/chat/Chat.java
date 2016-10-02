@@ -34,6 +34,7 @@ public class Chat extends Model {
 
     @Expose
     public String mensaje;
+    
 
     public static Finder<Long, Chat> find = new Finder<Long,Chat>(Chat.class);
 
