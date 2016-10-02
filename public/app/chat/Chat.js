@@ -1,5 +1,5 @@
 /*jslint node: true */
-angular.module('app').service('Amigos', function ($rootScope, $window, $location, Http) {
+angular.module('app').service('Chat', function ($rootScope, $window, $location, Http) {
     var self = this;
     self.getAmigos = function() {
         return Http.get('usuarios/darAmigos').then(function(res) {

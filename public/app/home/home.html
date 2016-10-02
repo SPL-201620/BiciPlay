@@ -40,7 +40,14 @@
         md-is-locked-open="$mdMedia('gt-md')"
         md-whiteframe="4">
 
-      <dir-amigos></dir-amigos>
+      <dir-amigos
+      ng-if = "!amigoSelected"
+       on-select="selectAmigo"
+      ></dir-amigos>
+
+      <dir-chat
+      ng-if="amigoSelected"
+      amigo="amigoSelected"></dir-chat>
 
     </md-sidenav>
 

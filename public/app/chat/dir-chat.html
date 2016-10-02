@@ -1,0 +1,43 @@
+<md-toolbar class="md-theme-indigo">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button">
+            <md-icon md-svg-icon="img/back.svg"></md-icon>
+        </md-button>
+        <h2>
+          <span>{{amigo.name}}</span>
+        </h2>
+        <span flex></span>
+            <img ng-src="img/avatar1.png"
+                class="md-avatar"
+                alt="amigo.name" />
+    </div>
+</md-toolbar>
+
+
+
+<md-list flex>
+    <md-list-item ng-repeat="mensaje in mensajes | orderBy:'fecha'"
+        class="md-2-line"
+        ng-click="null">
+
+        <div class="md-list-item-text">
+            <p>{{amigo.name}}:</p>
+            <h3>{{mensaje.texto}}</h3>
+        </div>
+    </md-list-item>
+
+    <md-divider></md-divider>
+    <div layout="row"
+        layout-align="center center">
+        <md-input-container>
+            <label>Mensaje</label>
+            <input ng-model="nuevoMensaje">
+        </md-input-container>
+        <md-button class="md-secondary md-icon-button"
+            ng-click="enviarMensaje(nuevoMensaje)">
+            <md-icon md-svg-icon="img/send.svg"></md-icon>
+        </md-button>
+    </div>
+
+
+</md-list>
