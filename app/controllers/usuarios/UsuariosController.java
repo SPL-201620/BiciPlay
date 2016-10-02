@@ -1,5 +1,6 @@
 package controllers.usuarios;
 
+import com.avaje.ebean.ExpressionList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -13,6 +14,7 @@ import services.Counter;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 
 /**
  * This controller demonstrates how to use dependency injection to
@@ -124,16 +126,8 @@ public class UsuariosController extends Controller {
     public Result darAmigos() {
         String usuarioId =  session(ID_USUARIO);
         //TODO ir a la base de datos y consultar los amigos de ese usuarioID
-        ObjectNode dato1 = Json.newObject();
-        dato1.put("id","100");
-        dato1.put("name","Joel");
-        ObjectNode dato2 = Json.newObject();
-        dato2.put("id","200");
-        dato2.put("name","Jose");
-        ArrayNode amigos = Json.newArray();
-        amigos.add(dato1);
-        amigos.add(dato2);
-        return ok(amigos);
+        Usuario amigo = Usuario.find.where().eq("id", usuarioId).findUnique();
+        return ok(GSON.toJson(amigo.misAmigos));
     }
     public Result buscarUsuarios() {
         JsonNode json = request().body().asJson();
@@ -142,18 +136,22 @@ public class UsuariosController extends Controller {
         } else {
             String name = json.findPath("name").textValue();
             if(name == null) {
-                return badRequest("Digite un nombre para buscar");
+                return badRequest("Digite un nombre o correo para buscar");
             } else {
-                ObjectNode dato1 = Json.newObject();
-                dato1.put("id","100");
-                dato1.put("name","Joel");
-                ObjectNode dato2 = Json.newObject();
-                dato2.put("id","200");
-                dato2.put("name","Jose");
-                ArrayNode amigos = Json.newArray();
-                amigos.add(dato1);
-                amigos.add(dato2);
-                return ok(amigos);
+
+                if(name.contains("@")){
+                    Usuario usuario=Usuario.find.where().contains("email",name).findUnique();
+                    if (usuario==null)
+                        return badRequest("No se encontraron resultados");
+                    else return ok(GSON.toJson(usuario));
+                    }
+                else {
+                    List<Usuario> usuarios=Usuario.find.where().contains("name",name).findList();
+                    if (usuarios.isEmpty())
+                        return badRequest("No se encontraron resultados");
+                    else
+                        return ok(GSON.toJson(usuarios));
+                }
             }
         }
     }
@@ -162,11 +160,21 @@ public class UsuariosController extends Controller {
         if(json == null) {
             return badRequest("Expecting Json data");
         } else {
-            String id = json.findPath("id").textValue();
-            if(id == null) {
+            int id = json.findPath("id").asInt();
+            if(id == 0) {
                 return badRequest("no ha seleccionado un usuario para agregar");
             } else {
-                return ok("OK");
+                Usuario amigo = Usuario.find.where().eq("id", id).findUnique();
+                String usuarioId =  session(ID_USUARIO);
+                Usuario usuario = Usuario.find.where().eq("id", usuarioId).findUnique();
+                if (usuario.misAmigos.add(amigo)) {
+                    usuario.save();
+                    return ok(GSON.toJson(amigo));
+                } else {
+
+                    return ok("Error Agregando amigo");
+
+                }
             }
         }
     }

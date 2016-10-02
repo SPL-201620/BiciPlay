@@ -4,6 +4,9 @@ import javax.persistence.*;
 import com.avaje.ebean.Model;
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="usuario")
 public class Usuario extends Model{
@@ -22,6 +25,20 @@ public class Usuario extends Model{
     @Expose
     public String foto;
 
+    @ManyToMany
+    @JoinTable(name="amigos",
+            joinColumns=@JoinColumn(name="usuarioId"),
+            inverseJoinColumns=@JoinColumn(name="amigoId")
+    )
+    public List<Usuario> misAmigos;
+/*
+    @ManyToMany
+    @JoinTable(name="amigos",
+            joinColumns=@JoinColumn(name="amigoId"),
+            inverseJoinColumns=@JoinColumn(name="usuarioId")
+    )
+    public List<Usuario> amigosDe;
+*/
 
     public static Finder<Long, Usuario> find = new Finder<Long,Usuario>(Usuario.class);
 
