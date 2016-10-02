@@ -126,7 +126,7 @@ public class UsuariosController extends Controller {
     public Result darAmigos() {
         String usuarioId =  session(ID_USUARIO);
         //TODO ir a la base de datos y consultar los amigos de ese usuarioID
-        Usuario amigo = Usuario.find.where().eq("id", usuarioId).findUnique();
+        Usuario amigo = Usuario.find.where().eq("id", Integer.valueOf(usuarioId)).findUnique();
         return ok(GSON.toJson(amigo.misAmigos));
     }
     public Result buscarUsuarios() {
@@ -141,16 +141,11 @@ public class UsuariosController extends Controller {
 
                 if(name.contains("@")){
                     Usuario usuario=Usuario.find.where().contains("email",name).findUnique();
-                    if (usuario==null)
-                        return badRequest("No se encontraron resultados");
-                    else return ok(GSON.toJson(usuario));
+                        return ok(GSON.toJson(usuario));
                     }
                 else {
                     List<Usuario> usuarios=Usuario.find.where().contains("name",name).findList();
-                    if (usuarios.isEmpty())
-                        return badRequest("No se encontraron resultados");
-                    else
-                        return ok(GSON.toJson(usuarios));
+                    return ok(GSON.toJson(usuarios));
                 }
             }
         }
@@ -166,10 +161,10 @@ public class UsuariosController extends Controller {
             } else {
                 Usuario amigo = Usuario.find.where().eq("id", id).findUnique();
                 String usuarioId =  session(ID_USUARIO);
-                Usuario usuario = Usuario.find.where().eq("id", usuarioId).findUnique();
+                Usuario usuario = Usuario.find.where().eq("id", Integer.valueOf(usuarioId)).findUnique();
                 if (usuario.misAmigos.add(amigo)) {
                     usuario.save();
-                    return ok(GSON.toJson(amigo));
+                    return ok("Ok");
                 } else {
 
                     return ok("Error Agregando amigo");
