@@ -6,6 +6,9 @@ import com.google.gson.annotations.Expose;
 import javax.persistence.*;
 import java.util.Date;
 
+
+
+
 /**
  * Created by jose on 8/30/16.
  */
@@ -21,10 +24,10 @@ public class Chat extends Model {
     public int id;
 
     @Expose
-    public String idUsuario1;
+    public int receptor;
 
     @Expose
-    public String idUsuario2;
+    public int emisor;
 
     @Expose
     public Date fechaHora;
@@ -32,7 +35,7 @@ public class Chat extends Model {
     @Expose
     public String mensaje;
 
-
+    public static Finder<Long, Chat> find = new Finder<Long,Chat>(Chat.class);
 
 
 

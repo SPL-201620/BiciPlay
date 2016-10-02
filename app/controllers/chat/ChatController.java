@@ -1,5 +1,6 @@
 package controllers.chat;
 
+import com.avaje.ebean.Expr;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +12,10 @@ import services.Counter;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
+import java.beans.Expression;
 import java.util.Date;
+import java.util.List;
+
 
 /**
  * Created by andres on 2/10/16.
@@ -35,28 +39,45 @@ public class ChatController extends Controller {
         if(json == null) {
             return badRequest("Expecting Json data");
         } else {
-            String usuario1 = json.findPath("idUsuario1").textValue();
-            String usuario2 = json.findPath("idUsuario2").textValue();
+            int  receptor = json.findPath("receptor").asInt();
+            int  emisor =  getUsuarioLogIn();
             String mensaje =  json.findPath("mensaje").textValue();
             Date fecha=new Date();
 
-
-
-            if(usuario1 == null || usuario2  == null) {
-                return badRequest("Missing parameter");
-            } else {
                 Chat chatNuevo = new Chat();
-                chatNuevo.idUsuario1 =usuario1;
-                chatNuevo.idUsuario1 = usuario2;
+                chatNuevo.receptor =receptor;
+                chatNuevo.emisor = emisor;
                 chatNuevo.mensaje=mensaje;
                 chatNuevo.fechaHora=fecha;
                 chatNuevo.save();
-                return ok("Ok");
-            }
+                return ok("Oks");
+
         }
     }
 
 
+    public Result leerMensaje() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            int  emisor =  getUsuarioLogIn();
+            int receptor = json.findPath("receptor").asInt();
+                         List<Chat> mensajes = Chat.find.where().or(Expr.and(Expr.eq("receptor",receptor),Expr.eq("emisor",emisor))
+                        ,Expr.and(Expr.eq("emisor",receptor),Expr.eq("receptor",emisor))).findList();
+
+                return ok(GSON.toJson(mensajes));
+
+        }
+    }
+
+
+    public int getUsuarioLogIn(){
+        return 1;
+       // return Integer.valueOf(session(ID_USUARIO));
+
+
+    }
 
 
 }
