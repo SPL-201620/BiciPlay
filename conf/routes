@@ -32,8 +32,12 @@ POST     /api/usuarios/buscarUsuarios                   controllers.usuarios.Usu
 # Control para el registro de usuario
 POST     /api/usuarios/agregarAmigo                     controllers.usuarios.UsuariosController.agregarAmigo
 
-# Control para el registro de usuario
+
+# Control para el enviar un mensjae
 POST     /api/chat/enviarMensaje                        controllers.chat.ChatController.enviarMensaje
+
+# Control para el leer mensaje
+POST     /api/chat/leerMensaje                      controllers.chat.ChatController.leerMensaje
 
 
 # An example controller showing how to write asynchronous code
