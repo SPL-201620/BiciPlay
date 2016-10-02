@@ -129,6 +129,7 @@ public class UsuariosController extends Controller {
         Usuario amigo = Usuario.find.where().eq("id", Integer.valueOf(usuarioId)).findUnique();
         return ok(GSON.toJson(amigo.misAmigos));
     }
+
     public Result buscarUsuarios() {
         JsonNode json = request().body().asJson();
         if(json == null) {
@@ -141,7 +142,7 @@ public class UsuariosController extends Controller {
 
                 if(name.contains("@")){
                     Usuario usuario=Usuario.find.where().contains("email",name).findUnique();
-                        return ok(GSON.toJson(usuario));
+                    return ok(GSON.toJson(usuario));
                     }
                 else {
                     List<Usuario> usuarios=Usuario.find.where().contains("name",name).findList();
@@ -173,4 +174,5 @@ public class UsuariosController extends Controller {
             }
         }
     }
+
 }

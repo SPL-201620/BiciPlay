@@ -5,8 +5,8 @@
 
 create table chat (
   id                            integer not null,
-  id_usuario1                   varchar(255),
-  id_usuario2                   varchar(255),
+  receptor                      integer,
+  emisor                        integer,
   fecha_hora                    timestamp,
   mensaje                       varchar(255),
   constraint pk_chat primary key (id)

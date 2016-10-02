@@ -17,7 +17,6 @@ import java.util.Date;
 @Table(name="chat")
 public class Chat extends Model {
 
-
     @Id
     @Expose
     @GeneratedValue(strategy= GenerationType.SEQUENCE)

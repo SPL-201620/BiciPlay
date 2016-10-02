@@ -1,4 +1,11 @@
-.ace_editor {
-    height: 200px;
-    margin: 10px;
+.avatar1 {
+    width: 114px;
+    height: 112px;
+    background: url("../img/avatars.jpg") 20px 42px;
+}
+
+.avatar2 {
+  width: 114px;
+  height: 112px;
+    background: url(img/avatars.jpg) -91px 0;
 }
