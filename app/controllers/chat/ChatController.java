@@ -56,7 +56,6 @@ public class ChatController extends Controller {
     }
 
 
-
     public Result leerMensaje() {
         JsonNode json = request().body().asJson();
         if(json == null) {

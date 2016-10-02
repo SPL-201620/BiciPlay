@@ -6,6 +6,6 @@ package controllers.chat;
  */
 public interface IChat {
     public boolean enviarMesaje(long fromUserId, long chatId, String mensaje);
-    public boolean leerMensaje(long userId, long chatId);
+    public boolean agregarUsuario(long userId, long chatId);
     public Chat darChat(long chatId);
 }

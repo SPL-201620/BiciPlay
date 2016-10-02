@@ -6,47 +6,24 @@
         <label>Buscar</label>
         <input ng-model="busqueda">
     </md-input-container>
-    <md-list-item ng-repeat="amigo in amigos"
-        class="md-2-line"
+    <md-list-item class="md-2-line"
         ng-click="null">
-        <img ng-src="img/avatar1.png"
-            class="md-avatar"
-            alt="amigo.name" />
+        <!--img ng-src="{{todos[0].face}}?20"
+        class="md-avatar"
+        alt="{{todos[0].who}}" /-->
         <div class="md-list-item-text">
-            <h3>{{amigo.name}}</h3>
-            <p>{{amigo.email}}</p>
+            <h3>Amigo1</h3>
+            <p>Secondary text</p>
         </div>
     </md-list-item>
-
-    <md-divider></md-divider>
-    <div ng-if="busqueda && busqueda.length > 0">
-        <div layout="row"
-            layout-align="center center">
-            <md-button ng-click="buscarPersonas(busqueda)"
-                class="md-raised md-primary"
-                flex>Buscar usuarios</md-button>
+    <md-list-item class="md-2-line"
+        ng-click="null">
+        <!--img ng-src="{{todos[0].face}}?20"
+        class="md-avatar"
+        alt="{{todos[0].who}}" /-->
+        <div class="md-list-item-text">
+            <h3>Amigo2</h3>
+            <p>Secondary text</p>
         </div>
-
-
-
-        <div ng-if="personas">
-            <md-subheader class="md-no-sticky">{{ personas.length > 0?'Personas que están registradas:':'No se encontraron personas con ese nombre o correo'}}</md-subheader>
-            <md-list-item ng-repeat="persona in personas"
-                class="md-2-line">
-                <img ng-src="img/avatar1.png"
-                    class="md-avatar"
-                    alt="persona.name" />
-                <div class="md-list-item-text">
-                    <h3>{{persona.name}}</h3>
-                    <p>{{persona.email}}</p>
-                </div>
-                <md-button class="md-secondary md-icon-button"
-                    ng-click="agregarAmigo(persona)">
-                    <md-icon md-svg-icon="img/add.svg"></md-icon>
-                </md-button>
-            </md-list-item>
-        </div>
-
-    </div>
-
+    </md-list-item>
 </md-list>
