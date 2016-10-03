@@ -64,18 +64,20 @@ public class UsuariosController extends Controller {
         if(json == null) {
             return badRequest("Expecting Json data");
         } else {
+            String foto = json.findPath("foto").textValue();
             String name = json.findPath("name").textValue();
             String email = json.findPath("email").textValue();
             String password = json.findPath("password").textValue();
 
 
-            if(name == null || email == null || password == null) {
+            if(name == null || email == null || password == null || foto==null) {
                 return badRequest("Missing parameter");
             } else {
                 Usuario usuarioNuevo = new Usuario();
                 usuarioNuevo.email =email;
                 usuarioNuevo.name = name;
                 usuarioNuevo.password = password;
+                usuarioNuevo.foto = foto;
                 usuarioNuevo.save();
                 crearSession(usuarioNuevo.id);
                 Usuario usuario =  Usuario.find.byId((long)usuarioNuevo.id);

@@ -2,11 +2,16 @@
 angular.module('app').service('User', function ($rootScope, $window, $location, Http) {
     var user = null;
     var self = this;
+    var callbacks = [];
 
 
     self.getUser = function() {
         return user;
     };
+    self.getUserCallback = function(callback){
+      callbacks.push(callback);
+    };
+
     self.registrar = function (user){
       return Http.post('usuarios/registro', user).then(function(res) {
           user = res.data;
@@ -26,6 +31,9 @@ angular.module('app').service('User', function ($rootScope, $window, $location, 
             if (data !== 'null') {
                 user = data;
             }
+            callbacks.forEach(function(callback){
+              callback(user);
+            })
             return user;
         });
     };

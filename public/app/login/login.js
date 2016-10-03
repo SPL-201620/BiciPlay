@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.controller('LoginCtrl', function($rootScope, $scope, $http, $location, $route, $mdDialog, User, EventHandler) {
+app.controller('LoginCtrl', function($rootScope, $scope, $http, $location,$timeout, $route, $mdDialog, User, EventHandler) {
 
     $scope.userLogin = {};
 
@@ -21,6 +21,13 @@ app.controller('LoginCtrl', function($rootScope, $scope, $http, $location, $rout
           $route.reload();
         });
     };
+    $scope.seleccionarImagen = true;
+    $scope.$watch('seleccionarImagen',function(nuevoValor){
+      $timeout(function(){
+          $scope.seleccionarImagenRestrasado= nuevoValor;
+      }, 250);
+
+    });
 
     $scope.keyUpListener = function($event, credenciales) {
         if ($event.keyCode === 13) {
@@ -30,6 +37,18 @@ app.controller('LoginCtrl', function($rootScope, $scope, $http, $location, $rout
             $scope.login(credenciales);
         }
     };
+
+    var fotos = [];
+    for(var i= 0; i<5 ; i++){
+      fotos.push('img/avatar' + (i+1) + '.png');
+    }
+    $scope.fotos = fotos;
+    $scope.userRegistro = {};
+    $scope.seleccionarFoto = function(foto){
+      $scope.userRegistro.foto = foto;
+    };
+
+
 
 
 });

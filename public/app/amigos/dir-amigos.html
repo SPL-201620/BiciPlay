@@ -10,7 +10,7 @@
         class="md-2-line"
         ng-click="onSelect(amigo)"
         ng-show="mostrar(amigo)">
-        <img ng-src="img/avatar1.png"
+        <img ng-src="{{amigo.foto}}"
             class="md-avatar"
             alt="amigo.name" />
         <div class="md-list-item-text">
@@ -34,7 +34,7 @@
             <md-subheader class="md-no-sticky">{{ personas.length > 0?'Personas que están registradas:':'No se encontraron personas con ese nombre o correo'}}</md-subheader>
             <md-list-item ng-repeat="persona in personas"
                 class="md-2-line">
-                <img ng-src="img/avatar1.png"
+                <img ng-src="{{persona.foto}}"
                     class="md-avatar"
                     alt="persona.name" />
                 <div class="md-list-item-text">

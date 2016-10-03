@@ -1,6 +1,11 @@
 (function() {
     var app = angular.module('app');
-    app.controller('HomeCtrl', function($scope, $rootScope, $mdDialog, $mdSidenav, $timeout) {
+    app.controller('HomeCtrl', function($scope, $rootScope, $mdDialog, $mdSidenav, $timeout, User) {
+
+         User.getUserCallback(function(user){
+          $scope.yo = user;
+        });
+        console.log("YO:", $scope.yo);
         $scope.toggleLeft = buildDelayedToggler('left');
         $scope.toggleRight = buildToggler('right');
         $scope.isOpenRight = function() {
@@ -51,13 +56,13 @@
             };
         }
 
-        $scope.selectAmigo = function (amigo){
-          console.log("Nuevo amigo seleccionado:", amigo);
-          $scope.amigoSelected = amigo;
+        $scope.selectAmigo = function(amigo) {
+            console.log("Nuevo amigo seleccionado:", amigo);
+            $scope.amigoSelected = amigo;
         };
-        
-        $scope.deseleccionarAmigo = function(){
-          $scope.amigoSelected = null;
+
+        $scope.deseleccionarAmigo = function() {
+            $scope.amigoSelected = null;
         };
     });
 

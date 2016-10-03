@@ -1,3 +1,4 @@
+//Weather http://api.openweathermap.org/data/2.5/weather?lat=4.672441016945879&lon=-74.06758514771603&appid=d08cf89aae234e20bc4cdd80a42d8543
 (function() {
     var map, poly;
     var markerImage = new google.maps.MarkerImage('/img/marker.svg',
@@ -61,6 +62,7 @@
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
+                console.log("Current location: lat:", position.coords.latitude, "lng:", position.coords.longitude);
                 var pos = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
