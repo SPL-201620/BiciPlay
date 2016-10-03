@@ -19,5 +19,5 @@ angular.module('app').service('Amigos', function ($rootScope, $window, $location
       }).then(function(res) {
           return res.data;
       });
-    }
+    };
 });

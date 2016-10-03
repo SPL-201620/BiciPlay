@@ -34,16 +34,9 @@ app.config(function($routeProvider, $httpProvider, $mdThemingProvider) {
         .when('/home', {
             controller: 'HomeCtrl',
             templateUrl: 'app/home/home.html',
-            /*resolve: {
+            resolve: {
             	loggedin: checkLoggedin
-            }*/
-        })
-        .when('/sorteos', {
-            controller: 'SorteosCtrl',
-            templateUrl: 'app/sorteos/sorteos.html',
-            /*resolve: {
-            	loggedin: checkLoggedin
-            }*/
+            }
         })
         .otherwise({
             controller: 'LoginCtrl',

@@ -26,9 +26,9 @@
         }
         $scope.$watch('ruta', function(ruta) {
 
-        })
+        });
         initMap();
-        console.log("DIR MAPA")
+        console.log("DIR MAPA");
 
     }
 

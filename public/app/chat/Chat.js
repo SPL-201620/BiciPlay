@@ -1,23 +1,21 @@
 /*jslint node: true */
 angular.module('app').service('Chat', function ($rootScope, $window, $location, Http) {
     var self = this;
-    self.getAmigos = function() {
-        return Http.get('usuarios/darAmigos').then(function(res) {
+    self.darMensajes = function(amigoId) {
+        return Http.post('chat/leerMensaje', {
+          receptor: amigoId
+        }).then(function(res) {
+            console.log("Mensajes:", res);
             return res.data;
         });
     };
-    self.buscarPersonas = function(nombre) {
-        return Http.post('usuarios/buscarUsuarios', {
-          name: nombre
+    self.enviarMensaje = function(receptorId, mensaje) {
+        console.log("se envía el mensaje:", mensaje, " a:", receptorId);
+        return Http.post('chat/enviarMensaje', {
+          receptor: receptorId,
+          mensaje: mensaje
         }).then(function(res) {
             return res.data;
         });
     };
-    self.agregarAmigo = function(idPersona){
-      return Http.post('usuarios/agregarAmigo', {
-        id: idPersona
-      }).then(function(res) {
-          return res.data;
-      });
-    }
 });

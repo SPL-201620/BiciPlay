@@ -2,7 +2,9 @@
     angular.module('app').directive('dirAmigos', function() {
         return {
             restrict: 'E',
-            scope: {},
+            scope: {
+              onSelect: "="
+            },
             templateUrl: 'app/amigos/dir-amigos.html',
             controller: controller
         };
@@ -20,12 +22,12 @@
         $scope.buscarPersonas = function(nombre) {
             Amigos.buscarPersonas(nombre).then(function(personas) {
                 $scope.personas = personas;
-            })
+            });
         };
         $scope.agregarAmigo = function(persona){
           Amigos.agregarAmigo(persona.id).then(function(personas) {
               refreshAmigos();
-          })
+          });
         };
         function refreshAmigos(){
           Amigos.getAmigos().then(function(amigosP) {

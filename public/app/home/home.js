@@ -54,7 +54,11 @@
         $scope.selectAmigo = function (amigo){
           console.log("Nuevo amigo seleccionado:", amigo);
           $scope.amigoSelected = amigo;
-        }
+        };
+        
+        $scope.deseleccionarAmigo = function(){
+          $scope.amigoSelected = null;
+        };
     });
 
 
