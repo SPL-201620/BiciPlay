@@ -8,7 +8,8 @@
     </md-input-container>
     <md-list-item ng-repeat="amigo in amigos"
         class="md-2-line"
-        ng-click="onSelect(amigo)">
+        ng-click="onSelect(amigo)"
+        ng-show="mostrar(amigo)">
         <img ng-src="img/avatar1.png"
             class="md-avatar"
             alt="amigo.name" />

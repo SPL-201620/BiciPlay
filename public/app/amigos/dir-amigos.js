@@ -29,6 +29,9 @@
               refreshAmigos();
           });
         };
+        $scope.mostrar = function(persona){
+          return $scope.busqueda?(persona.name.includes($scope.busqueda) || persona.email.includes($scope.busqueda)): true;
+        };
         function refreshAmigos(){
           Amigos.getAmigos().then(function(amigosP) {
               $scope.amigos = amigosP;
