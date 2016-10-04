@@ -46,24 +46,24 @@ public class RecorridoGrupalController {
             return badRequest("Expecting Json data");
         } else {
             //int usuarioId = json.findPath(session(ID_USUARIO)).asInt();
-            int usuarioId = json.findPath("usuario").asInt();
             String name = json.findPath("name").textValue();
+            String fechaRecorrido = json.findPath("fechaRecorrido").textValue();
             //Date fechaRecorrido = json.findPath("fechaRecorrido");
             int frecuencia = json.findPath("frecuencia").asInt();
             String unidadFrecuencia = json.findPath("unidadFrecuencia").textValue();
             String inicio = json.findPath("inicio").textValue();
             String destino = json.findPath("destino").textValue();
-            System.out.println(usuarioId + " - " + name + " - " + frecuencia+
+            System.out.println( name + " - " + frecuencia+
                     " - " + unidadFrecuencia + " - " + inicio + " - " + destino);
 
-            if( usuarioId == 0 || name == null || frecuencia == 0 || unidadFrecuencia == null
+            if( name == null || frecuencia == 0 || unidadFrecuencia == null
                     || inicio == null || destino == null) {
                 return badRequest("Missing parameteres");
             } else {
                 RecorridoGrupal recorridoNuevo = new RecorridoGrupal();
-                recorridoNuevo.usuario = usuarioId;
+                recorridoNuevo.usuario = Integer.parseInt(session(ID_USUARIO));
                 recorridoNuevo.name= name;
-                recorridoNuevo.fechaRecorrido = new Date();
+                recorridoNuevo.fechaRecorrido = fechaRecorrido;
                 recorridoNuevo.frecuencia = frecuencia;
                 recorridoNuevo.unidadFrecuencia = unidadFrecuencia;
                 recorridoNuevo.inicio =inicio;

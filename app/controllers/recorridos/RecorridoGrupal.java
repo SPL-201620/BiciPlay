@@ -25,7 +25,7 @@ public class RecorridoGrupal extends Model {
     @Expose
     public String name;
     @Expose
-    public Date fechaRecorrido;
+    public String fechaRecorrido;
     @Expose
     public int frecuencia;
     @Expose
