@@ -69,7 +69,6 @@ public class UsuariosController extends Controller {
             String email = json.findPath("email").textValue();
             String password = json.findPath("password").textValue();
 
-
             if(name == null || email == null || password == null || foto==null) {
                 return badRequest("Missing parameter");
             } else {

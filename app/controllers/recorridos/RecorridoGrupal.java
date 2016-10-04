@@ -4,6 +4,7 @@ import javax.persistence.*;
 import com.avaje.ebean.Model;
 import com.google.gson.annotations.Expose;
 import controllers.ruta.Ubicacion;
+import controllers.usuarios.Usuario;
 import scala.Int;
 
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ public class RecorridoGrupal extends Model {
     public int id;
 
     @Expose
+    public int usuario;
+    @Expose
+    public String name;
+    @Expose
     public Date fechaRecorrido;
     @Expose
     public int frecuencia;
@@ -31,11 +36,12 @@ public class RecorridoGrupal extends Model {
     public String destino;
 
 
+
     public List<Ubicacion> ubicacions;
 /*
     @OneToMany
 */
 
-    public static Finder<Long, controllers.usuarios.Usuario> find = new Finder<Long, controllers.usuarios.Usuario>(controllers.usuarios.Usuario.class);
+    public static Finder<Long, RecorridoGrupal> find = new Finder<Long, RecorridoGrupal>(RecorridoGrupal.class);
 
 }
