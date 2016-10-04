@@ -13,7 +13,8 @@
         return {
             restrict: 'E',
             scope: {
-                ruta: '@'
+                ruta: '=',
+                show: "="
             },
             templateUrl: 'app/mapa/dir-mapa.html',
             controller: controller
@@ -25,101 +26,129 @@
         if (!$scope.ruta) {
             $scope.ruta = [];
         }
+        /*setInterval(function(){
+          console.log("$scope.ruta", $scope.ruta);
+        }, 4000)*/
         $scope.$watch('ruta', function(ruta) {
+            console.log("Nueva ruta", ruta);
+        });
+        $scope.$watch('show', function(show) {
+            if (show) {
+                initMap();
+                //addLatLngToPoly(new google.maps.LatLng(4.60258436, -74.064453619));
+                console.log("DIR MAPA");
+            }
 
         });
-        initMap();
-        console.log("DIR MAPA");
 
-    }
-
-    function initMap() {
-        var mapElement = document.getElementById('map');
-        console.log("Elemento del mapa ", mapElement);
-        map = new google.maps.Map(mapElement, {
-            center: {
-                lat: -34.397,
-                lng: 150.644
-            },
-            zoom: 14
-        });
-        var infoWindow = new google.maps.InfoWindow({
-            map: map
-        });
-
-        poly = new google.maps.Polyline({
-            strokeColor: '#192047',
-            strokeOpacity: 0.5,
-            strokeWeight: 5,
-            map: map
-        });
-
-        // Add a listener for the click event
-        google.maps.event.addListener(map, 'click', function(event) {
-            addLatLngToPoly(event.latLng, poly);
-        });
-
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log("Current location: lat:", position.coords.latitude, "lng:", position.coords.longitude);
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('Usted esta aquí');
-                map.setCenter(pos);
-            }, function() {
-                handleLocationError(true, infoWindow, map.getCenter());
+        function initMap() {
+            var mapElement = document.getElementById('map');
+            console.log("Elemento del mapa ", mapElement);
+            map = new google.maps.Map(mapElement, {
+                center: {
+                    lat: -34.397,
+                    lng: 150.644
+                },
+                zoom: 14
             });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
+            var infoWindow = new google.maps.InfoWindow({
+                map: map
+            });
+
+            poly = new google.maps.Polyline({
+                strokeColor: '#192047',
+                strokeOpacity: 0.5,
+                strokeWeight: 5,
+                map: map
+            });
+
+            // Add a listener for the click event
+            google.maps.event.addListener(map, 'click', function(event) {
+                addLatLngToPoly(event.latLng, poly);
+            });
+
+            // Try HTML5 geolocation.
+            console.log("Try HTML5 geolocation");
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    console.log("Current location: lat:", position.coords.latitude, "lng:", position.coords.longitude);
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Usted esta aquí');
+                    map.setCenter(pos);
+                    console.log("Try HTML5 geolocation: OK");
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+
+
+
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
         }
 
 
+        /**
+         * Handles click events on a map, and adds a new point to the Polyline.
+         * Updates the encoding text area with the path's encoded values.
+         */
+        var markers = [];
 
-    }
+        function addLatLngToPoly(latLng) {
+            var path = poly.getPath();
+            path.push(latLng);
+            var currentMarkerImage = (path.getLength() === 1) ? markerInitImage : markerImage;
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
-    }
-
-
-    /**
-     * Handles click events on a map, and adds a new point to the Polyline.
-     * Updates the encoding text area with the path's encoded values.
-     */
-    var markers = [];
-
-    function addLatLngToPoly(latLng) {
-        var path = poly.getPath();
-        path.push(latLng);
-        var currentMarkerImage = (path.getLength() === 1)? markerInitImage:markerImage;
-
-        var marker = new google.maps.Marker({
-            position: latLng,
-            title: '#' + path.getLength(),
-            draggable: true,
-            icon: currentMarkerImage,
-            map: map
-        });
-        markers.push(marker);
-        marker.addListener('drag', onMarkerMove);
-    }
-
-    function onMarkerMove(event) {
-        var path = [];
-
-        for (var i = 0; i < markers.length; i++) {
-            path.push(markers[i].getPosition());
+            var marker = new google.maps.Marker({
+                position: latLng,
+                title: '#' + path.getLength(),
+                draggable: true,
+                icon: currentMarkerImage,
+                map: map
+            });
+            markers.push(marker);
+            marker.addListener('drag', onMarkerMove);
+            updateRuta();
         }
-        poly.setPath(path);
+
+        function onMarkerMove(event) {
+            var path = [];
+
+            for (var i = 0; i < markers.length; i++) {
+                path.push(markers[i].getPosition());
+            }
+            poly.setPath(path);
+            updateRuta();
+        }
+
+        function updateRuta() {
+            var path = poly.getPath();
+            $scope.ruta.splice(0,$scope.ruta.length);
+            console.log("Path", path);
+            path.forEach(function(latLng){
+              $scope.ruta.push({
+                  lat: latLng.lat(),
+                  lng: latLng.lng()
+              });
+            });
+
+        }
+
 
     }
+
+
 })();

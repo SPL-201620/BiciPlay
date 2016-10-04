@@ -43,9 +43,11 @@ app.controller('LoginCtrl', function($rootScope, $scope, $http, $location,$timeo
       fotos.push('img/avatar' + (i+1) + '.png');
     }
     $scope.fotos = fotos;
-    $scope.userRegistro = {};
     $scope.seleccionarFoto = function(foto){
       $scope.userRegistro.foto = foto;
+    };
+    $scope.userRegistro = {
+      foto: fotos[0]
     };
 
 
