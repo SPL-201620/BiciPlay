@@ -35,12 +35,10 @@ public class RecorridoGrupal extends Model {
     @Expose
     public String destino;
 
+    @OneToMany(mappedBy="recorridoGrupal")
+    public List<Ubicacion> ubicaciones;
 
 
-    public List<Ubicacion> ubicacions;
-/*
-    @OneToMany
-*/
 
     public static Finder<Long, RecorridoGrupal> find = new Finder<Long, RecorridoGrupal>(RecorridoGrupal.class);
 

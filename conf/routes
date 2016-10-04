@@ -50,6 +50,10 @@ POST     /api/recorridos/darRecorridos                 controllers.recorridos.Re
 POST     /api/recorridos/invitarRecorrido               controllers.recorridos.RecorridoGrupalController.crearRecorrido
 
 
+#   Ingresar Ubicaciones
+POST  /api/recorridos/ingresarUbicaciones               controllers.ruta.UbicacionController.ingresarUbicaciones
+
+
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
