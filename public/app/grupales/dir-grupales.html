@@ -1,7 +1,10 @@
 <md-card ng-show="showMapa">
-
     <md-toolbar class="md-theme-indigo">
         <div class="md-toolbar-tools">
+          <md-button class="md-icon-button"
+              ng-click="goBack()">
+              <md-icon md-svg-icon="img/back.svg"></md-icon>
+          </md-button>
             <h1 class="md-toolbar-tools">Mapa del recorrido</h1>
             <span flex></span>
             <md-button class="md-raised"
@@ -42,20 +45,6 @@
             <div class="md-list-item-text">
                 <h3>{{recorrido.name}}</h3>
                 <p>Recorrido a {{recorrido.destino}} el {{fechaFormat(recorridoActual.fechaRecorrido)}} desde {{recorrido.inicio}}</p>
-            </div>
-        </md-list-item>
-        <md-list-item class="md-2-line"
-            ng-click="null">
-            <div class="md-list-item-text">
-                <h3>Choachí</h3>
-                <p>Recorrido a choachí el sábado desde Bogotá</p>
-            </div>
-        </md-list-item>
-        <md-list-item class="md-2-line"
-            ng-click="null">
-            <div class="md-list-item-text">
-                <h3>La Vega</h3>
-                <p>Recorrido a la Vega el sábado desde Bogotá</p>
             </div>
         </md-list-item>
     </md-list>

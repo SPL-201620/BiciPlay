@@ -26,7 +26,9 @@
       value: "years"
     }];
     $scope.guardar = function(recorrido){
+      $scope.recorridoActual = null;
       Grupales.guardar(recorrido).then(function(){
+        $scope.recorridoActual = recorrido;
         $scope.showMapa = true;
       });
     };
@@ -37,6 +39,12 @@
       console.log("Seleccionando recorrido", recorrido);
       $scope.recorridoActual = recorrido;
       $scope.showMapa = true;
+    };
+    $scope.goBack = function(){
+      console.log("GO BACK");
+      $scope.recorridoActual = null;
+      $scope.showMapa = false;
+      $scope.showFormulario = false;
     };
     refresh();
     function refresh (){

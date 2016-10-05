@@ -34,7 +34,10 @@
         });
         $scope.$watch('show', function(show) {
             if (show) {
+              setTimeout(function(){
                 initMap();
+              }, 100)
+
                 //addLatLngToPoly(new google.maps.LatLng(4.60258436, -74.064453619));
                 console.log("DIR MAPA");
             }

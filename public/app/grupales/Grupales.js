@@ -12,10 +12,13 @@ angular.module('app').service('Grupales', function($rootScope, $window, $locatio
     self.darRecorridos = function() {
         return Http.get('recorridos/darRecorridos').then(function(res) {
             var recorridos = res.data;
-            for (var recorrido in recorridos) {
+            for (var i = 0; i < recorridos.length; i++) {
+              var recorrido = recorridos[i];
                 console.log("transfoming date: ", moment(recorrido.fechaRecorrido).toDate());
                 recorrido.fechaRecorrido = moment(recorrido.fechaRecorrido);
+                recorrido.ruta = [];
             }
+            console.log("Recorridos ------- : ", recorridos);
 
             return recorridos;
         });
