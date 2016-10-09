@@ -45,7 +45,7 @@ public class UbicacionController extends Controller {
         if(json == null) {
             return badRequest("Expecting Json data");
         } else {
-            RecorridoGrupal ubicaciones= GSON.fromJson(json.asText(), RecorridoGrupal.class);
+            RecorridoGrupal ubicaciones= GSON.fromJson(json.toString(), RecorridoGrupal.class);
             RecorridoGrupal recorrido=RecorridoGrupal.find.where().eq("id",ubicaciones.id ).findUnique();
             recorrido.ubicaciones=ubicaciones.ubicaciones;
             recorrido.save();

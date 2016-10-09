@@ -44,7 +44,7 @@ import java.util.List;
         @Expose
         public String destino;
 
-        @OneToMany(mappedBy="recorridoIndividual")
+        @OneToMany(mappedBy="recorridoIndividual",cascade=CascadeType.ALL)
         public List<Ubicacion> ubicaciones;
 
 

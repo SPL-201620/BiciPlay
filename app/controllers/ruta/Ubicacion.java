@@ -18,12 +18,6 @@ public class Ubicacion extends Model {
     public int id;
 
     @Expose
-    public int idRecorridoIndividual;
-
-    @Expose
-    public int idRecorridoGrupal;
-
-    @Expose
     public double lat;
     @Expose
     public double lng;

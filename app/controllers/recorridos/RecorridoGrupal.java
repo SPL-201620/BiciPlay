@@ -35,7 +35,8 @@ public class RecorridoGrupal extends Model {
     @Expose
     public String destino;
 
-    @OneToMany(mappedBy="recorridoGrupal")
+    @Expose
+    @OneToMany(mappedBy="recorridoGrupal",cascade=CascadeType.ALL)
     public List<Ubicacion> ubicaciones;
 
     @ManyToMany
