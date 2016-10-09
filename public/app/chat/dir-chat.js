@@ -12,10 +12,10 @@
     });
 
 
-    function controller($scope, Chat, User) {
+    function controller($scope, $interval, Chat, User) {
         $scope.yo = User.getUser();
         console.log("YO: ", $scope.yo);
-        refreshMensajes();
+
         $scope.enviarMensaje = function(mensaje) {
             Chat.enviarMensaje($scope.amigo.id, mensaje).then(function() {
                 $scope.nuevoMensaje = "";
@@ -29,7 +29,8 @@
             }
         };
 
-
+        refreshMensajes();
+        var refreshInterval = $interval(refreshMensajes, 2000);
 
         function refreshMensajes() {
             Chat.darMensajes($scope.amigo.id).then(function(mensajes) {
@@ -39,19 +40,22 @@
 
             });
         }
+        $scope.$on('$destroy', function() {
+            $interval.cancel(refreshInterval);
+        });
 
-        function autoscroll(animate){
-          setTimeout(function(){
-            var chatListElement = $("#chat");
-            if(animate){
-              chatListElement.animate({
-                  scrollTop: chatListElement[0].scrollHeight
-              }, 500);
-            } else{
-              chatListElement[0].scrollTop = chatListElement[0].scrollHeight;
-            }
+        function autoscroll(animate) {
+            setTimeout(function() {
+                var chatListElement = $("#chat");
+                if (animate) {
+                    chatListElement.animate({
+                        scrollTop: chatListElement[0].scrollHeight
+                    }, 500);
+                } else {
+                    chatListElement[0].scrollTop = chatListElement[0].scrollHeight;
+                }
 
-          }, 100);
+            }, 100);
         }
     }
 })();

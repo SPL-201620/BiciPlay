@@ -5,12 +5,10 @@ angular.module('app').service('Chat', function ($rootScope, $window, $location, 
         return Http.post('chat/leerMensaje', {
           receptor: amigoId
         }).then(function(res) {
-            console.log("Mensajes:", res);
             return res.data;
         });
     };
     self.enviarMensaje = function(receptorId, mensaje) {
-        console.log("se envía el mensaje:", mensaje, " a:", receptorId);
         return Http.post('chat/enviarMensaje', {
           receptor: receptorId,
           mensaje: mensaje
