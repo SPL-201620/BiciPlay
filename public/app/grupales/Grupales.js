@@ -24,4 +24,15 @@ angular.module('app').service('Grupales', function($rootScope, $window, $locatio
         });
     };
 
+    self.guardarRuta  = function(recorridoId, ubicaciones){
+        var datosPost = {
+            id: recorridoId,
+            ubicaciones: ubicaciones
+        };
+        console.log("DATOS POST:", datosPost);
+        return Http.post('recorridos/ingresarUbicaciones', datosPost).then(function(res) {
+            return res.data;
+        });
+    };
+
 });

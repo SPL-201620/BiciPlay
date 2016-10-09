@@ -50,9 +50,15 @@
     function refresh (){
       Grupales.darRecorridos().then(function(recorridos){
         $scope.recorridos = recorridos;
-        console.log("recorridos", recorridos)
+        console.log("recorridos", recorridos);
       });
     }
+
+    $scope.guardarRuta = function(recorridoId, ubicaciones){
+        Grupales.guardarRuta(recorridoId, ubicaciones).then(function(){
+            $scope.showMapa = false;
+        });
+    };
     /*setInterval(function(){
       console.log("$scope.recorridoActual.ruta", $scope.recorridoActual.ruta);
     }, 4000);*/

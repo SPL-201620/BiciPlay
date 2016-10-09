@@ -32,8 +32,8 @@
         </md-sidenav>
 
         <div flex>
-            <dir-grupales></dir-grupales>
-
+            <dir-grupales ng-if="view === 'Grupales'"></dir-grupales>
+            <dir-individuales ng-if="view === 'Individuales'"></dir-individuales>
         </div>
 
         <md-sidenav class="md-sidenav-left"

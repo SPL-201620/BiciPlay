@@ -1,4 +1,4 @@
-<md-card ng-show="showMapa">
+<md-card ng-show="view === 'mapa'">
     <md-toolbar class="md-theme-indigo">
         <div class="md-toolbar-tools">
           <md-button class="md-icon-button"
@@ -15,12 +15,12 @@
     </md-toolbar>
     <md-card-title>
         <md-card-title-text>
-            <span class="md-subhead">Haga clic en cualquier parte del mapa para agregar un punto de la ruta</span>
+            <span class="md-subhead">Inicie su recorrido o seleccione dos puntos del mapa para ver la mejor ruta</span>
         </md-card-title-text>
     </md-card-title>
     <section class="md-padding"
         layout="column">
-        <dir-mapa show="showMapa"
+        <dir-mapa-indiv show="view === 'mapa'"
             ruta="recorridoActual.ruta"
             flex>
         </dir-mapa>

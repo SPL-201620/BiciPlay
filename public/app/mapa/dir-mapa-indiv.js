@@ -9,7 +9,11 @@
         new google.maps.Size(30, 30),
         new google.maps.Point(0, 0),
         new google.maps.Point(15, 15));
-    angular.module('app').directive('dirMapa', function() {
+
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+
+    angular.module('app').directive('dirMapaIndiv', function() {
         return {
             restrict: 'E',
             scope: {
@@ -37,11 +41,11 @@
                 setTimeout(function() {
                     initMap();
                 }, 100);
-                //addLatLngToPoly(new google.maps.LatLng(4.60258436, -74.064453619));
                 console.log("DIR MAPA");
             }
 
         });
+
 
         function initMap() {
             var mapElement = document.getElementById('map');
@@ -57,6 +61,9 @@
                 map: map
             });
 
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay.setMap(map);
+
             poly = new google.maps.Polyline({
                 strokeColor: '#192047',
                 strokeOpacity: 0.5,
@@ -66,7 +73,7 @@
 
             // Add a listener for the click event
             google.maps.event.addListener(map, 'click', function(event) {
-                addLatLngToPoly(event.latLng, poly);
+                clickOverMap(event.latLng);
             });
 
             // Try HTML5 geolocation.
@@ -107,33 +114,53 @@
          * Handles click events on a map, and adds a new point to the Polyline.
          * Updates the encoding text area with the path's encoded values.
          */
-        var markers = [];
+        var markerIni;
+        var markerEnd;
 
-        function addLatLngToPoly(latLng) {
-            var path = poly.getPath();
-            path.push(latLng);
-            var currentMarkerImage = (path.getLength() === 1) ? markerInitImage : markerImage;
+        function clickOverMap(latLng) {
+            if (markerIni && markerEnd) {
+                quitMarkers();
+            }
+            if (!markerIni) {
+                markerIni = new google.maps.Marker({
+                    position: latLng,
+                    title: 'inicio',
+                    map: map
+                });
+            } else {
+                markerEnd = new google.maps.Marker({
+                    position: latLng,
+                    title: 'final',
+                    map: map
+                });
 
-            var marker = new google.maps.Marker({
-                position: latLng,
-                title: '#' + path.getLength(),
-                draggable: true,
-                icon: currentMarkerImage,
-                map: map
-            });
-            markers.push(marker);
-            marker.addListener('drag', onMarkerMove);
-            updateRuta();
+                calcRoute();
+            }
+        }
+        function quitMarkers(){
+            markerIni.setMap(null);
+            markerEnd.setMap(null);
+            markerIni = null;
+            markerEnd = null;
         }
 
-        function onMarkerMove(event) {
-            var path = [];
 
-            for (var i = 0; i < markers.length; i++) {
-                path.push(markers[i].getPosition());
-            }
-            poly.setPath(path);
-            updateRuta();
+
+        function calcRoute() {
+            var request = {
+                origin: markerIni.getPosition(),
+                destination: markerEnd.getPosition(),
+                travelMode: 'DRIVING'
+            };
+            quitMarkers();
+            directionsService.route(request, function(result, status) {
+                if (status == 'OK') {
+                    console.log("Result:", result)
+                    directionsDisplay.setDirections(result);
+                } else{
+                    console.log("Error", result, status);
+                }
+            });
         }
 
         function updateRuta() {
