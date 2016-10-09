@@ -76,7 +76,7 @@ public class RecorridoGrupalController {
 
     public Result darRecorridos() {
         String usuarioId =  session(ID_USUARIO);
-        List<RecorridoGrupal> misRecorridos = RecorridoGrupal.find.where().eq("usuario", Integer.valueOf(usuarioId)).findList();
+        List<RecorridoGrupal> misRecorridos = RecorridoGrupal.find.where().eq("usuarioCreador", Integer.valueOf(usuarioId)).findList();
         return ok(GSON.toJson(misRecorridos));
         //return ok(GSON.toJson(amigo.misAmigos));
     }
