@@ -7,7 +7,7 @@
 
 				if (status == 404) {
 					console.log("404 Not Found: " + url);
-				} else {
+				} else if(status == 400){
 					console.log("Error status : ", status, "error", error);
 					for (var i = errorListeners.length - 1; i >= 0; i--) {
 						errorListeners[i](error, status);

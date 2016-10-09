@@ -8,6 +8,9 @@
         $scope.setView = function(view){
             $scope.view = view;
         };
+        $scope.logout = function(){
+            User.logout();
+        }
 
         $scope.toggleLeft = buildDelayedToggler('left');
         $scope.toggleRight = buildToggler('right');

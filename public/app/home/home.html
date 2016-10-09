@@ -43,12 +43,15 @@
             <md-list>
             <md-list-item class="md-2-line" ng-click="showPerfil()">
                 <img ng-src="{{yo.foto}}"
-                    class="md-avatar"
-                    alt="yo.name" />
+                    class="md-avatar"/>
                 <div class="md-list-item-text">
                     <h3>{{yo.name}}</h3>
                     <p>{{yo.email}}</p>
                 </div>
+                <md-button class="md-secondary md-icon-button"
+                    ng-click="logout()">
+                    <md-icon md-svg-icon="img/close.svg"></md-icon>
+                </md-button>
             </md-list-item>
             </md-list>
             <dir-amigos ng-if="!amigoSelected"

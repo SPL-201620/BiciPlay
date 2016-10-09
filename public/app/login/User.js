@@ -1,5 +1,5 @@
 /*jslint node: true */
-angular.module('app').service('User', function ($rootScope, $window, $location, Http) {
+angular.module('app').service('User', function ($rootScope,$route, $window, $location, Http) {
     var user = null;
     var self = this;
     var callbacks = [];
@@ -33,13 +33,14 @@ angular.module('app').service('User', function ($rootScope, $window, $location, 
             }
             callbacks.forEach(function(callback){
               callback(user);
-            })
+          });
             return user;
         });
     };
     self.logout = function() {
-        return Http.post('usuarios/logout', {}).then(function(res) {
+        return Http.get('usuarios/logout').then(function(res) {
             user = null;
+            $route.reload();
         });
     };
 });
