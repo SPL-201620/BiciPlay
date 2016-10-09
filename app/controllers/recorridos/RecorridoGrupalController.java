@@ -81,4 +81,26 @@ public class RecorridoGrupalController {
         //return ok(GSON.toJson(amigo.misAmigos));
     }
 
+
+
+    public Result unirseRecorridoGrupal() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            int idRecorrido = json.findPath("id").asInt();
+            RecorridoGrupal recorrido = RecorridoGrupal.find.where().eq("id", idRecorrido).findUnique();
+            recorrido.usuario.add(Usuario.find.where().eq("id", getUsuarioLogIn()).findUnique());
+            recorrido.save();
+            return ok("OK");
+        }
+    }
+
+
+
+    public int getUsuarioLogIn(){
+       //  return 21;
+        return Integer.valueOf(session(ID_USUARIO));
+
+    }
 }

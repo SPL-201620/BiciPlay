@@ -49,9 +49,13 @@ GET     /api/recorridos/darRecorridos                 controllers.recorridos.Rec
 # Control para Invitar recorridos
 POST     /api/recorridos/invitarRecorrido               controllers.recorridos.RecorridoGrupalController.crearRecorrido
 
+#unirse al recorrido Grupal.
+POST  /api/recorridos/unirseRecorridoGrupal             controllers.recorridos.RecorridoGrupalController.unirseRecorridoGrupal
+
 
 #   Ingresar Ubicaciones
 POST  /api/recorridos/ingresarUbicaciones               controllers.ruta.UbicacionController.ingresarUbicaciones
+
 
 
 # An example controller showing how to write asynchronous code
