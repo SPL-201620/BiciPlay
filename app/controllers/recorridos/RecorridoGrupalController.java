@@ -61,7 +61,7 @@ public class RecorridoGrupalController {
                 return badRequest("Missing parameteres");
             } else {
                 RecorridoGrupal recorridoNuevo = new RecorridoGrupal();
-                recorridoNuevo.usuario = Integer.parseInt(session(ID_USUARIO));
+                recorridoNuevo.usuarioCreador = Integer.parseInt(session(ID_USUARIO));
                 recorridoNuevo.name= name;
                 recorridoNuevo.fechaRecorrido = fechaRecorrido;
                 recorridoNuevo.frecuencia = frecuencia;

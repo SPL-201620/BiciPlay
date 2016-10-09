@@ -21,7 +21,7 @@ public class RecorridoGrupal extends Model {
     public int id;
 
     @Expose
-    public int usuario;
+    public int usuarioCreador;
     @Expose
     public String name;
     @Expose
@@ -38,6 +38,12 @@ public class RecorridoGrupal extends Model {
     @OneToMany(mappedBy="recorridoGrupal")
     public List<Ubicacion> ubicaciones;
 
+    @ManyToMany
+    @JoinTable(name="usuario_recorridos",
+            joinColumns=@JoinColumn(name="idUsuarios"),
+            inverseJoinColumns=@JoinColumn(name="idRecorrido")
+    )
+    public List<Usuario> usuario;
 
 
     public static Finder<Long, RecorridoGrupal> find = new Finder<Long, RecorridoGrupal>(RecorridoGrupal.class);

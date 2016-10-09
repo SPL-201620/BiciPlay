@@ -3,6 +3,7 @@ package controllers.usuarios;
 import javax.persistence.*;
 import com.avaje.ebean.Model;
 import com.google.gson.annotations.Expose;
+import controllers.recorridos.RecorridoGrupal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,10 @@ public class Usuario extends Model{
             inverseJoinColumns=@JoinColumn(name="amigoId")
     )
     public List<Usuario> misAmigos;
+
+
+
+
 /*
     @ManyToMany
     @JoinTable(name="amigos",

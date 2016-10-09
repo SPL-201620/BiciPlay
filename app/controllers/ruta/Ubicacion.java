@@ -3,6 +3,7 @@ package controllers.ruta;
 import com.avaje.ebean.Model;
 import com.google.gson.annotations.Expose;
 import controllers.recorridos.RecorridoGrupal;
+import controllers.recorridos.RecorridoIndividual;
 
 import javax.persistence.*;
 
@@ -32,6 +33,9 @@ public class Ubicacion extends Model {
     @ManyToOne (cascade=CascadeType.ALL)
     public RecorridoGrupal recorridoGrupal;
 
+
+    @ManyToOne (cascade=CascadeType.ALL)
+    public RecorridoIndividual recorridoIndividual;
 
     public static Finder<Long, controllers.usuarios.Usuario> find = new Finder<Long, controllers.usuarios.Usuario>(controllers.usuarios.Usuario.class);
 
