@@ -56,7 +56,18 @@ POST  /api/recorridos/unirseRecorridoGrupal             controllers.recorridos.R
 #   Ingresar Ubicaciones
 POST  /api/recorridos/ingresarUbicaciones               controllers.ruta.UbicacionController.ingresarUbicaciones
 
+# Control para devolver los recorridos individuales de un usuairo
+GET     /api/recorridos/darRecorridosIndividuales       controllers.recorridos.RecorridoIndividualController.darRecorridosIndividuales
 
+# Control para iniciar Recorridos
+GET     /api/recorridos/iniciarRecorrido       controllers.recorridos.RecorridoIndividualController.iniciarRecorrido
+
+#control para finalizar REcorridos
+GET     /api/recorridos/finalizarRecorrido       controllers.recorridos.RecorridoIndividualController.finalizarRecorrido
+
+
+# Cnto   ingresarUbicacionesIndividuales
+POST  /api/recorridos/ingresarUbicacionesIndividuales               controllers.ruta.UbicacionController.ingresarUbicacionesIndividuales
 
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message

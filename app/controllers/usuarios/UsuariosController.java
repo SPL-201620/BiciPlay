@@ -72,14 +72,20 @@ public class UsuariosController extends Controller {
             if(name == null || email == null || password == null || foto==null) {
                 return badRequest("Missing parameter");
             } else {
-                Usuario usuarioNuevo = new Usuario();
-                usuarioNuevo.email =email;
-                usuarioNuevo.name = name;
-                usuarioNuevo.password = password;
-                usuarioNuevo.foto = foto;
-                usuarioNuevo.save();
-                crearSession(usuarioNuevo.id);
-                Usuario usuario =  Usuario.find.byId((long)usuarioNuevo.id);
+                Usuario usuario;
+                if(json.findPath("id").asLong() == 0)
+                    usuario = new Usuario();
+                else
+                    usuario=Usuario.find.byId(json.findPath("id").asLong());
+
+
+                usuario.email =email;
+                usuario.name = name;
+                usuario.password = password;
+                usuario.foto = foto;
+                usuario.save();
+                crearSession(usuario.id);
+
                 return ok(GSON.toJson(usuario));
             }
         }
@@ -168,7 +174,7 @@ public class UsuariosController extends Controller {
                     return ok("Ok");
                 } else {
 
-                    return ok("Error Agregando amigo");
+                    return ok("Error Agregando amigos");
 
                 }
             }

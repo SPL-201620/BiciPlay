@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.google.inject.Singleton;
 import controllers.chat.Chat;
 import controllers.recorridos.RecorridoGrupal;
+import controllers.recorridos.RecorridoIndividual;
 import controllers.usuarios.Usuario;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -42,16 +43,33 @@ public class UbicacionController extends Controller {
 
     public Result ingresarUbicaciones() {
         JsonNode json = request().body().asJson();
+        if (json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            RecorridoGrupal ubicaciones = GSON.fromJson(json.toString(), RecorridoGrupal.class);
+            RecorridoGrupal recorrido = RecorridoGrupal.find.where().eq("id", ubicaciones.id).findUnique();
+            recorrido.ubicaciones = ubicaciones.ubicaciones;
+            recorrido.save();
+            return ok("OK");
+
+        }
+    }
+
+    public Result ingresarUbicacionesIndividuales() {
+        JsonNode json = request().body().asJson();
         if(json == null) {
             return badRequest("Expecting Json data");
         } else {
-            RecorridoGrupal ubicaciones= GSON.fromJson(json.toString(), RecorridoGrupal.class);
+            RecorridoIndividual ubicaciones= GSON.fromJson(json.toString(), RecorridoIndividual.class);
             RecorridoGrupal recorrido=RecorridoGrupal.find.where().eq("id",ubicaciones.id ).findUnique();
-            recorrido.ubicaciones=ubicaciones.ubicaciones;
+            recorrido.ubicaciones.add(ubicaciones.ubicaciones.get(0));
             recorrido.save();
-           return ok("OK");
+            return ok("OK");
 
         }
+
+
+
     }
 
 

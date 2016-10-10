@@ -21,35 +21,29 @@ import java.util.List;
         public int id;
 
         @Expose
-        public int usuario;
+        public int usuarioCreador;
         @Expose
         public String name;
         @Expose
-        public Date incioRecorrido;
+        public Date inicioRecorrido;
         @Expose
         public Date finRecorrido;
         @Expose
         public double distancia;
         @Expose
         public double calorias;
+
         @Expose
         public double clima;
 
         @Expose
-        public int frecuencia;
-        @Expose
-        public String unidadFrecuencia;
-        @Expose
-        public String inicio;
-        @Expose
-        public String destino;
-
         @OneToMany(mappedBy="recorridoIndividual",cascade=CascadeType.ALL)
         public List<Ubicacion> ubicaciones;
 
 
 
-        public static Finder<Long, controllers.recorridos.RecorridoGrupal> find = new Finder<Long, controllers.recorridos.RecorridoGrupal>(controllers.recorridos.RecorridoGrupal.class);
+        public static Finder<Long, RecorridoIndividual> find =
+                new Finder<Long, RecorridoIndividual>(RecorridoIndividual.class);
 
     }
 
