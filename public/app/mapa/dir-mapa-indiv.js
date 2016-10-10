@@ -26,7 +26,7 @@
     });
 
 
-    function controller($scope, $timeout) {
+    function controller($scope, $timeout, $interval) {
         if (!$scope.ruta) {
             $scope.ruta = [];
         }
@@ -137,7 +137,8 @@
                 calcRoute();
             }
         }
-        function quitMarkers(){
+
+        function quitMarkers() {
             markerIni.setMap(null);
             markerEnd.setMap(null);
             markerIni = null;
@@ -156,11 +157,32 @@
             directionsService.route(request, function(result, status) {
                 if (status == 'OK') {
                     console.log("Result:", result)
+                    $scope.rutaPlaneada = result.routes[0].overview_path;
+                    simular($scope.rutaPlaneada);
                     directionsDisplay.setDirections(result);
-                } else{
+                } else {
                     console.log("Error", result, status);
                 }
             });
+        }
+
+        function simular(ruta) {
+            var i = 0;
+            var markerActual = new google.maps.Marker({
+                position: ruta[i],
+                title: 'actual',
+                map: map
+            });
+
+            var intervaloSimulacion = $interval(function() {
+                console.log("SIMULACION");
+                var newPosition = ruta[i++];
+                console.log("SIMULACION:", newPosition);
+                if (newPosition)
+                    markerActual.setPosition(newPosition);
+                else
+                    $interval.cancel(intervaloSimulacion);
+            }, 5000);
         }
 
         function updateRuta() {

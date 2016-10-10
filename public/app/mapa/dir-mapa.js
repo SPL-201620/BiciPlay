@@ -1,6 +1,6 @@
 //Weather http://api.openweathermap.org/data/2.5/weather?lat=4.672441016945879&lon=-74.06758514771603&appid=d08cf89aae234e20bc4cdd80a42d8543
 (function() {
-    var map, poly;
+    var map, poly, infoWindow;
     var markerImage = new google.maps.MarkerImage('/img/marker.svg',
         new google.maps.Size(30, 30),
         new google.maps.Point(0, 0),
@@ -64,7 +64,7 @@
                 },
                 zoom: 14
             });
-            var infoWindow = new google.maps.InfoWindow({
+            infoWindow = new google.maps.InfoWindow({
                 map: map
             });
 
@@ -97,10 +97,10 @@
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-
+                    map.setCenter(pos);
                     infoWindow.setPosition(pos);
                     infoWindow.setContent('Usted esta aquí');
-                    map.setCenter(pos);
+
                     console.log("Try HTML5 geolocation: OK");
                 }, function() {
                     handleLocationError(true, infoWindow, map.getCenter());
