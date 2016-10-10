@@ -26,24 +26,35 @@
         if (!$scope.ruta) {
             $scope.ruta = [];
         }
-        /*setInterval(function(){
-          console.log("$scope.ruta", $scope.ruta);
-        }, 4000)*/
-        $scope.$watch('ruta', function(ruta) {
-            console.log("Nueva ruta", ruta);
-        });
+
+        function refreshRuta() {
+            console.log("Nueva ruta", $scope.ruta);
+            markers.forEach(function(marker) {
+                marker.setMap(null);
+            });
+            markers = [];
+            $scope.ruta.forEach(function(ubicacion) {
+                addLatLngToPoly(new google.maps.LatLng(ubicacion.lat, ubicacion.lng));
+            });
+        }
         $scope.$watch('show', function(show) {
             if (show) {
                 setTimeout(function() {
-                    initMap();
+                    var initialPos;
+                    if ($scope.ruta && $scope.ruta.length > 0) {
+                        initialPos = {
+                            lat: $scope.ruta[0].lat,
+                            lng: $scope.ruta[0].lng
+                        };
+                    }
+                    initMap(initialPos);
+                    refreshRuta();
                 }, 100);
-                //addLatLngToPoly(new google.maps.LatLng(4.60258436, -74.064453619));
-                console.log("DIR MAPA");
             }
 
         });
 
-        function initMap() {
+        function initMap(initialPos) {
             var mapElement = document.getElementById('map');
             console.log("Elemento del mapa ", mapElement);
             map = new google.maps.Map(mapElement, {
@@ -67,8 +78,16 @@
             // Add a listener for the click event
             google.maps.event.addListener(map, 'click', function(event) {
                 addLatLngToPoly(event.latLng, poly);
+                updateRuta();
             });
 
+            if(initialPos){
+                map.setCenter(initialPos);
+            } else{
+                centerMapOnCurrentLocation();
+            }
+        }
+        function centerMapOnCurrentLocation(){
             // Try HTML5 geolocation.
             console.log("Try HTML5 geolocation");
             if (navigator.geolocation) {
@@ -90,9 +109,6 @@
                 // Browser doesn't support Geolocation
                 handleLocationError(false, infoWindow, map.getCenter());
             }
-
-
-
         }
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -123,7 +139,7 @@
             });
             markers.push(marker);
             marker.addListener('drag', onMarkerMove);
-            updateRuta();
+
         }
 
         function onMarkerMove(event) {

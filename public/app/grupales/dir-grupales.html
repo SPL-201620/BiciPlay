@@ -8,7 +8,7 @@
             <h1 class="md-toolbar-tools">Mapa del recorrido</h1>
             <span flex></span>
             <md-button class="md-raised"
-                ng-click="guardarRuta(recorridoActual.id, recorridoActual.ruta)">
+                ng-click="guardarRuta(recorridoActual.id, recorridoActual.ubicaciones)">
                 Guardar
             </md-button>
         </div>
@@ -21,7 +21,7 @@
     <section class="md-padding"
         layout="column">
         <dir-mapa show="showMapa"
-            ruta="recorridoActual.ruta"
+            ruta="recorridoActual.ubicaciones"
             flex>
         </dir-mapa>
     </section>
