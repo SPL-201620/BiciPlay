@@ -12,6 +12,7 @@
 
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
+    var distanceService = new google.maps.DistanceMatrixService();
 
     angular.module('app').directive('dirMapaIndiv', function() {
         return {
@@ -65,8 +66,8 @@
             directionsDisplay.setMap(map);
 
             poly = new google.maps.Polyline({
-                strokeColor: '#192047',
-                strokeOpacity: 0.5,
+                strokeColor: '#006600',
+                strokeOpacity: 0.8,
                 strokeWeight: 5,
                 map: map
             });
@@ -148,9 +149,11 @@
 
 
         function calcRoute() {
+            var origin = markerIni.getPosition();
+            var destination = markerEnd.getPosition();
             var request = {
-                origin: markerIni.getPosition(),
-                destination: markerEnd.getPosition(),
+                origin: origin,
+                destination: destination,
                 travelMode: 'DRIVING'
             };
             quitMarkers();
@@ -163,6 +166,50 @@
                 } else {
                     console.log("Error", result, status);
                 }
+            });
+
+            distanceService.getDistanceMatrix({
+                origins: [origin],
+                destinations: [destination],
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC
+            }, function(response, status) {
+                if (status == 'OK') {
+
+                    console.log("Result distance:", response);
+                    var results = response.rows[0].elements;
+                    var result = results[0];
+                    $scope.distance = result.distance.text;
+                    $scope.tiempo = result.duration.text;
+                } else {
+                    console.log("Error", response, status);
+                }
+            });
+
+
+            var queryTxt =  "http://api.openweathermap.org/data/2.5/weather?lat=" + origin.lat() + "&lon=" + origin.lng() +  "&appid=d08cf89aae234e20bc4cdd80a42d8543";
+            $.getJSON(queryTxt).then(function(rsp) {
+                var prefix = "wi wi-";
+                var dorn = "";
+
+                var today = new Date();
+                var hour = today.getHours();
+
+                if (hour > 6 && hour < 20) {
+                    //Day time
+                    dorn = "day-";
+
+                } else {
+                    //Night time
+                    dorn = "night-";
+                }
+                console.log(dorn);
+                var weather = rsp.weather[0];
+                var code = weather.id;
+                console.log("Weather:", weather);
+                $scope.iconClass = prefix + "owm-" + dorn + code;
+                $scope.weather = weather.description;
+                console.log("Icon class: ", $scope.iconClass);
             });
         }
 
@@ -178,6 +225,8 @@
                 console.log("SIMULACION");
                 var newPosition = ruta[i++];
                 console.log("SIMULACION:", newPosition);
+                var path = poly.getPath();
+                path.push(newPosition);
                 if (newPosition)
                     markerActual.setPosition(newPosition);
                 else

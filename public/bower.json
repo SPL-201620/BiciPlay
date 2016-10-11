@@ -21,6 +21,7 @@
     "jquery": "^3.1.0",
     "moment": "^2.15.0",
     "angular-route": "^1.5.8",
-    "angular-ui-ace": "^0.2.3"
+    "angular-ui-ace": "^0.2.3",
+    "weather-icons": "^2.0.10"
   }
 }
