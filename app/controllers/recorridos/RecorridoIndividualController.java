@@ -1,5 +1,6 @@
 
 package controllers.recorridos;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,8 +23,8 @@ import static play.mvc.Results.ok;
  */
 @Singleton
 public class RecorridoIndividualController {
-    public final static String ID_USUARIO="idUsuario";
-    public final static String ROL_USUARIO="rol";
+    public final static String ID_USUARIO = "idUsuario";
+    public final static String ROL_USUARIO = "rol";
     private final static Gson GSON = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     private static final String PERSISTENCE_UNIT_NAME = "defaultPersistenceUnit";
@@ -35,31 +36,48 @@ public class RecorridoIndividualController {
     }
 
 
-
     public Result iniciarRecorrido() {
         JsonNode json = request().body().asJson();
-        if(json == null) {
+        if (json == null) {
             return badRequest("Expecting Json data");
         } else {
-            RecorridoIndividual recorridoIndividual=new RecorridoIndividual();
-            recorridoIndividual.inicioRecorrido= new Date();
-            recorridoIndividual.usuarioCreador=getUsuarioLogIn();
-                return ok("OK");
-            }
+            RecorridoIndividual recorridoIndividual = new RecorridoIndividual();
+            recorridoIndividual.fecha = new Date();
+            recorridoIndividual.usuarioCreador = getUsuarioLogIn();
+            return ok("OK");
         }
+    }
 
-    public Result finalizarRecorrido(){
+    public Result finalizarRecorrido() {
 
         JsonNode json = request().body().asJson();
-        if(json == null) {
+        if (json == null) {
             return badRequest("Expecting Json data");
         } else {
 
             int idRecorridoIndividual = json.findPath("id").asInt();
-            RecorridoIndividual recorridoInd= RecorridoIndividual.find.where().eq("id",idRecorridoIndividual).findUnique();
-            recorridoInd.finRecorrido=new Date();
-            recorridoInd.distancia=getDistancia();
-            recorridoInd.calorias=calcularCalorias(recorridoInd.distancia);
+            RecorridoIndividual recorridoInd = RecorridoIndividual.find.where().eq("id", idRecorridoIndividual).findUnique();
+            recorridoInd.fecha = new Date();
+            recorridoInd.distancia = getDistancia();
+            recorridoInd.calorias = calcularCalorias(recorridoInd.distancia);
+
+            return ok("OK");
+
+        }
+    }
+
+    public Result registrarRecorrido() {
+
+        JsonNode json = request().body().asJson();
+        if (json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+
+            RecorridoIndividual recorridoIndividual = GSON.fromJson(json.toString(), RecorridoIndividual.class);
+            recorridoIndividual.fecha = new Date();
+            recorridoIndividual.usuarioCreador = getUsuarioLogIn();
+            recorridoIndividual.calorias = calcularCalorias(recorridoIndividual.distancia);
+            recorridoIndividual.save();
 
             return ok("OK");
 
@@ -75,20 +93,20 @@ public class RecorridoIndividualController {
     }
 
 
-    public double calcularCalorias(double distancia){
+    public double calcularCalorias(double distancia) {
 
-        return distancia*60;
+        return distancia * 60;
 
     }
 
 
-    public double getDistancia(){
+    public double getDistancia() {
 
         return 3.0;
 
     }
 
-    public int getUsuarioLogIn(){
+    public int getUsuarioLogIn() {
         //  return 21;
         return Integer.valueOf(session(ID_USUARIO));
 

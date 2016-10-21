@@ -25,16 +25,18 @@ import java.util.List;
         @Expose
         public String name;
         @Expose
-        public Date inicioRecorrido;
+        public Date fecha;
         @Expose
-        public Date finRecorrido;
+        public int duracion;
         @Expose
         public double distancia;
         @Expose
         public double calorias;
 
         @Expose
-        public double clima;
+        public String clima;
+        @Expose
+        public String iconoClima;
 
         @Expose
         @OneToMany(mappedBy="recorridoIndividual",cascade=CascadeType.ALL)

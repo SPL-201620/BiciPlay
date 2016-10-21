@@ -10,8 +10,14 @@
   });
 
 
-  function controller($scope, $timeout, Individuales) {
+  function controller($scope, $interval, Individuales) {
     $scope.view = "mapa";
+    $scope.recorridoActual = {};
+    $scope.guardarRuta = function(recorridoActual){
+        Individuales.guardarRuta(recorridoActual);
+    };
+
+
 
 
   }

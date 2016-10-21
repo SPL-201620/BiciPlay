@@ -66,6 +66,9 @@ GET     /api/recorridos/iniciarRecorrido       controllers.recorridos.RecorridoI
 GET     /api/recorridos/finalizarRecorrido       controllers.recorridos.RecorridoIndividualController.finalizarRecorrido
 
 
+# Registro de recorridos
+POST    /api/recorridos/registrarRecorrido        controllers.recorridos.RecorridoIndividualController.registrarRecorrido
+
 # Cnto   ingresarUbicacionesIndividuales
 POST  /api/recorridos/ingresarUbicacionesIndividuales               controllers.ruta.UbicacionController.ingresarUbicacionesIndividuales
 
