@@ -21,6 +21,9 @@
     $scope.dateFormat = function(fecha){
         return moment(fecha).format('dddd, DD [de] MMMM [a las] hh:mm a');
     };
+    $scope.setRecorridoActual = function(recorrido){
+        $scope.recorridoActual = recorrido;
+    };
     refresh();
     function refresh (){
         Individuales.darRecorridos().then(function(recorridos){

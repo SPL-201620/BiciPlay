@@ -41,6 +41,29 @@
         }, 4000)*/
         $scope.$watch('ruta', function(ruta) {
             console.log("Nueva ruta", ruta);
+            $interval.cancel(intervaloSimulacion);
+            quitMarkers();
+
+            if (poly)
+                poly.setMap(null);
+            if (directionsDisplay)
+                directionsDisplay.setMap(null);
+            poly = new google.maps.Polyline({
+                strokeColor: '#006600',
+                strokeOpacity: 0.8,
+                strokeWeight: 5,
+                map: map
+            });
+            var path = poly.getPath();
+            ruta.forEach(function(ubicacion) {
+                path.push(new google.maps.LatLng(ubicacion.lat, ubicacion.lng));
+            });
+            if (ruta.length > 0){
+                map.setCenter({lat: ruta[0].lat,lng: ruta[0].lng});
+            }
+
+
+
         });
         $scope.$watch('show', function(show) {
             if (show) {
@@ -67,8 +90,7 @@
                 map: map
             });
 
-            directionsDisplay = new google.maps.DirectionsRenderer();
-            directionsDisplay.setMap(map);
+
 
 
 
@@ -140,10 +162,16 @@
         }
 
         function quitMarkers() {
-            markerIni.setMap(null);
-            markerEnd.setMap(null);
-            markerIni = null;
-            markerEnd = null;
+            if (markerIni) {
+                markerIni.setMap(null);
+                markerIni = null;
+            }
+            if (markerEnd) {
+                markerEnd.setMap(null);
+                markerEnd = null;
+            }
+
+
         }
 
 
@@ -157,6 +185,8 @@
                 travelMode: 'DRIVING'
             };
             quitMarkers();
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay.setMap(map);
             directionsService.route(request, function(result, status) {
                 if (status == 'OK') {
                     console.log("Result:", result)
@@ -220,7 +250,7 @@
         function simular(ruta) {
             if (intervaloSimulacion)
                 $interval.cancel(intervaloSimulacion);
-            if(poly)
+            if (poly)
                 poly.setMap(null);
             poly = new google.maps.Polyline({
                 strokeColor: '#006600',
@@ -241,7 +271,7 @@
                 var newPosition = ruta[i++];
                 if (!newPosition)
                     return $interval.cancel(intervaloSimulacion);
-                $scope.distancia = Math.round((i*distanciTotal)/(ruta.length*100))/10;
+                $scope.distancia = Math.round((i * distanciTotal) / (ruta.length * 100)) / 10;
                 markerActual.setPosition(newPosition);
                 var path = poly.getPath();
                 path.push(newPosition);

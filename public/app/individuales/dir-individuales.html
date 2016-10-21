@@ -15,7 +15,8 @@
     </md-toolbar>
     <md-card-title>
         <md-card-title-text>
-            <span class="md-subhead">Inicie su recorrido o seleccione dos puntos del mapa para ver la mejor ruta</span>
+            <span ng-if="!recorridoActual.id"class="md-subhead">Inicie su recorrido o seleccione dos puntos del mapa para ver la mejor ruta</span>
+            <span ng-if="recorridoActual.id" class="md-subhead">Recorrido de {{recorridoActual.distancia}} km hecho en {{recorridoActual.duracion}} minutos con clima <i class="{{recorridoActual.iconoClima}}"></i> "{{recorridoActual.clima}}"</span>
         </md-card-title-text>
     </md-card-title>
     <section class="md-padding"
@@ -39,8 +40,8 @@
     </md-toolbar>
     <md-list flex>
         <md-list-item class="md-2-line"
-             ng-repeat="recorrido in recorridos">
-            <div class="md-list-item-text">
+             ng-repeat="recorrido in recorridos" ng-click="setRecorridoActual(recorrido)">
+            <div class="md-list-item-text" >
                 <h3>{{dateFormat(recorrido.fecha)}}</h3>
                 <p>Recorrido de {{recorrido.distancia}} km hecho en {{recorrido.duracion}} minutos con clima <i class="{{recorrido.iconoClima}}"></i> "{{recorrido.clima}}"</p>
             </div>
