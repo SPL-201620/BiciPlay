@@ -31,77 +31,19 @@
     </section>
 </md-card>
 
-<md-card ng-show="!showFormulario && !showMapa">
+<md-card>
     <md-toolbar class="md-theme-indigo">
         <div class="md-toolbar-tools">
-            <h1 class="md-toolbar-tools">Recorridos grupales</h1>
-            <span flex></span>
-            <md-button class="md-raised"
-                ng-click="showFormulario = true">
-                Agregar
-            </md-button>
+            <h1 class="md-toolbar-tools">Recorridos individuales</h1>
         </div>
     </md-toolbar>
     <md-list flex>
-
         <md-list-item class="md-2-line"
-             ng-repeat="recorrido in recorridos" ng-click="seleccionarRecorrido(recorrido)">
+             ng-repeat="recorrido in recorridos">
             <div class="md-list-item-text">
-                <h3>{{recorrido.name}}</h3>
-                <p>Recorrido a {{recorrido.destino}} el {{fechaFormat(recorridoActual.fechaRecorrido)}} desde {{recorrido.inicio}}</p>
+                <h3>{{dateFormat(recorrido.fecha)}}</h3>
+                <p>Recorrido de {{recorrido.distancia}} km hecho en {{recorrido.duracion}} minutos con clima <i class="{{recorrido.iconoClima}}"></i> "{{recorrido.clima}}"</p>
             </div>
         </md-list-item>
     </md-list>
-</md-card>
-<md-card ng-show="showFormulario && !showMapa">
-    <md-toolbar class="md-theme-indigo">
-        <div class="md-toolbar-tools">
-            <h1 class="md-toolbar-tools">Nuevo recorrido</h1>
-            <span flex></span>
-            <md-button class="md-raised"
-                ng-click="guardar(recorridoActual)">
-                Guardar
-            </md-button>
-        </div>
-    </md-toolbar>
-    <section class="md-padding"
-        layout="column">
-        <md-input-container>
-            <label>Nombre</label>
-            <input ng-model="recorridoActual.name"
-                required>
-        </md-input-container>
-        <md-input-container>
-            <label>Punto de inicio</label>
-            <input ng-model="recorridoActual.inicio"
-                required>
-        </md-input-container>
-        <md-input-container>
-            <label>Punto de llegada</label>
-            <input ng-model="recorridoActual.destino"
-                required>
-        </md-input-container>
-        <div layout-gt-xs="row">
-            <md-input-container class="md-block"
-                flex-gt-xs>
-                <label>Se realiza cada</label>
-                <input ng-model="recorridoActual.frecuencia"
-                    required>
-            </md-input-container>
-            <md-input-container class="md-block"
-                flex-gt-xs>
-                <label>Unidad de frecuencia</label>
-                <md-select ng-model="recorridoActual.unidadFrecuencia">
-                    <md-option ng-repeat="unidadFrecuencia in unidadesFrecuencia"
-                        value="{{unidadFrecuencia.value}}">
-                        {{unidadFrecuencia.name}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-        <md-input-container>
-            <label>Primer día</label>
-            <md-datepicker ng-model="recorridoActual.fechaRecorrido"></md-datepicker>
-        </md-input-container>
-    </section>
 </md-card>

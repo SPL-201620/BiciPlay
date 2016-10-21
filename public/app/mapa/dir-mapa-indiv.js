@@ -211,6 +211,7 @@
                 $scope.iconClass = prefix + "owm-" + dorn + code;
                 $scope.weather = weather.description;
                 console.log("Icon class: ", $scope.iconClass);
+                $scope.weatherIcon = $scope.iconClass;
             });
         }
 
@@ -237,13 +238,11 @@
             });
 
             intervaloSimulacion = $interval(function() {
-                console.log("SIMULACION");
                 var newPosition = ruta[i++];
                 if (!newPosition)
                     return $interval.cancel(intervaloSimulacion);
                 $scope.distancia = Math.round((i*distanciTotal)/(ruta.length*100))/10;
                 markerActual.setPosition(newPosition);
-                console.log("SIMULACION:", newPosition);
                 var path = poly.getPath();
                 path.push(newPosition);
                 updateRuta();
@@ -254,7 +253,6 @@
         function updateRuta() {
             var path = poly.getPath();
             $scope.ruta.splice(0, $scope.ruta.length);
-            console.log("Path", path);
             path.forEach(function(latLng) {
                 $scope.ruta.push({
                     lat: latLng.lat(),
