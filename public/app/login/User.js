@@ -1,5 +1,5 @@
 /*jslint node: true */
-angular.module('app').service('User', function ($rootScope,$route, $window, $location, Http) {
+angular.module('app').service('User', function ($rootScope,$route, $window, $location, Http, Facebook) {
     var user = null;
     var self = this;
     var callbacks = [];
@@ -22,6 +22,16 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
         return Http.post('usuarios/login', userLogin).then(function(res) {
             user = res.data;
             return user;
+        });
+    };
+
+    self.loginFacebook = function(){
+        return Facebook.login().then(function(facebookUser){
+            console.log("USER: facebookUser", facebookUser);
+            return Http.post('usuarios/loginFacebook', facebookUser).then(function(res) {
+                user = res.data;
+                return user;
+            });
         });
     };
     self.checkLoggedin = function() {

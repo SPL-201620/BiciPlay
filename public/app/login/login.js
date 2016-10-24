@@ -15,6 +15,9 @@ app.controller('LoginCtrl', function($rootScope, $scope, $http, $location,$timeo
           });
         }
     };
+    $scope.loginFacebook = function(){
+        User.loginFacebook();
+    };
 
     $scope.registrar = function(credenciales){
         User.registrar(credenciales).then(function () {

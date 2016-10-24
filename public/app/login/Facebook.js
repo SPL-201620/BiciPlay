@@ -1,0 +1,53 @@
+/*jslint node: true */
+angular.module('app').service('Facebook', function($rootScope, $route, $window, $location, $q, Http) {
+    var self = this;
+    FB.init({
+        appId: '646051245577345',
+        cookie: true,
+        xfbml: true,
+        version: 'v2.5'
+    });
+
+    function statusChangeCallback(response) {
+        return $q(function(resolve, reject){
+            console.log('statusChangeCallback');
+            console.log(response);
+            if (response.status === 'connected') {
+                FB.api('/me', {
+                    fields: 'name, email, picture'
+                }, function(facebookUser) {
+                    facebookUser.foto = facebookUser.picture.data.url;
+                    console.log('Successful login for: ', facebookUser);
+                    resolve(facebookUser);
+                });
+            } else{
+                resolve(null);
+            }
+        });
+    }
+
+    checkLoginState();
+    function checkLoginState() {
+        FB.getLoginStatus(function(res){
+            statusChangeCallback(res);
+        });
+    }
+
+    self.login = function(userLogin) {
+        return $q(function(resolve, reject){
+            FB.login(function(res){
+                resolve(statusChangeCallback(res));
+            }, {scope: 'public_profile,email'});
+        });
+    };
+    self.logout = function() {
+        return $q(function(resolve, reject) {
+            if (FB.getAccessToken() !== null) {
+                FB.logout(resolve);
+            } else {
+                resolve();
+            }
+        });
+
+    };
+});
