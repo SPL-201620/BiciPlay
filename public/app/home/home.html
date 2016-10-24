@@ -28,12 +28,20 @@
                         <p>Haz un seguimiento a tus recorridos</p>
                     </div>
                 </md-list-item>
+                <md-list-item class="md-2-line"
+                    ng-click="setView('Reportes')">
+                    <div class="md-list-item-text">
+                        <h3>Reportes</h3>
+                        <p>Haz un seguimiento a tus recorridos</p>
+                    </div>
+                </md-list-item>
             </md-list>
         </md-sidenav>
 
         <div flex>
             <dir-grupales ng-if="view === 'Grupales'"></dir-grupales>
             <dir-individuales ng-if="view === 'Individuales'"></dir-individuales>
+            <dir-reportes ng-if="view === 'Reportes'"></dir-reportes>
         </div>
 
         <md-sidenav class="md-sidenav-left"
