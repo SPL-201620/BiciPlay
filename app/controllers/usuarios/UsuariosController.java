@@ -36,6 +36,32 @@ public class UsuariosController extends Controller {
 
     }
 
+    public Result loginFacebook() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        }
+
+        String name = json.findPath("name").textValue();
+        String email = json.findPath("email").textValue();
+        String foto = json.findPath("foto").textValue();
+
+        if(email == null || name == null || foto == null) {
+            return badRequest("Missing parameter");
+        }
+
+        Usuario usuario =  Usuario.find.where().eq("email", email).findUnique();
+        if(usuario == null ){
+            usuario = new Usuario();
+        }
+        usuario.email =email;
+        usuario.name = name;
+        usuario.foto = foto;
+        usuario.save();
+        crearSession(usuario.id);
+        return ok(GSON.toJson(usuario));
+    }
+
     /**
      * An action that responds with the {@link Counter}'s current
      * count. The result is plain text. This action is mapped to
@@ -110,7 +136,7 @@ public class UsuariosController extends Controller {
         crearSession(usuario.id);
         return ok(GSON.toJson(usuario));
     }
-    private void crearSession(long idUsuario){
+    private static void crearSession(long idUsuario){
         session().clear();
         session(ID_USUARIO, "" + idUsuario);
         session(ROL_USUARIO, "admin");

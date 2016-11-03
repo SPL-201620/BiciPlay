@@ -17,6 +17,9 @@ POST     /api/usuarios/registro                         controllers.usuarios.Usu
 # Control para el login
 POST     /api/usuarios/login                            controllers.usuarios.UsuariosController.login
 
+# Control para el login de usuarios de Facebook
+POST     /api/usuarios/loginFacebook                    controllers.usuarios.UsuariosController.loginFacebook
+
 # Control para la validacion de login
 GET     /api/usuarios/loggedin                          controllers.usuarios.UsuariosController.loggedin
 
