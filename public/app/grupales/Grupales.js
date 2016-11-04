@@ -5,7 +5,9 @@ angular.module('app').service('Grupales', function($rootScope, $window, $locatio
     self.guardar = function(recorrido) {
         console.log("Se guarda el recorrido", recorrido);
         return Http.post('recorridos/crearRecorrido', recorrido).then(function(res) {
-            return res.data;
+            var recorrido = transformarRecorrido(res.data);
+            console.log("Recorrido Guardado y Transformado: ",recorrido );
+            return recorrido;
         });
     };
 
@@ -13,10 +15,8 @@ angular.module('app').service('Grupales', function($rootScope, $window, $locatio
         return Http.get('recorridos/darRecorridos').then(function(res) {
             var recorridos = res.data;
             for (var i = 0; i < recorridos.length; i++) {
-              var recorrido = recorridos[i];
-                console.log("transfoming date: ", moment(recorrido.fechaRecorrido).toDate());
-                recorrido.fechaRecorrido = moment(recorrido.fechaRecorrido);
-                recorrido.ruta = [];
+                transformarRecorrido(recorridos[i]);
+
             }
             console.log("Recorridos ------- : ", recorridos);
 
@@ -24,7 +24,7 @@ angular.module('app').service('Grupales', function($rootScope, $window, $locatio
         });
     };
 
-    self.guardarRuta  = function(recorridoId, ubicaciones){
+    self.guardarRuta = function(recorridoId, ubicaciones) {
         var datosPost = {
             id: recorridoId,
             ubicaciones: ubicaciones
@@ -34,5 +34,14 @@ angular.module('app').service('Grupales', function($rootScope, $window, $locatio
             return res.data;
         });
     };
+
+    function transformarRecorrido(recorrido) {
+        recorrido.fechaRecorrido = moment(recorrido.fechaRecorrido);
+        recorrido.ruta = [];
+        if(!recorrido.ubicaciones){
+            recorrido.ubicaciones = [];
+        }
+        return recorrido;
+    }
 
 });

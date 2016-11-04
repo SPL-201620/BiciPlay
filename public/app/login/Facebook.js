@@ -10,14 +10,11 @@ angular.module('app').service('Facebook', function($rootScope, $route, $window, 
 
     function statusChangeCallback(response) {
         return $q(function(resolve, reject){
-            console.log('statusChangeCallback');
-            console.log(response);
             if (response.status === 'connected') {
                 FB.api('/me', {
                     fields: 'name, email, picture'
                 }, function(facebookUser) {
                     facebookUser.foto = facebookUser.picture.data.url;
-                    console.log('Successful login for: ', facebookUser);
                     resolve(facebookUser);
                 });
             } else{

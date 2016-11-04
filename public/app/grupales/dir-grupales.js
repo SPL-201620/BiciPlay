@@ -27,9 +27,12 @@
     }];
     $scope.guardar = function(recorrido){
       $scope.recorridoActual = null;
-      Grupales.guardar(recorrido).then(function(){
-        $scope.recorridoActual = recorrido;
+      Grupales.guardar(recorrido).then(function(recorridoP){
+          console.log("Recorrido Creado P :", recorridoP);
+        $scope.recorridoActual = recorridoP;
         $scope.showMapa = true;
+        $scope.showFormulario = false;
+        refresh();
       });
     };
     $scope.fechaFormat = function(fecha){
@@ -56,6 +59,7 @@
 
     $scope.guardarRuta = function(recorridoId, ubicaciones){
         Grupales.guardarRuta(recorridoId, ubicaciones).then(function(){
+            refresh();
             $scope.showMapa = false;
         });
     };

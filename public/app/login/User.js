@@ -27,7 +27,6 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
 
     self.loginFacebook = function(){
         return Facebook.login().then(function(facebookUser){
-            console.log("USER: facebookUser", facebookUser);
             return Http.post('usuarios/loginFacebook', facebookUser).then(function(res) {
                 user = res.data;
                 return user;
@@ -37,7 +36,6 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
 
     self.loginGoogle = function(){
         return Google.login().then(function(googleUser){
-            console.log("USER: googleUser", googleUser);
             return Http.post('usuarios/loginFacebook', googleUser).then(function(res) {
                 user = res.data;
                 return user;
@@ -48,7 +46,6 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
     self.checkLoggedin = function() {
         return Http.get('usuarios/loggedin').then(function(res) {
             var data = res.data;
-            console.log("Data", data);
             if (data !== 'null') {
                 user = data;
             }

@@ -56,7 +56,6 @@
 
         function initMap(initialPos) {
             var mapElement = document.getElementById('map');
-            console.log("Elemento del mapa ", mapElement);
             map = new google.maps.Map(mapElement, {
                 center: {
                     lat: 4.60258436,
@@ -155,7 +154,6 @@
         function updateRuta() {
             var path = poly.getPath();
             $scope.ruta.splice(0, $scope.ruta.length);
-            console.log("Path", path);
             path.forEach(function(latLng) {
                 $scope.ruta.push({
                     lat: latLng.lat(),
