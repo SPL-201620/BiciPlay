@@ -4,16 +4,16 @@ angular.module('app').service('Grupales', function($rootScope, $window, $locatio
 
     self.guardar = function(recorrido) {
         console.log("Se guarda el recorrido", recorrido);
-        return Http.post('recorridos/crearRecorrido', recorrido).then(function(res) {
-            var recorrido = transformarRecorrido(res.data);
+        return Http.post('recorridos/crearRecorrido', recorrido).then(function(data) {
+            var recorrido = transformarRecorrido(data);
             console.log("Recorrido Guardado y Transformado: ",recorrido );
             return recorrido;
         });
     };
 
     self.darRecorridos = function() {
-        return Http.get('recorridos/darRecorridos').then(function(res) {
-            var recorridos = res.data;
+        return Http.get('recorridos/darRecorridos').then(function(data) {
+            var recorridos = data;
             for (var i = 0; i < recorridos.length; i++) {
                 transformarRecorrido(recorridos[i]);
 
@@ -30,9 +30,7 @@ angular.module('app').service('Grupales', function($rootScope, $window, $locatio
             ubicaciones: ubicaciones
         };
         console.log("DATOS POST:", datosPost);
-        return Http.post('recorridos/ingresarUbicaciones', datosPost).then(function(res) {
-            return res.data;
-        });
+        return Http.post('recorridos/ingresarUbicaciones', datosPost);
     };
 
     function transformarRecorrido(recorrido) {

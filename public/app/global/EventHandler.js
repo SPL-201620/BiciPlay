@@ -1,23 +1,35 @@
+/**
+ * Servicio encargado de hacer handling de errores en la aplicación
+ */
 (function() {
-	angular.module('app').service('EventHandler', function errorHandler($location, $http) {
-		var errorListeners = [];
-		this.error = function(url) {
+    angular.module('app').service('EventHandler', function errorHandler($location) {
+        var errorListeners = [];
 
-			function handler (error, status, headers, config) {
+        this.error = function(res) {
+            var error, status;
+            console.log("ERROR", res);
+            if(res.status){
+                error = res.data;
+                status = res.status;
+                if (status === 401) {
+                    $location.url('/');
+                }
+                var req = res.config;
+                console.log("HTTP Error: " + status + "  " + req.method + " " + req.url, error.message);
+                if(error.length > 40){
+                    return 0;
+                }
+            } else {
+                error = res;
+                console.log("APP Error: ", error.message);
+            }
+            for (var i = errorListeners.length - 1; i >= 0; i--) {
+                errorListeners[i](error, status);
+            }
+        };
 
-				if (status == 404) {
-					console.log("404 Not Found: " + url);
-				} else if(status == 400){
-					console.log("Error status : ", status, "error", error);
-					for (var i = errorListeners.length - 1; i >= 0; i--) {
-						errorListeners[i](error, status);
-					}
-				}
-			}
-			return handler;
-		};
-		this.addErrorListener = function(callback) {
-			errorListeners.push(callback);
-		};
-	});
+        this.addErrorListener = function(callback) {
+            errorListeners.push(callback);
+        };
+    });
 })();

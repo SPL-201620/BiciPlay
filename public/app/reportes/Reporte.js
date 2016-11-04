@@ -6,8 +6,6 @@ angular.module('app').service('Reporte', function($rootScope, $window, $location
         console.log("Se guarda el recorrido", recorrido);
         return Http.post('reportes/', {
             fecha: fecha
-        }).then(function(res) {
-            return res.data;
         });
     };
 

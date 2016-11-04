@@ -1,19 +1,15 @@
 /*jslint node: true */
-angular.module('app').service('Chat', function ($rootScope, $window, $location, Http) {
+angular.module('app').service('Chat', function($rootScope, $window, $location, Http) {
     var self = this;
     self.darMensajes = function(amigoId) {
         return Http.post('chat/leerMensaje', {
-          receptor: amigoId
-        }).then(function(res) {
-            return res.data;
+            receptor: amigoId
         });
     };
     self.enviarMensaje = function(receptorId, mensaje) {
         return Http.post('chat/enviarMensaje', {
-          receptor: receptorId,
-          mensaje: mensaje
-        }).then(function(res) {
-            return res.data;
+            receptor: receptorId,
+            mensaje: mensaje
         });
     };
 });

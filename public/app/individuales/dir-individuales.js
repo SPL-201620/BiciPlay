@@ -29,6 +29,12 @@
         Individuales.darRecorridos().then(function(recorridos){
             console.log("Recorridos: ", recorridos);
             $scope.recorridos = recorridos;
+            if($scope.recorridoActual.id){
+                $scope.recorridoActual = $scope.recorridos.filter(function(recorrido){
+                    return recorrido.id === $scope.recorridoActual.id;
+                }[0]);
+            }
+
         });
     }
 

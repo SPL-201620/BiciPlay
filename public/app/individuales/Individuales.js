@@ -7,8 +7,6 @@ angular.module('app').service('Individuales', function($rootScope, $window, $loc
     };
 
     self.darRecorridos = function(){
-        return Http.get('recorridos/darRecorridosIndividuales').then(function(res) {
-            return res.data;
-        });
+        return Http.get('recorridos/darRecorridosIndividuales');
     };
 });
