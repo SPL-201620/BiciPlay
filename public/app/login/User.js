@@ -1,5 +1,5 @@
 /*jslint node: true */
-angular.module('app').service('User', function ($rootScope,$route, $window, $location, Http, Facebook) {
+angular.module('app').service('User', function ($rootScope,$route, $window, $location, Http, Facebook, Google) {
     var user = null;
     var self = this;
     var callbacks = [];
@@ -34,6 +34,17 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
             });
         });
     };
+
+    self.loginGoogle = function(){
+        return Google.login().then(function(googleUser){
+            console.log("USER: googleUser", googleUser);
+            return Http.post('usuarios/loginFacebook', googleUser).then(function(res) {
+                user = res.data;
+                return user;
+            });
+        });
+    };
+
     self.checkLoggedin = function() {
         return Http.get('usuarios/loggedin').then(function(res) {
             var data = res.data;

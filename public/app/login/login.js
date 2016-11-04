@@ -20,6 +20,12 @@ app.controller('LoginCtrl', function($rootScope, $scope, $http, $location,$timeo
           $route.reload();
         });
     };
+    $scope.loginGoogle = function(){
+        User.loginGoogle().then(function () {
+          $route.reload();
+        });
+    };
+
 
     $scope.registrar = function(credenciales){
         User.registrar(credenciales).then(function () {
