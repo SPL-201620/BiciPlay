@@ -69,7 +69,7 @@ public class RecorridoGrupalController {
                 recorridoNuevo.inicio =inicio;
                 recorridoNuevo.destino = destino;
                 recorridoNuevo.save();
-                return ok("OK");
+                return ok(GSON.toJson(recorridoNuevo));
             }
         }
     }

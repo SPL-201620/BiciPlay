@@ -6,11 +6,16 @@
               <md-icon md-svg-icon="img/back.svg"></md-icon>
           </md-button>
             <h1 class="md-toolbar-tools">Mapa del recorrido</h1>
-            <span flex></span>
-            <md-button class="md-raised"
+            <span ></span>
+            <md-button ng-if="recorridoActual.id" class="md-raised"
+                ng-click="showRetosDialog($event)">
+                Retar
+            </md-button>
+            <md-button ng-if="!recorridoActual.id" class="md-raised"
                 ng-click="guardarRuta(recorridoActual)">
                 Guardar
             </md-button>
+
         </div>
     </md-toolbar>
     <md-card-title>

@@ -12,6 +12,13 @@ import java.util.List;
 @Table(name="usuario")
 public class Usuario extends Model{
 
+    public Usuario(){
+    }
+
+    public Usuario(int id){
+        this.id = id;
+    }
+
     @Id
     @Expose
     @GeneratedValue(strategy=GenerationType.SEQUENCE)

@@ -75,6 +75,18 @@ POST    /api/recorridos/registrarRecorrido        controllers.recorridos.Recorri
 # Cnto   ingresarUbicacionesIndividuales
 POST  /api/recorridos/ingresarUbicacionesIndividuales               controllers.ruta.UbicacionController.ingresarUbicacionesIndividuales
 
+
+
+
+#RETOS
+# Cnto   ingresarUbicacionesIndividuales
+POST  /api/retos               controllers.retos.RetosController.retarAmigo
+
+
+# END RETOS
+
+
+
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 

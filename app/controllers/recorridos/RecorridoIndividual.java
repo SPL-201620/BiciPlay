@@ -47,5 +47,11 @@ import java.util.List;
         public static Finder<Long, RecorridoIndividual> find =
                 new Finder<Long, RecorridoIndividual>(RecorridoIndividual.class);
 
+        public RecorridoIndividual(int id) {
+            this.id = id;
+        }
+
+        public RecorridoIndividual() {
+        }
     }
 

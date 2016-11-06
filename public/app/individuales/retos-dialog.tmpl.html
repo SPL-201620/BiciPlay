@@ -1,0 +1,49 @@
+<md-dialog aria-label="Retar amigos">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Retar amigos</h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                    ng-click="cancel()">
+                    <md-icon md-svg-src="img/close.svg"
+                        aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        {{recorridoActual}}
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-list flex>
+                    <md-input-container>
+                        <label>Buscar</label>
+                        <input ng-model="busqueda">
+                    </md-input-container>
+                    <md-list-item ng-repeat="amigo in amigos"
+                        class="md-2-line"
+                        ng-click="amigo.selected = !amigo.selected"
+                        ng-show="mostrar(amigo)">
+                        <md-checkbox ng-model="amigo.selected" aria-label="Checkbox 1" >
+                        </md-checkbox>
+                        <img ng-src="{{amigo.foto}}"
+                            class="md-avatar"
+                            alt="amigo.name" />
+                        <div class="md-list-item-text" flex>
+                            <h3>{{amigo.name}}</h3>
+                            <p>{{amigo.email}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-primary md-raised"
+                ng-click="retarSeleccionados()">
+                Retar seleccionados
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
