@@ -48,8 +48,18 @@ public class RetosController {
         return ok(GSON.toJson(reto));
     }
 
+    public Result darRetos() {
+        List<Reto> misRetos = Reto.find.where().eq("retado_id", getUsuarioLogIn()).findList();
+        for(Reto reto: misRetos){
+            reto.retado = Usuario.find.byId((long)reto.retado.id);
+            reto.creador = Usuario.find.byId((long)reto.creador.id);
+            reto.recorrido = RecorridoIndividual.find.byId((long)reto.recorrido.id);
+        }
+        return ok(GSON.toJson(misRetos));
+    }
 
-    public int darRetos() {
+
+    public int getUsuarioLogIn() {
         //  return 21;
         return Integer.valueOf(session(ID_USUARIO));
 

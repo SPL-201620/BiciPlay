@@ -1,0 +1,20 @@
+<md-card>
+    <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+            <h1 class="md-toolbar-tools">Retos</h1>
+        </div>
+    </md-toolbar>
+    <md-list flex>
+        <md-list-item class="md-2-line"
+             ng-repeat="reto in retos" ng-click="setRetoActual()">
+             <img ng-src="{{reto.creador.foto}}"
+                 class="md-avatar"
+                 alt="reto.creador.name" />
+            <div class="md-list-item-text" >
+
+                <h3>{{reto.creador.name}} te ha retado a superar su marca de:</h3>
+                <p> {{reto.recorrido.duracion}} minutos en un trayecto de {{reto.recorrido.distancia}} km hecho con clima <i class="{{reto.recorrido.iconoClima}}"></i> "{{reto.recorrido.clima}}"</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-card>

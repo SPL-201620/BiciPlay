@@ -4,13 +4,10 @@ import javax.persistence.*;
 import com.avaje.ebean.Model;
 import com.google.gson.annotations.Expose;
 import controllers.recorridos.RecorridoIndividual;
-import controllers.ruta.Ubicacion;
 import controllers.usuarios.Usuario;
-import scala.Int;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Fetch;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name="reto")
@@ -21,15 +18,19 @@ public class Reto extends Model {
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     public int id;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @Expose
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="creador_id")
     public Usuario creador;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @Expose
+    @ManyToOne()
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name="retado_id")
     public Usuario retado;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @Expose
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="recorrido_id")
     public RecorridoIndividual recorrido;
 

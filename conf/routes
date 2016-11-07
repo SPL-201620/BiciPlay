@@ -82,7 +82,7 @@ POST  /api/recorridos/ingresarUbicacionesIndividuales               controllers.
 # Cnto   ingresarUbicacionesIndividuales
 POST  /api/retos               controllers.retos.RetosController.retarAmigo
 
-
+GET   /api/retos               controllers.retos.RetosController.darRetos
 # END RETOS
 
 
