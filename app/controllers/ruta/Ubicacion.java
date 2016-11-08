@@ -4,13 +4,14 @@ import com.avaje.ebean.Model;
 import com.google.gson.annotations.Expose;
 import controllers.recorridos.RecorridoGrupal;
 import controllers.recorridos.RecorridoIndividual;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 
 
 @Entity
 @Table(name="ubicacion")
-public class Ubicacion extends Model {
+public class Ubicacion extends Model implements Comparable<Ubicacion>{
 
     @Id
     @Expose
@@ -32,5 +33,13 @@ public class Ubicacion extends Model {
     public RecorridoIndividual recorridoIndividual;
 
     public static Finder<Long, controllers.usuarios.Usuario> find = new Finder<Long, controllers.usuarios.Usuario>(controllers.usuarios.Usuario.class);
+
+    @Override
+    public int compareTo(@NotNull Ubicacion o) {
+        if(this.lat == o.lat && this.lng == o.lng) {
+            return 0;
+        }
+        return -1;
+    }
 
 }

@@ -18,10 +18,11 @@
          */
         this.post = function(relativRoute, body) {
             var url = "POST " + this.serverUrl + relativRoute;
-            dev(url);
+
             return $http.post(this.serverUrl + relativRoute, body, {
                 withCredentials: true
             }).then(function(res) {
+                dev(url, body, res.data);
                 return res.data;
             }, EventHandler.error);
         };
@@ -32,10 +33,11 @@
          */
         this.get = function(relativRoute) {
             var url = "GET " + this.serverUrl + relativRoute;
-            dev(url);
+
             return $http.get(this.serverUrl + relativRoute, {
                 withCredentials: true
             }).then(function(res) {
+                dev(url, null, res.data);
                 return res.data;
             }, EventHandler.error);
         };
@@ -43,8 +45,8 @@
          * Método que hace logs en la consola JavaScript
          * @param message El mensaje a mostrar en la consola
          */
-        function dev(message) {
-            console.log("HTTP:" + message);
+        function dev(message, body, response) {
+            console.log("HTTP:" + message, body?body:"", "->", response);
         }
     });
 })();

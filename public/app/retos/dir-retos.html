@@ -1,4 +1,4 @@
-<md-card>
+<md-card ng-show="view === 'retos-list'">
     <md-toolbar class="md-theme-indigo">
         <div class="md-toolbar-tools">
             <h1 class="md-toolbar-tools">Retos</h1>
@@ -6,14 +6,83 @@
     </md-toolbar>
     <md-list flex>
         <md-list-item class="md-2-line"
-             ng-repeat="reto in retos" ng-click="setRetoActual()">
-             <img ng-src="{{reto.creador.foto}}"
-                 class="md-avatar"
-                 alt="reto.creador.name" />
-            <div class="md-list-item-text" >
+            ng-repeat="reto in retos"
+            ng-click="setRetoActual(reto)">
+            <img ng-src="{{reto.creador.foto}}"
+                class="md-avatar"
+                alt="reto.creador.name" />
+            <div class="md-list-item-text">
 
                 <h3>{{reto.creador.name}} te ha retado a superar su marca de:</h3>
                 <p> {{reto.recorrido.duracion}} minutos en un trayecto de {{reto.recorrido.distancia}} km hecho con clima <i class="{{reto.recorrido.iconoClima}}"></i> "{{reto.recorrido.clima}}"</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-card>
+
+
+<md-card ng-show="view === 'mapa'">
+    <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                ng-click="goBack()">
+                <md-icon md-svg-icon="img/back.svg"></md-icon>
+            </md-button>
+            <h1 class="md-toolbar-tools">Mapa del recorrido</h1>
+            <span></span>
+            <md-button ng-if="recorridoActual.id"
+                class="md-raised"
+                ng-click="showRetosDialog($event)">
+                Retar
+            </md-button>
+            <md-button ng-if="!recorridoActual.id"
+                class="md-raised"
+                ng-click="guardarRuta(recorridoActual)">
+                Guardar
+            </md-button>
+
+        </div>
+    </md-toolbar>
+    <md-card-title>
+        <md-card-title-text>
+            <span ng-if="!recorridoActual.id"
+                class="md-subhead">Inicie su recorrido y cuando llegue al punto final sabremos quien es el nuevo vencedor</span>
+            <span ng-if="recorridoActual.id"
+                class="md-subhead">Recorrido de {{recorridoActual.distancia}} km hecho en {{recorridoActual.duracion}} minutos con clima <i class="{{recorridoActual.iconoClima}}"></i> "{{recorridoActual.clima}}"</span>
+        </md-card-title-text>
+    </md-card-title>
+    <section class="md-padding"
+        layout="column">
+        <dir-mapa-indiv show="view === 'mapa'"
+            ruta-planeada-obligatoria="retoSelected.recorrido.ubicaciones"
+            ruta="recorridoActual.ubicaciones"
+            duracion="recorridoActual.duracion"
+            weather="recorridoActual.clima"
+            weather-icon="recorridoActual.iconoClima"
+            distancia="recorridoActual.distancia"
+            flex>
+            </dir-mapa>
+    </section>
+</md-card>
+
+<md-card ng-show="view === 'mapa'">
+    <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+            <h1 class="md-toolbar-tools">Recorridos individuales participantes</h1>
+        </div>
+    </md-toolbar>
+    <md-list flex>
+        <md-list-item class="md-2-line"
+            ng-repeat="reto in retosRanking"
+            ng-click="setRecorridoActual(recorrido)"
+            ng-show="reto.recorridoRealizado">
+            <img ng-src="{{reto.retado.foto}}"
+                class="md-avatar"
+                alt="reto.retado.name" />
+            <div class="md-list-item-text">
+                <h3>{{reto.retado.name}} tiene una marca de:</h3>
+                <h3> <b>{{reto.recorridoRealizado.duracion}} minutos</b> con clima <i class="{{reto.recorridoRealizado.iconoClima}}"></i> "{{reto.recorridoRealizado.clima}}"</h3>
+                <p>{{dateFormat(reto.recorridoRealizado.fecha)}}</p>
             </div>
         </md-list-item>
     </md-list>

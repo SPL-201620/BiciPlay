@@ -1,6 +1,6 @@
 //Weather http://api.openweathermap.org/data/2.5/weather?lat=4.672441016945879&lon=-74.06758514771603&appid=d08cf89aae234e20bc4cdd80a42d8543
 (function() {
-    var map, poly;
+
     var markerImage = new google.maps.MarkerImage('/img/marker.svg',
         new google.maps.Size(30, 30),
         new google.maps.Point(0, 0),
@@ -19,6 +19,7 @@
         return {
             restrict: 'E',
             scope: {
+                rutaPlaneadaObligatoria: '=?',
                 ruta: '=',
                 duracion: '=',
                 weather: "=",
@@ -33,36 +34,56 @@
 
 
     function controller($scope, $timeout, $interval) {
+        var map, poly;
         if (!$scope.ruta) {
             $scope.ruta = [];
         }
+
+        $scope.$watch('rutaPlaneadaObligatoria', function(){
+            console.log("Ruta planeada:", $scope.rutaPlaneadaObligatoria);
+            setTimeout(function() {
+                if($scope.rutaPlaneadaObligatoria){
+                    var startPoint = $scope.rutaPlaneadaObligatoria[$scope.rutaPlaneadaObligatoria.length-1];
+                    var endPoint = $scope.rutaPlaneadaObligatoria[0];
+                    if(startPoint.id > endPoint.id){
+                        var temp = startPoint;
+                        startPoint = endPoint;
+                        endPoint = temp;
+                    }
+                    clickOverMap(new google.maps.LatLng(startPoint.lat, startPoint.lng));
+                    clickOverMap(new google.maps.LatLng(endPoint.lat, endPoint.lng));
+                }
+            }, 200);
+
+        });
+
         /*setInterval(function(){
           console.log("$scope.ruta", $scope.ruta);
         }, 4000)*/
         $scope.$watch('ruta', function(ruta) {
             console.log("Nueva ruta", ruta);
-            $interval.cancel(intervaloSimulacion);
-            quitMarkers();
+            if(ruta){
+                $interval.cancel(intervaloSimulacion);
+                quitMarkers();
 
-            if (poly)
-                poly.setMap(null);
-            if (directionsDisplay)
-                directionsDisplay.setMap(null);
-            poly = new google.maps.Polyline({
-                strokeColor: '#006600',
-                strokeOpacity: 0.8,
-                strokeWeight: 5,
-                map: map
-            });
-            var path = poly.getPath();
-            ruta.forEach(function(ubicacion) {
-                path.push(new google.maps.LatLng(ubicacion.lat, ubicacion.lng));
-            });
-            if (ruta.length > 0){
-                map.setCenter({lat: ruta[0].lat,lng: ruta[0].lng});
+                if (poly)
+                    poly.setMap(null);
+                if (directionsDisplay)
+                    directionsDisplay.setMap(null);
+                poly = new google.maps.Polyline({
+                    strokeColor: '#006600',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 5,
+                    map: map
+                });
+                var path = poly.getPath();
+                ruta.forEach(function(ubicacion) {
+                    path.push(new google.maps.LatLng(ubicacion.lat, ubicacion.lng));
+                });
+                if (ruta.length > 0){
+                    map.setCenter({lat: ruta[0].lat,lng: ruta[0].lng});
+                }
             }
-
-
 
         });
         $scope.$watch('show', function(show) {
@@ -276,8 +297,8 @@
                 var path = poly.getPath();
                 path.push(newPosition);
                 updateRuta();
-                $scope.duracion++;
-            }, 5000);
+                $scope.duracion += Math.floor(Math.random() * 2) + 0;
+            }, 50);
         }
 
         function updateRuta() {

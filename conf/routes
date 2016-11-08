@@ -83,6 +83,10 @@ POST  /api/recorridos/ingresarUbicacionesIndividuales               controllers.
 POST  /api/retos               controllers.retos.RetosController.retarAmigo
 
 GET   /api/retos               controllers.retos.RetosController.darRetos
+
+POST  /api/retos/:id/recorrido               controllers.retos.RetosController.asociarReccorrido(id:Integer)
+
+GET  /api/ranking/:recorridoPropuestoId      controllers.retos.RetosController.ranking(recorridoPropuestoId:Integer)
 # END RETOS
 
 

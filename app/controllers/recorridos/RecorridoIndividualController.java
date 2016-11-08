@@ -79,7 +79,7 @@ public class RecorridoIndividualController {
             recorridoIndividual.calorias = calcularCalorias(recorridoIndividual.distancia);
             recorridoIndividual.save();
 
-            return ok("OK");
+            return ok(GSON.toJson(recorridoIndividual));
 
         }
     }
