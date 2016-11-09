@@ -9,7 +9,7 @@
     });
 
 
-    function controller($scope, $interval, $mdDialog, Individuales, Retos, Amigos) {
+    function controller($scope, $interval, $mdDialog, Individuales, Retos, Amigos, User) {
         $scope.view = "mapa";
         $scope.recorridoActual = {};
         $scope.guardarRuta = function(recorridoActual) {
@@ -77,6 +77,17 @@
                 return $scope.busqueda ? (persona.name.includes($scope.busqueda) || persona.email.includes($scope.busqueda)) : true;
             };
         }
+
+
+        $scope.share = function(recorridoActual){
+            recorridoActual.shared = true;
+            return User.shareIndividual(recorridoActual).then(function(){
+
+            }, function(){
+                recorridoActual.shared = false;
+                console.log("Error: Ocurrió un problema al intentar compartir");
+            });
+        };
 
 
 

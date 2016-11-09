@@ -1,5 +1,5 @@
 /*jslint node: true */
-angular.module('app').service('User', function ($rootScope,$route, $window, $location, Http, Facebook, Google) {
+angular.module('app').service('User', function($rootScope, $route, $window, $location, Http, Facebook, Google) {
     var user = null;
     var self = this;
     var callbacks = [];
@@ -8,15 +8,15 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
     self.getUser = function() {
         return user;
     };
-    self.getUserCallback = function(callback){
-      callbacks.push(callback);
+    self.getUserCallback = function(callback) {
+        callbacks.push(callback);
     };
 
-    self.registrar = function (user){
-      return Http.post('usuarios/registro', user).then(function(userP) {
-          user = userP;
-          return user;
-      });
+    self.registrar = function(user) {
+        return Http.post('usuarios/registro', user).then(function(userP) {
+            user = userP;
+            return user;
+        });
     };
     self.login = function(userLogin) {
         return Http.post('usuarios/login', userLogin).then(function(userP) {
@@ -25,8 +25,8 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
         });
     };
 
-    self.loginFacebook = function(){
-        return Facebook.login().then(function(facebookUser){
+    self.loginFacebook = function() {
+        return Facebook.login().then(function(facebookUser) {
             return Http.post('usuarios/loginFacebook', facebookUser).then(function(userP) {
                 user = userP;
                 return user;
@@ -34,8 +34,8 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
         });
     };
 
-    self.loginGoogle = function(){
-        return Google.login().then(function(googleUser){
+    self.loginGoogle = function() {
+        return Google.login().then(function(googleUser) {
             return Http.post('usuarios/loginFacebook', googleUser).then(function(userP) {
                 user = userP;
                 return user;
@@ -48,9 +48,9 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
             if (userP !== 'null') {
                 user = userP;
             }
-            callbacks.forEach(function(callback){
-              callback(user);
-          });
+            callbacks.forEach(function(callback) {
+                callback(user);
+            });
             return user;
         });
     };
@@ -59,5 +59,20 @@ angular.module('app').service('User', function ($rootScope,$route, $window, $loc
             user = null;
             $route.reload();
         });
+    };
+
+    self.share = function(message, link, title, greeting) {
+        return Facebook.share(message, link, title, greeting);
+    };
+
+    self.shareIndividual = function(recorridoInd) {
+        var message = "Recorrido de " +
+            recorridoInd.distancia + " km que hice en " +
+            recorridoInd.duracion + " minutos a través de BiciPlay el " +
+            moment(recorridoInd.fecha).format('dddd, DD [de] MMMM [a las] hh:mm a');
+        var link = Http.serverUrl + "#/recorridos/ind/" + recorridoInd.id;
+        var title = "Recorrido individual BiciPlay";
+        var greeting = "¡Mira mi nuevo recorrido!";
+        return self.share(message, link, title, greeting);
     };
 });

@@ -11,6 +11,10 @@
                 ng-click="showRetosDialog($event)">
                 Retar
             </md-button>
+            <md-button ng-if="recorridoActual.id" class="md-raised" ng-disabled="{{recorridoActual.shared?true:false}}"
+                ng-click="share(recorridoActual)">
+                {{recorridoActual.shared?'Compartido':'Compartir'}}
+            </md-button>
             <md-button ng-if="!recorridoActual.id" class="md-raised"
                 ng-click="guardarRuta(recorridoActual)">
                 Guardar

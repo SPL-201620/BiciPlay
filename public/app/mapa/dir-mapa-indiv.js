@@ -53,7 +53,7 @@
                     clickOverMap(new google.maps.LatLng(startPoint.lat, startPoint.lng));
                     clickOverMap(new google.maps.LatLng(endPoint.lat, endPoint.lng));
                 }
-            }, 200);
+            }, 500);
 
         });
 
@@ -298,7 +298,7 @@
                 path.push(newPosition);
                 updateRuta();
                 $scope.duracion += Math.floor(Math.random() * 2) + 0;
-            }, 50);
+            }, 500);
         }
 
         function updateRuta() {

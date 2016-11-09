@@ -8,7 +8,8 @@
          * Url del servidor
          * @type {string}
          */
-        this.serverUrl = $location.protocol() + '://'+ $location.host() + ':' + '9000/api/';
+        this.serverUrl = $location.protocol() + '://'+ $location.host() + ':' + '9000';
+        this.serverPath = this.serverUrl + '/api/';
         //this.serverUrl = '/api/';
         /**
          * Método encargado de hacer peticiones HTTP Post
@@ -17,9 +18,9 @@
          * @returns {*}
          */
         this.post = function(relativRoute, body) {
-            var url = "POST " + this.serverUrl + relativRoute;
+            var url = "POST " + this.serverPath + relativRoute;
 
-            return $http.post(this.serverUrl + relativRoute, body, {
+            return $http.post(this.serverPath + relativRoute, body, {
                 withCredentials: true
             }).then(function(res) {
                 dev(url, body, res.data);
@@ -32,15 +33,16 @@
          * @returns {*}
          */
         this.get = function(relativRoute) {
-            var url = "GET " + this.serverUrl + relativRoute;
+            var url = "GET " + this.serverPath + relativRoute;
 
-            return $http.get(this.serverUrl + relativRoute, {
+            return $http.get(this.serverPath + relativRoute, {
                 withCredentials: true
             }).then(function(res) {
                 dev(url, null, res.data);
                 return res.data;
             }, EventHandler.error);
         };
+
         /**
          * Método que hace logs en la consola JavaScript
          * @param message El mensaje a mostrar en la consola
