@@ -70,7 +70,7 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
             recorridoInd.distancia + " km que hice en " +
             recorridoInd.duracion + " minutos a través de BiciPlay el " +
             moment(recorridoInd.fecha).format('dddd, DD [de] MMMM [a las] hh:mm a');
-        var link = Http.serverUrl + "#/recorridos/ind/" + recorridoInd.id;
+        var link = Http.serverUrl + "/#/recorridos/ind/" + recorridoInd.id;
         var title = "Recorrido individual BiciPlay";
         var greeting = "¡Mira mi nuevo recorrido!";
         return self.share(message, link, title, greeting);

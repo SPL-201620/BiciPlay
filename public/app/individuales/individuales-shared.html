@@ -1,0 +1,28 @@
+<md-card ng-show="view === 'mapa'">
+    <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+          <md-button class="md-icon-button"
+              ng-click="goBack()">
+              <md-icon md-svg-icon="img/back.svg"></md-icon>
+          </md-button>
+            <h1 class="md-toolbar-tools">Mapa del recorrido</h1>
+            <span ></span>
+        </div>
+    </md-toolbar>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-subhead">Recorrido de {{recorridoActual.distancia}} km hecho en {{recorridoActual.duracion}} minutos con clima <i class="{{recorridoActual.iconoClima}}"></i> "{{recorridoActual.clima}}"</span>
+        </md-card-title-text>
+    </md-card-title>
+    <section class="md-padding"
+        layout="column">
+        <dir-mapa-indiv show="view === 'mapa'"
+            ruta="recorridoActual.ubicaciones"
+            duracion="recorridoActual.duracion"
+            weather="recorridoActual.clima"
+            weather-icon="recorridoActual.iconoClima"
+            distancia="recorridoActual.distancia"
+            flex>
+        </dir-mapa>
+    </section>
+</md-card>

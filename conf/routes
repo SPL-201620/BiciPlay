@@ -59,6 +59,9 @@ POST  /api/recorridos/unirseRecorridoGrupal             controllers.recorridos.R
 #   Ingresar Ubicaciones
 POST  /api/recorridos/ingresarUbicaciones               controllers.ruta.UbicacionController.ingresarUbicaciones
 
+#   Dar un recorrido por su id
+GET     /api/recorridos/individuales/:recorridoId    controllers.recorridos.RecorridoIndividualController.darRecorridoIndividual(recorridoId: Integer)
+
 # Control para devolver los recorridos individuales de un usuairo
 GET     /api/recorridos/darRecorridosIndividuales       controllers.recorridos.RecorridoIndividualController.darRecorridosIndividuales
 

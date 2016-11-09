@@ -58,7 +58,7 @@ angular.module('app').service('Facebook', function($rootScope, $route, $window, 
                     name: title,
                     link: link,
                     description: message,
-                    picture: 'http://2.gravatar.com/avatar/8a13ef9d2ad87de23c6962b216f8e9f4?s=128&amp;d=mm&amp;r=G'
+                    picture: 'https://raw.githubusercontent.com/SPL-201620/BiciPlay/master/attachments/logo.jpg'
                 };
                 console.log("Facebook params: ", params);
                 FB.api('/me/feed', 'post', params, function(response) {

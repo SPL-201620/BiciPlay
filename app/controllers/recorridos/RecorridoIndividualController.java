@@ -92,6 +92,11 @@ public class RecorridoIndividualController {
 
     }
 
+    public Result darRecorridoIndividual (int id){
+        RecorridoIndividual ri = RecorridoIndividual.find.byId((long)id);
+        return ok(GSON.toJson(ri));
+    }
+
 
     public double calcularCalorias(double distancia) {
 

@@ -9,4 +9,8 @@ angular.module('app').service('Individuales', function($rootScope, $window, $loc
     self.darRecorridos = function(){
         return Http.get('recorridos/darRecorridosIndividuales');
     };
+
+    self.get = function(recorridoId){
+        return Http.get('recorridos/individuales/' + recorridoId);
+    };
 });

@@ -37,6 +37,9 @@ app.config(function($routeProvider, $httpProvider, $mdThemingProvider) {
             resolve: {
             	loggedin: checkLoggedin
             }
+        }).when('/recorridos/ind/:idRecorrido', {
+            controller: 'IndividualesSharedCtrl',
+            templateUrl: 'app/individuales/individuales-shared.html',
         })
         .otherwise({
             controller: 'LoginCtrl',
