@@ -43,10 +43,11 @@ public class UsuariosController extends Controller {
         }
 
         String name = json.findPath("name").textValue();
+        String type = json.findPath("type").textValue();
         String email = json.findPath("email").textValue();
         String foto = json.findPath("foto").textValue();
 
-        if(email == null || name == null || foto == null) {
+        if(email == null || name == null || foto == null || type == null) {
             return badRequest("Missing parameter");
         }
 
@@ -57,6 +58,7 @@ public class UsuariosController extends Controller {
         usuario.email =email;
         usuario.name = name;
         usuario.foto = foto;
+        usuario.type = type;
         usuario.save();
         crearSession(usuario.id);
         return ok(GSON.toJson(usuario));

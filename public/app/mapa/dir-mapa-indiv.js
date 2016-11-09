@@ -63,26 +63,29 @@
         $scope.$watch('ruta', function(ruta) {
             console.log("Nueva ruta", ruta);
             if(ruta){
-                $interval.cancel(intervaloSimulacion);
-                quitMarkers();
+                setTimeout(function() {
+                    $interval.cancel(intervaloSimulacion);
+                    quitMarkers();
 
-                if (poly)
-                    poly.setMap(null);
-                if (directionsDisplay)
-                    directionsDisplay.setMap(null);
-                poly = new google.maps.Polyline({
-                    strokeColor: '#006600',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 5,
-                    map: map
-                });
-                var path = poly.getPath();
-                ruta.forEach(function(ubicacion) {
-                    path.push(new google.maps.LatLng(ubicacion.lat, ubicacion.lng));
-                });
-                if (ruta.length > 0){
-                    map.setCenter({lat: ruta[0].lat,lng: ruta[0].lng});
-                }
+                    if (poly)
+                        poly.setMap(null);
+                    if (directionsDisplay)
+                        directionsDisplay.setMap(null);
+                    poly = new google.maps.Polyline({
+                        strokeColor: '#006600',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 5,
+                        map: map
+                    });
+                    var path = poly.getPath();
+                    ruta.forEach(function(ubicacion) {
+                        path.push(new google.maps.LatLng(ubicacion.lat, ubicacion.lng));
+                    });
+                    if (ruta.length > 0){
+                        map.setCenter({lat: ruta[0].lat,lng: ruta[0].lng});
+                    }
+                }, 500);
+
             }
 
         });

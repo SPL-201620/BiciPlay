@@ -1,8 +1,11 @@
 /*jslint node: true */
-angular.module('app').service('User', function($rootScope, $route, $window, $location, Http, Facebook, Google) {
+angular.module('app').service('User', function($rootScope, $route, $window, $location, $q, Http, Facebook, Google) {
     var user = null;
     var self = this;
     var callbacks = [];
+
+    var TYPE_FACEBOOK = "Facebook";
+    var TYPE_GOOGLE = "Google";
 
 
     self.getUser = function() {
@@ -27,6 +30,7 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
 
     self.loginFacebook = function() {
         return Facebook.login().then(function(facebookUser) {
+            facebookUser.type = TYPE_FACEBOOK;
             return Http.post('usuarios/loginFacebook', facebookUser).then(function(userP) {
                 user = userP;
                 return user;
@@ -36,6 +40,7 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
 
     self.loginGoogle = function() {
         return Google.login().then(function(googleUser) {
+            googleUser.type = TYPE_GOOGLE;
             return Http.post('usuarios/loginFacebook', googleUser).then(function(userP) {
                 user = userP;
                 return user;
@@ -62,7 +67,21 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
     };
 
     self.share = function(message, link, title, greeting) {
-        return Facebook.share(message, link, title, greeting);
+        if(user.type === TYPE_FACEBOOK){
+            return Facebook.share(message, link, title, greeting);
+        } else if(user.type=== TYPE_GOOGLE){
+            return $q(function(resolve, reject) {
+                var transformedLink = link.replace("localhost", "127.0.0.1").replace("#", "%23");
+                console.log("transformedLink", transformedLink);
+                window.open('https://plus.google.com/share?url=' +  transformedLink, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+                resolve();
+            });
+        }
+
+
+
+
+
     };
 
     self.shareIndividual = function(recorridoInd) {

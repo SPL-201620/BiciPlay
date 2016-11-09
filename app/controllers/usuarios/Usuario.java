@@ -12,6 +12,8 @@ import java.util.List;
 @Table(name="usuario")
 public class Usuario extends Model{
 
+
+
     public Usuario(){
     }
 
@@ -32,6 +34,9 @@ public class Usuario extends Model{
     public String password;
     @Expose
     public String foto;
+    
+    @Expose
+    public String type;
 
     @ManyToMany
     @JoinTable(name="amigos",
