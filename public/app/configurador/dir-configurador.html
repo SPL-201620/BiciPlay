@@ -1,0 +1,18 @@
+
+<md-menu ng-repeat="config in configs">
+    <md-button class="md-raised"aria-label="Open phone interactions menu"
+        ng-click="openMenu($mdOpenMenu, $event)">
+        <h2>{{config.name}}</h2>
+        <img ng-src="{{config.selected.img}}" height="178px" width="178px"></img>
+        <h4>{{config.selected.name}}</h4>
+    </md-button>
+    <md-menu-content width="4">
+        <md-menu-item ng-repeat="option in config.options">
+            <md-button ng-click="config.selected=option">
+                <img ng-src="{{option.img}}"
+                    class="md-avatar icon-sm"/>
+                {{option.name}}
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

@@ -2,3 +2,9 @@
     height: 200px;
     margin: 10px;
 }
+.icon-sm{
+    margin: auto 8px auto 0;
+    vertical-align: middle;
+    height:34px;
+    width:34px
+}

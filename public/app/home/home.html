@@ -42,6 +42,13 @@
                         <p>Mira tus retos y gánales a tus amigos</p>
                     </div>
                 </md-list-item>
+                <md-list-item class="md-2-line"
+                    ng-click="setView('Configurador')">
+                    <div class="md-list-item-text">
+                        <h3>Configurador</h3>
+                        <p>Configura tu bici y averigüa sí es correcta</p>
+                    </div>
+                </md-list-item>
             </md-list>
         </md-sidenav>
 
@@ -50,6 +57,7 @@
             <dir-individuales ng-if="view === 'Individuales'"></dir-individuales>
             <dir-reportes ng-if="view === 'Reportes'"></dir-reportes>
             <dir-retos ng-if="view === 'Retos'"></dir-retos>
+            <dir-configurador ng-if="view === 'Configurador'"></dir-configurador>
         </div>
 
         <md-sidenav class="md-sidenav-left"
