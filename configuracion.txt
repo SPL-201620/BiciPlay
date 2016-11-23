@@ -1,0 +1,16 @@
+IngresoApp
+IngresoFacebook
+IngresoTwitter
+Local
+AgregarAmigos
+Chat
+RecorridosIndividuales
+RecorridosGrupales
+ConfigBicicletas
+CompartirViaje
+facebook
+Twitter
+Reportes
+Semanal
+AlquilerBicicletas
+Retos
