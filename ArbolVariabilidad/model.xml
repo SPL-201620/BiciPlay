@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel>
+		<properties/>
+		<struct>
+			<and abstract="true" mandatory="true" name="BiciPlay">
+				<description>
+					
+				</description>
+				<and mandatory="true" name="IngresoApp">
+					<description>
+						
+					</description>
+					<feature name="IngresoFacebook">
+						<description>
+							
+						</description>
+					</feature>
+					<feature name="IngresoTwitter">
+						<description>
+							
+						</description>
+					</feature>
+					<feature mandatory="true" name="Local">
+						<description>
+							
+						</description>
+					</feature>
+				</and>
+				<feature mandatory="true" name="AgregarAmigos">
+					<description>
+						
+					</description>
+				</feature>
+				<feature mandatory="true" name="Chat">
+					<description>
+						
+					</description>
+				</feature>
+				<feature mandatory="true" name="RecorridosIndividuales">
+					<description>
+						
+					</description>
+				</feature>
+				<feature mandatory="true" name="RecorridosGrupales">
+					<description>
+						
+					</description>
+				</feature>
+				<feature name="ConfigBicicletas">
+					<description>
+						
+					</description>
+				</feature>
+				<and name="CompartirViaje">
+					<description>
+						
+					</description>
+					<feature name="facebook">
+						<description>
+							
+						</description>
+					</feature>
+					<feature name="Twitter">
+						<description>
+							
+						</description>
+					</feature>
+				</and>
+				<alt name="Reportes">
+					<description>
+						
+					</description>
+					<feature mandatory="true" name="Semanal">
+						<description>
+							
+						</description>
+					</feature>
+					<feature mandatory="true" name="Mensual">
+						<description>
+							
+						</description>
+					</feature>
+				</alt>
+				<feature name="AlquilerBicicletas">
+					<description>
+						
+					</description>
+				</feature>
+				<feature name="Retos">
+					<description>
+						
+					</description>
+				</feature>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>facebook</var>
+					<var>IngresoFacebook</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Twitter</var>
+					<var>IngresoTwitter</var>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
