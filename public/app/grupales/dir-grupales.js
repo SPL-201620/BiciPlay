@@ -55,7 +55,23 @@
         $scope.recorridos = recorridos;
         console.log("recorridos", recorridos);
       });
+      Grupales.darProximosRecorridos().then(function(recorridos){
+        $scope.proximosRecorridos = recorridos;
+        console.log("proximosRecorridos", recorridos);
+      });
+      if($scope.recorridoActual && $scope.recorridoActual.id){
+          Grupales.darRecorrido($scope.recorridoActual.id).then(function(recorrido){
+              $scope.recorridoActual = recorrido;
+          });
+      }
+
     }
+
+    $scope.unirseARecorridoGrupal = function(recorridoGId){
+        Grupales.unirseARecorridoGrupal(recorridoGId).then(function(){
+            refresh();
+        });
+    };
 
     $scope.guardarRuta = function(recorridoId, ubicaciones){
         Grupales.guardarRuta(recorridoId, ubicaciones).then(function(){

@@ -39,6 +39,7 @@ public class RecorridoGrupal extends Model {
     @OneToMany(mappedBy="recorridoGrupal",cascade=CascadeType.ALL)
     public List<Ubicacion> ubicaciones;
 
+    @Expose
     @ManyToMany
     @JoinTable(name="usuario_recorridos",
             joinColumns=@JoinColumn(name="idUsuarios"),

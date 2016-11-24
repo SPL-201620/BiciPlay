@@ -1,1 +1,17 @@
-{{nombreReporte}}
+
+<md-card >
+    <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                ng-click="goBack()">
+                <md-icon md-svg-icon="img/back.svg"></md-icon>
+            </md-button>
+            <h1 class="md-toolbar-tools">Reporte ------semanal-------</h1>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <section class="md-padding"
+        layout="column">
+        <div id="chart_div"></div>
+    </section>
+</md-card>

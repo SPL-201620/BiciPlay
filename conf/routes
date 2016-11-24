@@ -46,14 +46,22 @@ POST     /api/chat/leerMensaje                      controllers.chat.ChatControl
 # Control para crear recorridos
 POST     /api/recorridos/crearRecorrido                 controllers.recorridos.RecorridoGrupalController.crearRecorrido
 
-# Control para devolver los recorridos grupales de un usuairo
+# Control para devolver un recorrido por su id
+GET     /api/recorridos/grupales/lista/:recorridoId         controllers.recorridos.RecorridoGrupalController.darRecorridoGrupal(recorridoId: Integer)
+
+
+
+# Control para devolver los recorridos grupales de un usuario
 GET     /api/recorridos/darRecorridos                 controllers.recorridos.RecorridoGrupalController.darRecorridos
+
+# Devuelve los recorridos grupales que están próximos a realizarse
+GET     /api/recorridos/grupales/proximos                controllers.recorridos.RecorridoGrupalController.darProximosRecorridos
 
 # Control para Invitar recorridos
 POST     /api/recorridos/invitarRecorrido               controllers.recorridos.RecorridoGrupalController.crearRecorrido
 
 #unirse al recorrido Grupal.
-POST  /api/recorridos/unirseRecorridoGrupal             controllers.recorridos.RecorridoGrupalController.unirseRecorridoGrupal
+POST  /api/recorridos/grupales/asistentes            controllers.recorridos.RecorridoGrupalController.unirseRecorridoGrupal
 
 
 #   Ingresar Ubicaciones

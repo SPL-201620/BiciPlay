@@ -11,6 +11,11 @@
                 ng-click="guardarRuta(recorridoActual.id, recorridoActual.ubicaciones)">
                 Guardar
             </md-button>
+            <md-button class="md-raised"
+                ng-if="recorridoActual.id"
+                ng-click="unirseARecorridoGrupal(recorridoActual.id)">
+                Unirse
+            </md-button>
         </div>
     </md-toolbar>
     <md-card-title>
@@ -25,12 +30,28 @@
             flex>
         </dir-mapa>
     </section>
+
+    <md-list flex>
+        <div style="padding:16px;">
+            <h2>Asistentes al recorrido</h2>
+        </div>
+        <md-list-item ng-repeat="amigo in recorridoActual.usuario"
+            class="md-2-line">
+            <img ng-src="{{amigo.foto}}"
+                class="md-avatar"
+                alt="amigo.name" />
+            <div class="md-list-item-text">
+                <h3>{{amigo.name}}</h3>
+                <p>{{amigo.email}}</p>
+            </div>
+        </md-list-item>
+    </md-list>
 </md-card>
 
 <md-card ng-show="!showFormulario && !showMapa">
     <md-toolbar class="md-theme-indigo">
         <div class="md-toolbar-tools">
-            <h1 class="md-toolbar-tools">Recorridos grupales</h1>
+            <h1 class="md-toolbar-tools">Mis recorridos grupales</h1>
             <span flex></span>
             <md-button class="md-raised"
                 ng-click="showFormulario = true">
@@ -42,6 +63,23 @@
 
         <md-list-item class="md-2-line"
              ng-repeat="recorrido in recorridos" ng-click="seleccionarRecorrido(recorrido)">
+            <div class="md-list-item-text">
+                <h3>{{recorrido.name}}</h3>
+                <p>Recorrido a {{recorrido.destino}} el {{fechaFormat(recorridoActual.fechaRecorrido)}} desde {{recorrido.inicio}}</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-card>
+<md-card ng-show="!showFormulario && !showMapa">
+    <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+            <h1 class="md-toolbar-tools">Próximos Recorridos grupales </h1>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-list flex>
+        <md-list-item class="md-2-line"
+             ng-repeat="recorrido in proximosRecorridos" ng-click="seleccionarRecorrido(recorrido)">
             <div class="md-list-item-text">
                 <h3>{{recorrido.name}}</h3>
                 <p>Recorrido a {{recorrido.destino}} el {{fechaFormat(recorridoActual.fechaRecorrido)}} desde {{recorrido.inicio}}</p>

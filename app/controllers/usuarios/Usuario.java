@@ -34,7 +34,7 @@ public class Usuario extends Model{
     public String password;
     @Expose
     public String foto;
-    
+
     @Expose
     public String type;
 

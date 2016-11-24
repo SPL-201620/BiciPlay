@@ -74,11 +74,20 @@ public class RecorridoGrupalController {
         }
     }
 
+    public Result darRecorridoGrupal(int id){
+        return ok(GSON.toJson(RecorridoGrupal.find.byId((long)id)));
+    }
+
     public Result darRecorridos() {
         String usuarioId =  session(ID_USUARIO);
         List<RecorridoGrupal> misRecorridos = RecorridoGrupal.find.where().eq("usuarioCreador", Integer.valueOf(usuarioId)).findList();
         return ok(GSON.toJson(misRecorridos));
         //return ok(GSON.toJson(amigo.misAmigos));
+    }
+
+    public Result darProximosRecorridos(){
+        List<RecorridoGrupal> recorridosProximos = RecorridoGrupal.find.orderBy("fechaRecorrido asc").findList();
+        return ok(GSON.toJson(recorridosProximos));
     }
 
 

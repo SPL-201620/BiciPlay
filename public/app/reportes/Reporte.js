@@ -9,4 +9,7 @@ angular.module('app').service('Reporte', function($rootScope, $window, $location
         });
     };
 
+    self.darRecorridos = function(numero) {
+        return Http.get('reportes/individuales/' + numero);
+    };
 });
