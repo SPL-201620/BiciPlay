@@ -12,32 +12,29 @@ fs.readFile('/home/andres/Instalaciones/BiciPlay7/configuracion.txt', 'utf8', fu
 
 
 var fs = require('fs');
-var filename = fs.readFile('/home/andres/Instalaciones/BiciPlay7/configuracion.txt', 'utf8', function(err,data2) {
+var path = require('path');
+var LIST_FILE_CONFIG = path.join('ArbolVariabilidad', 'configs', 'default.config');
+var JS_FILE_CONFIG = path.join('public', 'app', 'global', 'Config.js');
+var CONFIG_TAMPLATE = "angular.module('app').constant('Config', <JSON>);";
+fs.readFile(LIST_FILE_CONFIG, 'utf8', function(err, configData) {
 
-        data2 = data2.toString();
-        console.log("File: " + data2);
-var position = data2.toString().indexOf('\n'); // find position of new line element
+    var featuresList = configData.toString().split('\n');
+    console.log("featuresList:", featuresList);
 
-if (position != -1) {
-        dataArr = data2.split('\n');
-        console.log("dataArr: " + dataArr);
+    var features = {};
 
-        var obj = {};
+    for (i = 0; i < featuresList.length; i++) {
+        features[featuresList[i]] = true;
+    }
 
-        for (i=0;i<dataArr.length;i++) {
-                      obj[dataArr[i]] = true;
+    if (features.IngresoApp) {
+        console.log("objeto", features);
+    }
+
+    fs.writeFile(JS_FILE_CONFIG, CONFIG_TAMPLATE.replace("<JSON>", JSON.stringify(features)), function(err) {
+        if (err) { // if error, report
+            console.log(err);
         }
-
-        if(obj.IngresoApp){
-              console.log("objeto", obj)
-        }
-         data2 = JSON.stringify(obj, null, 4);
-
-                fs.writeFile('/home/andres/Instalaciones/BiciPlay7/configuracionJSon.txt', data2, function(err) {
-                        if (err) { // if error, report
-                        console.log (err);
-                }
-                        console.log("Finished");
-        })
-};
+        console.log("Finished");
+    });
 });

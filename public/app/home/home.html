@@ -29,6 +29,7 @@
                     </div>
                 </md-list-item>
                 <md-list-item class="md-2-line"
+                    ng-if="config.Reportes"
                     ng-click="setView('Reportes')">
                     <div class="md-list-item-text">
                         <h3>Reportes</h3>
@@ -36,6 +37,7 @@
                     </div>
                 </md-list-item>
                 <md-list-item class="md-2-line"
+                    ng-if="config.Retos"
                     ng-click="setView('Retos')">
                     <div class="md-list-item-text">
                         <h3>Retos</h3>
@@ -43,6 +45,7 @@
                     </div>
                 </md-list-item>
                 <md-list-item class="md-2-line"
+                    ng-if="config.ConfigBicicletas"
                     ng-click="setView('Configurador')">
                     <div class="md-list-item-text">
                         <h3>Configurador</h3>
@@ -65,18 +68,19 @@
             md-is-locked-open="$mdMedia('gt-sm')"
             md-whiteframe="4">
             <md-list>
-            <md-list-item class="md-2-line" ng-click="showPerfil()">
-                <img ng-src="{{yo.foto}}"
-                    class="md-avatar"/>
-                <div class="md-list-item-text">
-                    <h3>{{yo.name}}</h3>
-                    <p>{{yo.email}}</p>
-                </div>
-                <md-button class="md-secondary md-icon-button"
-                    ng-click="logout()">
-                    <md-icon md-svg-icon="img/close.svg"></md-icon>
-                </md-button>
-            </md-list-item>
+                <md-list-item class="md-2-line"
+                    ng-click="showPerfil()">
+                    <img ng-src="{{yo.foto}}"
+                        class="md-avatar" />
+                    <div class="md-list-item-text">
+                        <h3>{{yo.name}}</h3>
+                        <p>{{yo.email}}</p>
+                    </div>
+                    <md-button class="md-secondary md-icon-button"
+                        ng-click="logout()">
+                        <md-icon md-svg-icon="img/close.svg"></md-icon>
+                    </md-button>
+                </md-list-item>
             </md-list>
             <dir-amigos ng-if="!amigoSelected"
                 on-select="selectAmigo"></dir-amigos>

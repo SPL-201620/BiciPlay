@@ -1,6 +1,8 @@
 (function() {
     var app = angular.module('app');
-    app.controller('HomeCtrl', function($scope, $rootScope, $mdDialog, $mdSidenav, $timeout, User) {
+    app.controller('HomeCtrl', function($scope, $rootScope, $mdDialog, $mdSidenav, $timeout, User, Config) {
+        $scope.config = Config;
+
 
         User.getUserCallback(function(user) {
             $scope.yo = user;
@@ -10,7 +12,7 @@
         };
         $scope.logout = function(){
             User.logout();
-        }
+        };
 
         $scope.toggleLeft = buildDelayedToggler('left');
         $scope.toggleRight = buildToggler('right');

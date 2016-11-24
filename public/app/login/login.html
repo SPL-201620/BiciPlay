@@ -38,9 +38,11 @@
                 class="md-raised md-primary">Ingresar</md-button>
             <md-button ng-click="showRegistro = !showRegistro">Registro</md-button>
             <md-button ng-click="loginFacebook()"
+                ng-if="config.IngresoFacebook"
                 class="md-raised md-primary">Ingresar con Facebook</md-button>
             <md-button ng-click="loginGoogle()"
-                    class="md-raised md-primary">Ingresar con Google</md-button>
+                ng-if="config.IngresoTwitter"
+                class="md-raised md-primary">Ingresar con Google</md-button>
 
         </md-card-actions>
     </md-card>
@@ -62,35 +64,39 @@
         <section class="md-padding"
             layout="column">
             <div layout-gt-xs="row">
-              <md-fab-speed-dial md-open="seleccionarImagen"
-                  md-direction="right"
-                  class="md-fling">
-                  <md-fab-trigger>
-                      <md-button aria-label="menu"
-                          class="md-fab md-warn"
-                          style="padding:3px">
-                          <img ng-src="{{userRegistro.foto}}"
-                            style="border-radius: 25px;"
-                              class="md-avatar"
-                              alt="Foto" />
-                      </md-button>
-                  </md-fab-trigger>
+                <md-fab-speed-dial md-open="seleccionarImagen"
+                    md-direction="right"
+                    class="md-fling">
+                    <md-fab-trigger>
+                        <md-button aria-label="menu"
+                            class="md-fab md-warn"
+                            style="padding:3px">
+                            <img ng-src="{{userRegistro.foto}}"
+                                style="border-radius: 25px;"
+                                class="md-avatar"
+                                alt="Foto" />
+                        </md-button>
+                    </md-fab-trigger>
 
-                  <md-fab-actions ng-show="seleccionarImagen || seleccionarImagenRestrasado">
-                      <md-button aria-label="Twitter"
-                          class="md-fab md-raised md-mini" style="padding:0px" ng-repeat="foto in fotos" ng-click="seleccionarFoto(foto)">
-                          <img ng-src="{{foto}}"
-                            style="border-radius: 25px;"
-                              class="md-avatar"
-                              alt="foto" />
-                      </md-button>
-                  </md-fab-actions>
-              </md-fab-speed-dial>
-              <md-input-container class="md-block" flex-gt-xs>
-                  <label>Nombre</label>
-                  <input ng-model="userRegistro.name"
-                      required>
-              </md-input-container>
+                    <md-fab-actions ng-show="seleccionarImagen || seleccionarImagenRestrasado">
+                        <md-button aria-label="Twitter"
+                            class="md-fab md-raised md-mini"
+                            style="padding:0px"
+                            ng-repeat="foto in fotos"
+                            ng-click="seleccionarFoto(foto)">
+                            <img ng-src="{{foto}}"
+                                style="border-radius: 25px;"
+                                class="md-avatar"
+                                alt="foto" />
+                        </md-button>
+                    </md-fab-actions>
+                </md-fab-speed-dial>
+                <md-input-container class="md-block"
+                    flex-gt-xs>
+                    <label>Nombre</label>
+                    <input ng-model="userRegistro.name"
+                        required>
+                </md-input-container>
             </div>
             <md-input-container>
                 <label>Correo</label>

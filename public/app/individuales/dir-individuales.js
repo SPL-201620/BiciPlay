@@ -9,7 +9,8 @@
     });
 
 
-    function controller($scope, $interval, $mdDialog, Individuales, Retos, Amigos, User) {
+    function controller($scope, $interval, $mdDialog, Individuales, Retos, Amigos, User, Config) {
+        $scope.config = Config;
         $scope.view = "mapa";
         $scope.recorridoActual = {};
         $scope.guardarRuta = function(recorridoActual) {
