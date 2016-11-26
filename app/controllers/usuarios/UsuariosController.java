@@ -24,6 +24,11 @@ import java.util.List;
  */
 @Singleton
 public class UsuariosController extends Controller {
+
+    public final static String AT_LOCAL = "Local";
+    public final static String AT_FACEBOOK = "Facebook";
+    public final static String AT_GOOGLE = "Google";
+
     public final static String ID_USUARIO="idUsuario";
     public final static String ROL_USUARIO="rol";
     private final static Gson GSON = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -41,27 +46,15 @@ public class UsuariosController extends Controller {
         if(json == null) {
             return badRequest("Expecting Json data");
         }
+        return ok(GSON.toJson(autenticar(json, AT_FACEBOOK)));
+    }
 
-        String name = json.findPath("name").textValue();
-        String type = json.findPath("type").textValue();
-        String email = json.findPath("email").textValue();
-        String foto = json.findPath("foto").textValue();
-
-        if(email == null || name == null || foto == null || type == null) {
-            return badRequest("Missing parameter");
+    public Result loginGoogle() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
         }
-
-        Usuario usuario =  Usuario.find.where().eq("email", email).findUnique();
-        if(usuario == null ){
-            usuario = new Usuario();
-        }
-        usuario.email =email;
-        usuario.name = name;
-        usuario.foto = foto;
-        usuario.type = type;
-        usuario.save();
-        crearSession(usuario.id);
-        return ok(GSON.toJson(usuario));
+        return ok(GSON.toJson(autenticar(json, AT_GOOGLE)));
     }
 
     /**
@@ -123,20 +116,42 @@ public class UsuariosController extends Controller {
         if(json == null) {
             return badRequest("Expecting Json data");
         }
+        return ok(GSON.toJson(autenticar(json, AT_LOCAL)));
+    }
 
-        String email = json.findPath("username").textValue();
-        String password = json.findPath("password").textValue();
-        if(email == null || password == null) {
-            return badRequest("Missing parameter");
+    private Usuario autenticar(JsonNode json, String tipoAutenticacion){
+        Usuario usuario = null;
+        if(tipoAutenticacion == AT_LOCAL){
+            String email = json.findPath("username").textValue();
+            String password = json.findPath("password").textValue();
+            if(email != null && password != null) {
+                Usuario usuarioP =  Usuario.find.where().eq("email", email).findUnique();
+                if(usuarioP != null && usuarioP.password.equals(password)){
+                    usuario = usuarioP;
+                }
+            }
+        } else if (tipoAutenticacion == AT_GOOGLE || tipoAutenticacion == AT_FACEBOOK ){
+            String name = json.findPath("name").textValue();
+            String type = json.findPath("type").textValue();
+            String email = json.findPath("email").textValue();
+            String foto = json.findPath("foto").textValue();
+
+            if(email != null && name != null && foto != null && type != null) {
+                usuario =  Usuario.find.where().eq("email", email).findUnique();
+                if(usuario == null ){
+                    usuario = new Usuario();
+                }
+                usuario.email =email;
+                usuario.name = name;
+                usuario.foto = foto;
+                usuario.type = type;
+                usuario.save();
+            }
         }
-
-        Usuario usuario =  Usuario.find.where().eq("email", email).findUnique();
-        if(usuario == null || !usuario.password.equals(password)){
-            return badRequest("Credenciales incorrectas");
+        if(usuario != null){
+            crearSession(usuario.id);
         }
-
-        crearSession(usuario.id);
-        return ok(GSON.toJson(usuario));
+        return usuario;
     }
     private static void crearSession(long idUsuario){
         session().clear();
