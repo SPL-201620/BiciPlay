@@ -23,6 +23,7 @@ public class Reporte extends Model {
     @Expose
     public String tipo;
     @Expose
+    @Column(columnDefinition = "double precision")
     public double cantidad;
     @Expose
     public int periodo;

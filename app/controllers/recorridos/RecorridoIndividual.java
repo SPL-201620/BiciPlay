@@ -7,6 +7,7 @@ import controllers.ruta.Ubicacion;
 import controllers.usuarios.Usuario;
 import scala.Int;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,8 +30,10 @@ import java.util.List;
         @Expose
         public int duracion;
         @Expose
+        @Column(columnDefinition = "double precision")
         public double distancia;
         @Expose
+        @Column(columnDefinition = "double precision")
         public double calorias;
 
         @Expose
