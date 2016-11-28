@@ -93,18 +93,27 @@ POST  /api/recorridos/configuracion               controllers.configurador.Confi
 
 
 
-#RETOS
-# Cnto   ingresarUbicacionesIndividuales
+# @RETOS
 POST  /api/retos               controllers.retos.RetosController.retarAmigo
 
+# @RETOS
 GET   /api/retos               controllers.retos.RetosController.darRetos
 
+# @RETOS
 POST  /api/retos/:id/recorrido               controllers.retos.RetosController.asociarReccorrido(id:Integer)
 
+# @RETOS
 GET  /api/ranking/:recorridoPropuestoId      controllers.retos.RetosController.ranking(recorridoPropuestoId:Integer)
-# END RETOS
 
 
+# @REPORTES
+GET /api/reportes/tipos                 controllers.reportes.ReportesController.darTiposReporte
+
+# @REPORTES
+POST /api/reportes/list                 controllers.reportes.ReportesController.darReporte
+
+# @REPORTES
+GET /api/reportes/individuales/:periodo                 controllers.reportes.ReportesController.darIndividualesEnPeriodo(periodo:Integer)
 
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message

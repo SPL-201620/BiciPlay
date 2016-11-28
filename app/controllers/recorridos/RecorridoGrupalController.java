@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import controllers.reportes.ReportesController;
 import controllers.usuarios.Usuario;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -101,6 +102,7 @@ public class RecorridoGrupalController {
             RecorridoGrupal recorrido = RecorridoGrupal.find.where().eq("id", idRecorrido).findUnique();
             recorrido.usuario.add(Usuario.find.where().eq("id", getUsuarioLogIn()).findUnique());
             recorrido.save();
+            /* @Reportes */ ReportesController.agregar(ReportesController.TIPO_GRUPALES, 1);
             return ok("OK");
         }
     }

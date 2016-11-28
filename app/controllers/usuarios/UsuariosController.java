@@ -116,7 +116,8 @@ public class UsuariosController extends Controller {
         if(json == null) {
             return badRequest("Expecting Json data");
         }
-        return ok(GSON.toJson(autenticar(json, AT_LOCAL)));
+        Usuario usuario = autenticar(json, AT_LOCAL);
+        return usuario!= null?ok(GSON.toJson(usuario)):badRequest("Credenciales incorrectas.");
     }
 
     private Usuario autenticar(JsonNode json, String tipoAutenticacion){

@@ -4,6 +4,8 @@ package controllers.recorridos;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import controllers.reportes.Reporte;
+import controllers.reportes.ReportesController;
 import play.mvc.Result;
 import services.Counter;
 
@@ -79,6 +81,12 @@ public class RecorridoIndividualController {
             recorridoIndividual.calorias = calcularCalorias(recorridoIndividual.distancia);
             recorridoIndividual.save();
 
+            System.out.println("ReportesController.TIPO_DISTANCIA: " + ReportesController.TIPO_DISTANCIA);
+            /* @Reportes */ ReportesController.agregar(ReportesController.TIPO_INDIVIDUAL, 1);
+            /* @Reportes */ Reporte rDistancia = ReportesController.agregar(ReportesController.TIPO_DISTANCIA, recorridoIndividual.distancia);
+            /* @Reportes */ Reporte rTiempo = ReportesController.agregar(ReportesController.TIPO_TIEMPO, recorridoIndividual.duracion);
+            /* @Reportes */ ReportesController.reemplazar(ReportesController.TIPO_VELOCIDAD, rDistancia.cantidad/(rTiempo.cantidad/60));
+            /* @Reportes */ ReportesController.agregar(ReportesController.TIPO_CALORIAS, recorridoIndividual.calorias);
             return ok(GSON.toJson(recorridoIndividual));
 
         }
