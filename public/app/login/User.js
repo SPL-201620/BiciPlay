@@ -8,6 +8,9 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
     var TYPE_GOOGLE = "Google";
 
 
+    function setUser(userP) {
+        user = (userP !== 'null')?userP:null;
+    }
     self.getUser = function() {
         return user;
     };
@@ -17,13 +20,13 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
 
     self.registrar = function(user) {
         return Http.post('usuarios/registro', user).then(function(userP) {
-            user = userP;
+            setUser(userP);
             return user;
         });
     };
     self.login = function(userLogin) {
         return Http.post('usuarios/login', userLogin).then(function(userP) {
-            user = userP;
+            setUser(userP);
             return user;
         });
     };
@@ -32,7 +35,7 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
         return Facebook.login().then(function(facebookUser) {
             facebookUser.type = TYPE_FACEBOOK;
             return Http.post('usuarios/loginFacebook', facebookUser).then(function(userP) {
-                user = userP;
+                setUser(userP);
                 return user;
             });
         });
@@ -42,7 +45,7 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
         return Google.login().then(function(googleUser) {
             googleUser.type = TYPE_GOOGLE;
             return Http.post('usuarios/loginFacebook', googleUser).then(function(userP) {
-                user = userP;
+                setUser(userP);
                 return user;
             });
         });
@@ -50,9 +53,7 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
 
     self.checkLoggedin = function() {
         return Http.get('usuarios/loggedin').then(function(userP) {
-            if (userP !== 'null') {
-                user = userP;
-            }
+            setUser(userP);
             callbacks.forEach(function(callback) {
                 callback(user);
             });
@@ -61,19 +62,19 @@ angular.module('app').service('User', function($rootScope, $route, $window, $loc
     };
     self.logout = function() {
         return Http.get('usuarios/logout').then(function() {
-            user = null;
+            setUser(null);
             $route.reload();
         });
     };
 
     self.share = function(message, link, title, greeting) {
-        if(user.type === TYPE_FACEBOOK){
+        if (user.type === TYPE_FACEBOOK) {
             return Facebook.share(message, link, title, greeting);
-        } else if(user.type=== TYPE_GOOGLE){
+        } else if (user.type === TYPE_GOOGLE) {
             return $q(function(resolve, reject) {
                 var transformedLink = link.replace("localhost", "127.0.0.1").replace("#", "%23");
                 console.log("transformedLink", transformedLink);
-                window.open('https://plus.google.com/share?url=' +  transformedLink, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+                window.open('https://plus.google.com/share?url=' + transformedLink, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
                 resolve();
             });
         }

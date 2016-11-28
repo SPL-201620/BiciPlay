@@ -18,7 +18,7 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, User) {
     });
 };
 
-var app = angular.module('app', ['ngRoute', 'ngMaterial', 'ui.ace']);
+var app = angular.module('app', ['ngRoute', 'ngMaterial', 'ui.ace', 'md.data.table']);
 
 app.config(function($routeProvider, $httpProvider, $mdThemingProvider) {
     $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
