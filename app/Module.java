@@ -1,6 +1,7 @@
 import com.google.inject.AbstractModule;
 import java.time.Clock;
 
+import controllers.configurador.ConfiguracionesValidas;
 import services.ApplicationTimer;
 import services.AtomicCounter;
 import services.Counter;
@@ -21,6 +22,8 @@ public class Module extends AbstractModule {
     public void configure() {
         // Use the system clock as the default implementation of Clock
         bind(Clock.class).toInstance(Clock.systemDefaultZone());
+        System.out.print("Estoy arrancando el configurador");
+        ConfiguracionesValidas.leerArchivo();
         // Ask Guice to create an instance of ApplicationTimer when the
         // application starts.
         bind(ApplicationTimer.class).asEagerSingleton();

@@ -87,6 +87,10 @@ POST    /api/recorridos/registrarRecorrido        controllers.recorridos.Recorri
 POST  /api/recorridos/ingresarUbicacionesIndividuales               controllers.ruta.UbicacionController.ingresarUbicacionesIndividuales
 
 
+# Cnto   ingresarUbicacionesIndividuales
+POST  /api/recorridos/configuracion               controllers.configurador.ConfiguradorController.validarConfiguracion
+
+
 
 
 #RETOS

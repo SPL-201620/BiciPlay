@@ -1,4 +1,13 @@
-
+<md-toolbar class="md-theme-indigo">
+    <div class="md-toolbar-tools">
+        <h1 class="md-toolbar-tools">Configurador de Bicicletas</h1>
+        <span flex></span>
+        <md-button class="md-raised"
+                   ng-click="validarConfiguracion(configs)">
+            Validar
+        </md-button>
+    </div>
+</md-toolbar>
 <md-menu ng-repeat="config in configs">
     <md-button class="md-raised"aria-label="Open phone interactions menu"
         ng-click="openMenu($mdOpenMenu, $event)">
@@ -16,3 +25,13 @@
         </md-menu-item>
     </md-menu-content>
 </md-menu>
+<md-toolbar class="md-theme-indigo">
+    <div class="md-toolbar-tools">
+        <h1 class="md-toolbar-tools"></h1>
+        <span flex></span>
+        <md-button class="md-raised"
+                   ng-click="validarConfiguracion(configs)">
+            Validar
+        </md-button>
+    </div>
+</md-toolbar>
