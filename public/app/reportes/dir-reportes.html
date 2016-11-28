@@ -1,17 +1,56 @@
-
-<md-card >
+<md-card>
     <md-toolbar class="md-theme-indigo">
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button"
-                ng-click="goBack()">
-                <md-icon md-svg-icon="img/back.svg"></md-icon>
-            </md-button>
-            <h1 class="md-toolbar-tools">Reporte ------semanal-------</h1>
+            <h1 class="md-toolbar-tools">Reporte {{(config.Semanal)?'semanal':'mensual'}}</h1>
             <span flex></span>
         </div>
     </md-toolbar>
+    <md-input-container>
+        <label>Tipo de reporte</label>
+        <md-select ng-model="tipoReporteActual">
+            <md-option ng-repeat="tipo in tiposDeReporte"
+                value="{{tipo}}">
+                {{tipo}}
+            </md-option>
+        </md-select>
+    </md-input-container>
     <section class="md-padding"
         layout="column">
         <div id="chart_div"></div>
     </section>
+    <md-table-container>
+        <table md-table
+            multiple
+            md-progress="promise">
+            <thead md-head
+                md-order="indOrder"
+                md-on-reorder="getDesserts">
+                <tr md-row>
+                    <th md-column
+                        md-order-by="fecha"><span>Fecha</span></th>
+                    <th md-column
+                        md-numeric
+                        md-order-by="duracion"><span>Duración (min)</span></th>
+                    <th md-column
+                        md-numeric
+                        md-order-by="distancia"><span>Distancia (km)</span></th>
+                    <th md-column
+                        md-numeric
+                        md-order-by="calorias"><span>Calorias (Cal)</span></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row
+                    md-select="individual"
+                    md-select-id="name"
+                    md-auto-select
+                    ng-repeat="individual in individuales | orderBy:indOrder">
+                    <td md-cell>{{individual.fecha}}</td>
+                    <td md-cell>{{individual.duracion}}</td>
+                    <td md-cell>{{individual.distancia}}</td>
+                    <td md-cell>{{individual.calorias}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </md-table-container>
 </md-card>
