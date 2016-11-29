@@ -25,6 +25,10 @@ import java.util.List;
 @Singleton
 public class UsuariosController extends Controller {
 
+
+    public final static boolean AUTENTICACION_FACEBOOK = false;
+    public final static boolean AUTENTICACION_GOOGLE = false;
+
     public final static String AT_LOCAL = "Local";
     public final static String AT_FACEBOOK = "Facebook";
     public final static String AT_GOOGLE = "Google";
@@ -42,9 +46,16 @@ public class UsuariosController extends Controller {
     }
 
     public Result loginFacebook() {
+
         JsonNode json = request().body().asJson();
         if(json == null) {
             return badRequest("Expecting Json data");
+        }
+        if(json.findPath("type").textValue().equals(AT_FACEBOOK) &&!AUTENTICACION_FACEBOOK){
+            return badRequest("No está habilitada la opción de autenticación con Facebook");
+        }
+        if(json.findPath("type").textValue().equals(AT_GOOGLE) && !AUTENTICACION_GOOGLE){
+            return badRequest("No está habilitada la opción de autenticación con Facebook");
         }
         return ok(GSON.toJson(autenticar(json, AT_FACEBOOK)));
     }
