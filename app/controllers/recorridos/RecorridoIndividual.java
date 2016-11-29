@@ -29,6 +29,7 @@ import java.util.List;
         @Expose
         public int duracion;
         @Expose
+        @Column(columnDefinition = "double precision")
         public double distancia;
         @Expose
         public double calorias;
