@@ -22,6 +22,7 @@ fs.readFile(LIST_FILE_CONFIG, 'utf8', function(err, configData) {
 
 
     derivarInterfaz(features);
+    derivarREST(features.Reportes, features.Retos, features.ConfigBicicletas);
     derivarReportes(features.Reportes);
     derivarTipoReportes(features.Semanal);
 
@@ -37,6 +38,34 @@ function derivarInterfaz(features) {
             console.log(err);
         }
         console.log("OK: Interfaz");
+    });
+}
+
+function derivarREST(aReportes, aRetos, aConfigBicicletas) {
+    var REST_FILE = path.join('conf', 'routes');
+
+    var REPORTE_ACTIVADO = '# @REPORTES\n';
+    var REPORTE_DESACTIVADO = '# @REPORTES DISABLED';
+
+    var RETOS_ACTIVADO = '# @RETOS\n';
+    var RETOS_DESACTIVADO = '# @RETOS DISABLED';
+
+    var CONF_ACTIVADO = '# @CONFIGURACION\n';
+    var CONF_DESACTIVADO = '# @CONFIGURACION DISABLED';
+
+
+
+    fs.readFile(REST_FILE, 'utf8', function(err, restContent) {
+        if (err) throw err;
+        var restContentGenerado = restContent.toString();
+        restContentGenerado = aReportes?restContentGenerado.split(REPORTE_DESACTIVADO).join(REPORTE_ACTIVADO):restContentGenerado.split(REPORTE_ACTIVADO).join(REPORTE_DESACTIVADO);
+        restContentGenerado = aRetos?restContentGenerado.split(RETOS_DESACTIVADO).join(RETOS_ACTIVADO):restContentGenerado.split(RETOS_ACTIVADO).join(RETOS_DESACTIVADO);
+        restContentGenerado = aConfigBicicletas?restContentGenerado.split(CONF_DESACTIVADO).join(CONF_ACTIVADO):restContentGenerado.split(CONF_ACTIVADO).join(CONF_DESACTIVADO);
+
+        fs.writeFile(REST_FILE, restContentGenerado, function(err) {
+            if (err) throw err;
+            //console.log('Generado:', filePath);
+        });
     });
 }
 
@@ -79,11 +108,11 @@ function derivarReportes(activado) {
     }
 }
 
-function derivarTipoReportes(activadoSemanal){
+function derivarTipoReportes(activadoSemanal) {
     var REPOERTE_FILE = path.join('app', 'controllers', 'reportes', 'ReportesController.java');
     var REPOERTE_SEMANAL_FILE = path.join(__dirname, "ReportesController.semana.java");
     var REPOERTE_MENSUAL_FILE = path.join(__dirname, "ReportesController.mes.java");
-    var selectedFile = activadoSemanal?REPOERTE_SEMANAL_FILE:REPOERTE_MENSUAL_FILE;
+    var selectedFile = activadoSemanal ? REPOERTE_SEMANAL_FILE : REPOERTE_MENSUAL_FILE;
     fs.readFile(selectedFile, 'utf8', function(err, javaFileContent) {
         if (err) throw err;
         fs.writeFile(REPOERTE_FILE, "", function(err) {
