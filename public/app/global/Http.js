@@ -8,7 +8,7 @@
          * Url del servidor
          * @type {string}
          */
-        this.serverUrl = $location.protocol() + '://'+ $location.host() + ':' + '9000';
+        this.serverUrl = $location.protocol() + '://'+ $location.host() ;
         this.serverPath = this.serverUrl + '/api/';
         //this.serverUrl = '/api/';
         /**
