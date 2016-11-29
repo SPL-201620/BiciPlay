@@ -25,6 +25,7 @@ fs.readFile(LIST_FILE_CONFIG, 'utf8', function(err, configData) {
     derivarREST(features.Reportes, features.Retos, features.ConfigBicicletas);
     derivarReportes(features.Reportes);
     derivarTipoReportes(features.Semanal);
+    derivarAutenticacion(features.IngresoFacebook, features.IngresoTwitter);
 
     if (features.IngresoApp) {
         console.log("objeto", features);
@@ -138,6 +139,32 @@ function derivarTipoReportes(activadoSemanal) {
     });
 }
 
+function derivarAutenticacion(IngresoFacebook, IngresoTwitter) {
+    var USUARIO_CONTROLLER_FILE = path.join(APP_FOLDER, "usuarios", "UsuariosController.java");
+    var INGRESO_FACEBOOK_HABILITADO = "public final static boolean AUTENTICACION_FACEBOOK = true;";
+    var INGRESO_FACEBOOK_DESHABILITADO = "public final static boolean AUTENTICACION_FACEBOOK = false;";
+    var INGRESO_GOOGLE_HABILITADO = "public final static boolean AUTENTICACION_GOOGLE = true;";
+    var INGRESO_GOOGLE_DESHABILITADO = "public final static boolean AUTENTICACION_GOOGLE = false;";
+
+    fs.readFile(USUARIO_CONTROLLER_FILE, 'utf8', function(err, javaFileContent) {
+        if (err) return console.log("ERROR", err);
+        var codigoGenerado = javaFileContent.toString();
+
+        codigoGenerado = IngresoFacebook?codigoGenerado.replace(INGRESO_FACEBOOK_DESHABILITADO, INGRESO_FACEBOOK_HABILITADO):codigoGenerado.replace(INGRESO_FACEBOOK_HABILITADO,INGRESO_FACEBOOK_DESHABILITADO );
+        codigoGenerado = IngresoTwitter?codigoGenerado.replace(INGRESO_GOOGLE_DESHABILITADO, INGRESO_GOOGLE_HABILITADO):codigoGenerado.replace(INGRESO_GOOGLE_HABILITADO,INGRESO_GOOGLE_DESHABILITADO );
+
+        fs.writeFile(USUARIO_CONTROLLER_FILE, "", function(err) {
+            if (err) return console.log("ERROR", err);
+            fs.writeFile(USUARIO_CONTROLLER_FILE, codigoGenerado, function(err) {
+                if (err) return console.log("ERROR", err);
+                console.log('OK: Autenticación');
+            });
+        });
+
+    });
+
+}
+
 
 
 
@@ -154,42 +181,42 @@ var walkSync = function(dir, filelist) {
 };
 
 var rmdirAsync = function(path, callback) {
-	fs.readdir(path, function(err, files) {
-		if(err) {
-			// Pass the error on to callback
-			callback(err, []);
-			return;
-		}
-		var wait = files.length,
-			count = 0,
-			folderDone = function(err) {
-			count++;
-			// If we cleaned out all the files, continue
-			if( count >= wait || err) {
-				fs.rmdir(path,callback);
-			}
-		};
-		// Empty directory to bail early
-		if(!wait) {
-			folderDone();
-			return;
-		}
+    fs.readdir(path, function(err, files) {
+        if (err) {
+            // Pass the error on to callback
+            callback(err, []);
+            return;
+        }
+        var wait = files.length,
+            count = 0,
+            folderDone = function(err) {
+                count++;
+                // If we cleaned out all the files, continue
+                if (count >= wait || err) {
+                    fs.rmdir(path, callback);
+                }
+            };
+        // Empty directory to bail early
+        if (!wait) {
+            folderDone();
+            return;
+        }
 
-		// Remove one or more trailing slash to keep from doubling up
-		path = path.replace(/\/+$/,"");
-		files.forEach(function(file) {
-			var curPath = path + "/" + file;
-			fs.lstat(curPath, function(err, stats) {
-				if( err ) {
-					callback(err, []);
-					return;
-				}
-				if( stats.isDirectory() ) {
-					rmdirAsync(curPath, folderDone);
-				} else {
-					fs.unlink(curPath, folderDone);
-				}
-			});
-		});
-	});
+        // Remove one or more trailing slash to keep from doubling up
+        path = path.replace(/\/+$/, "");
+        files.forEach(function(file) {
+            var curPath = path + "/" + file;
+            fs.lstat(curPath, function(err, stats) {
+                if (err) {
+                    callback(err, []);
+                    return;
+                }
+                if (stats.isDirectory()) {
+                    rmdirAsync(curPath, folderDone);
+                } else {
+                    fs.unlink(curPath, folderDone);
+                }
+            });
+        });
+    });
 };
