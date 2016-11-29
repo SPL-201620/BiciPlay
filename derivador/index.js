@@ -1,4 +1,4 @@
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
 var LIST_FILE_CONFIG = path.join('ArbolVariabilidad', 'configs', 'default.config');
 var JS_FILE_CONFIG = path.join('public', 'app', 'global', 'Config.js');
@@ -56,17 +56,30 @@ function derivarREST(aReportes, aRetos, aConfigBicicletas) {
 
 
     fs.readFile(REST_FILE, 'utf8', function(err, restContent) {
-        if (err) throw err;
+        if (err) return console.log("ERROR", err);
         var restContentGenerado = restContent.toString();
-        restContentGenerado = aReportes?restContentGenerado.split(REPORTE_DESACTIVADO).join(REPORTE_ACTIVADO):restContentGenerado.split(REPORTE_ACTIVADO).join(REPORTE_DESACTIVADO);
-        restContentGenerado = aRetos?restContentGenerado.split(RETOS_DESACTIVADO).join(RETOS_ACTIVADO):restContentGenerado.split(RETOS_ACTIVADO).join(RETOS_DESACTIVADO);
-        restContentGenerado = aConfigBicicletas?restContentGenerado.split(CONF_DESACTIVADO).join(CONF_ACTIVADO):restContentGenerado.split(CONF_ACTIVADO).join(CONF_DESACTIVADO);
+        restContentGenerado = aReportes ? restContentGenerado.split(REPORTE_DESACTIVADO).join(REPORTE_ACTIVADO) : restContentGenerado.split(REPORTE_ACTIVADO).join(REPORTE_DESACTIVADO);
+        restContentGenerado = aRetos ? restContentGenerado.split(RETOS_DESACTIVADO).join(RETOS_ACTIVADO) : restContentGenerado.split(RETOS_ACTIVADO).join(RETOS_DESACTIVADO);
+        restContentGenerado = aConfigBicicletas ? restContentGenerado.split(CONF_DESACTIVADO).join(CONF_ACTIVADO) : restContentGenerado.split(CONF_ACTIVADO).join(CONF_DESACTIVADO);
 
         fs.writeFile(REST_FILE, restContentGenerado, function(err) {
-            if (err) throw err;
+            if (err) return console.log("ERROR", err);
             //console.log('Generado:', filePath);
         });
     });
+
+    if (aRetos) {
+        fs.copy(path.join(__dirname, "retos"), path.join(APP_FOLDER, "retos"), function(err) {
+            if (err) return console.error(err);
+            console.log('Paquete de retos agregado!');
+        });
+    } else {
+        rmdirAsync(path.join(APP_FOLDER, "retos"), function(err) {
+            if (err) return console.error(err);
+            console.log('Paquete de retos elimindo!');
+        });
+    }
+
 }
 
 function derivarReportes(activado) {
@@ -77,10 +90,10 @@ function derivarReportes(activado) {
     fileList.forEach(function(filePath) {
 
         fs.readFile(filePath, 'utf8', function(err, javaFileContent) {
-            if (err) throw err;
+            if (err) return console.log("ERROR", err);
             var codigoGenerado = generarCodigo(javaFileContent.toString(), activado);
             fs.writeFile(filePath, codigoGenerado, function(err) {
-                if (err) throw err;
+                if (err) return console.log("ERROR", err);
                 //console.log('Generado:', filePath);
             });
         });
@@ -114,11 +127,11 @@ function derivarTipoReportes(activadoSemanal) {
     var REPOERTE_MENSUAL_FILE = path.join(__dirname, "ReportesController.mes.java");
     var selectedFile = activadoSemanal ? REPOERTE_SEMANAL_FILE : REPOERTE_MENSUAL_FILE;
     fs.readFile(selectedFile, 'utf8', function(err, javaFileContent) {
-        if (err) throw err;
+        if (err) return console.log("ERROR", err);
         fs.writeFile(REPOERTE_FILE, "", function(err) {
-            if (err) throw err;
+            if (err) return console.log("ERROR", err);
             fs.writeFile(REPOERTE_FILE, javaFileContent, function(err) {
-                if (err) throw err;
+                if (err) return console.log("ERROR", err);
                 //console.log('Generado:', filePath);
             });
         });
@@ -138,4 +151,45 @@ var walkSync = function(dir, filelist) {
         }
     });
     return filelist;
+};
+
+var rmdirAsync = function(path, callback) {
+	fs.readdir(path, function(err, files) {
+		if(err) {
+			// Pass the error on to callback
+			callback(err, []);
+			return;
+		}
+		var wait = files.length,
+			count = 0,
+			folderDone = function(err) {
+			count++;
+			// If we cleaned out all the files, continue
+			if( count >= wait || err) {
+				fs.rmdir(path,callback);
+			}
+		};
+		// Empty directory to bail early
+		if(!wait) {
+			folderDone();
+			return;
+		}
+
+		// Remove one or more trailing slash to keep from doubling up
+		path = path.replace(/\/+$/,"");
+		files.forEach(function(file) {
+			var curPath = path + "/" + file;
+			fs.lstat(curPath, function(err, stats) {
+				if( err ) {
+					callback(err, []);
+					return;
+				}
+				if( stats.isDirectory() ) {
+					rmdirAsync(curPath, folderDone);
+				} else {
+					fs.unlink(curPath, folderDone);
+				}
+			});
+		});
+	});
 };
