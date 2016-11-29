@@ -22,7 +22,8 @@ fs.readFile(LIST_FILE_CONFIG, 'utf8', function(err, configData) {
 
 
     derivarInterfaz(features);
-    derivarReportes(true/*features.Reportes*/);
+    derivarReportes(features.Reportes);
+    derivarTipoReportes(features.Semanal);
 
     if (features.IngresoApp) {
         console.log("objeto", features);
@@ -51,7 +52,7 @@ function derivarReportes(activado) {
             var codigoGenerado = generarCodigo(javaFileContent.toString(), activado);
             fs.writeFile(filePath, codigoGenerado, function(err) {
                 if (err) throw err;
-                console.log('Generado:', filePath);
+                //console.log('Generado:', filePath);
             });
         });
     });
@@ -72,10 +73,27 @@ function derivarReportes(activado) {
                 }
 
             });
-            console.log("REGULAR EXP: javaFileContent\n", javaFileContent);
+            //console.log("REGULAR EXP: javaFileContent\n", javaFileContent);
         }
         return javaFileContent;
     }
+}
+
+function derivarTipoReportes(activadoSemanal){
+    var REPOERTE_FILE = path.join('app', 'controllers', 'reportes', 'ReportesController.java');
+    var REPOERTE_SEMANAL_FILE = path.join(__dirname, "ReportesController.semana.java");
+    var REPOERTE_MENSUAL_FILE = path.join(__dirname, "ReportesController.mes.java");
+    var selectedFile = activadoSemanal?REPOERTE_SEMANAL_FILE:REPOERTE_MENSUAL_FILE;
+    fs.readFile(selectedFile, 'utf8', function(err, javaFileContent) {
+        if (err) throw err;
+        fs.writeFile(REPOERTE_FILE, "", function(err) {
+            if (err) throw err;
+            fs.writeFile(REPOERTE_FILE, javaFileContent, function(err) {
+                if (err) throw err;
+                //console.log('Generado:', filePath);
+            });
+        });
+    });
 }
 
 
