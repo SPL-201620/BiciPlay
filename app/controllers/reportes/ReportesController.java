@@ -30,9 +30,9 @@ import static play.mvc.Results.ok;
 @Singleton
 public class ReportesController {
 
-    public static final String UNIDAD_TIEMPO = "semana";
-    public static final int NUM_PERIODOS = 53;
-    public static final int PERIODO = Calendar.WEEK_OF_YEAR;
+    public static final String UNIDAD_TIEMPO = "mes";
+    public static final int NUM_PERIODOS = 13;
+    public static final int PERIODO = Calendar.MONTH;
 
 
     public static final String TIPO_INDIVIDUAL = "Recorridos individuales";
@@ -65,7 +65,7 @@ public class ReportesController {
         System.out.println("TIPO DATO: " + tipo);
         Date fecha = new Date();
         Calendar calendar = Calendar.getInstance();
-        int periodo = calendar.get(PERIODO);
+        int periodo = calendar.get(PERIODO) + 1;
         Reporte reporte = Reporte.find.where()
                 .eq("usuario_id", getUsuarioLogIn())
                 .eq("tipo", tipo)
@@ -108,7 +108,7 @@ public class ReportesController {
     public ReporteDatos buildReporte(String tipo){
         ReporteDatos reporteDatos = new ReporteDatos();
         reporteDatos.setTitle(tipo + " por " + UNIDAD_TIEMPO);
-        reporteDatos.setxTitle(UNIDAD_TIEMPO + "s");
+        reporteDatos.setxTitle(UNIDAD_TIEMPO + "es");
         reporteDatos.setyTitle(tipo);
 
         List<Reporte> datos = Reporte.find.where()
@@ -126,14 +126,14 @@ public class ReportesController {
 
     public Result darIndividualesEnPeriodo(int periodo){
         Calendar cal = Calendar.getInstance();
-        cal.set(PERIODO, periodo);
+        cal.set(PERIODO, periodo-1);
 
-        //TODO cambiar implementación para meses
+
         Calendar first = (Calendar) cal.clone();
-        first.add(Calendar.DAY_OF_WEEK, first.getFirstDayOfWeek() - first.get(Calendar.DAY_OF_WEEK));
+        first.set(Calendar.DATE, 1);
 
         Calendar last = (Calendar) first.clone();
-        last.add(Calendar.DAY_OF_YEAR, 6);
+        last.set(Calendar.DATE, last.getActualMaximum(Calendar.DAY_OF_MONTH));
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println("TIME: " +  df.format(cal.getTime()) + " _ " + df.format(first.getTime()) + " -> " +
