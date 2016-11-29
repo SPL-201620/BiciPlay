@@ -102,7 +102,7 @@ public class RecorridoGrupalController {
             RecorridoGrupal recorrido = RecorridoGrupal.find.where().eq("id", idRecorrido).findUnique();
             recorrido.usuario.add(Usuario.find.where().eq("id", getUsuarioLogIn()).findUnique());
             recorrido.save();
-            /* @Reportes */ ReportesController.agregar(ReportesController.TIPO_GRUPALES, 1);
+            /* @Reportes({"key":"TIPO_GRUPALES","value":1})*/ ReportesController.registrar(ReportesController.TIPO_GRUPALES, 1);
             return ok("OK");
         }
     }

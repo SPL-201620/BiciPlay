@@ -82,13 +82,22 @@ public class ReportesController {
         return reporte;
     }
 
-    public static Reporte agregar(String tipo, double cantidad){
-        return actualizar(tipo, cantidad, true);
-    }
-    public static Reporte reemplazar(String tipo, double cantidad){
-        return actualizar(tipo, cantidad, false);
-    }
+    public static Reporte registrar (String tipo, double cantidad){
+        if(tipo.equals(TIPO_TIEMPO)){
+            Reporte rTiempo = actualizar(TIPO_TIEMPO, cantidad, true);
+            Reporte rDistancia = actualizar(TIPO_DISTANCIA, 0, true);
+            actualizar(TIPO_VELOCIDAD, rDistancia.cantidad/(rTiempo.cantidad/60), false);
+            return rTiempo;
+        } else if(tipo.equals(TIPO_DISTANCIA)){
+            Reporte rTiempo = actualizar(TIPO_TIEMPO, 0, true);
+            Reporte rDistancia = actualizar(TIPO_DISTANCIA, cantidad, true);
+            actualizar(TIPO_VELOCIDAD, rDistancia.cantidad/(rTiempo.cantidad/60), false);
+            return rTiempo;
+        } else{
+            return actualizar(tipo, cantidad, true);
+        }
 
+    }
     public Result darReporte() {
         JsonNode json = request().body().asJson();
         ReporteDatos reporte=  buildReporte(json.findPath("tipo").textValue());

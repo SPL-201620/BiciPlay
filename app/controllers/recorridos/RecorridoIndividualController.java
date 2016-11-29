@@ -82,11 +82,10 @@ public class RecorridoIndividualController {
             recorridoIndividual.save();
 
             System.out.println("ReportesController.TIPO_DISTANCIA: " + ReportesController.TIPO_DISTANCIA);
-            /* @Reportes */ ReportesController.agregar(ReportesController.TIPO_INDIVIDUAL, 1);
-            /* @Reportes */ Reporte rDistancia = ReportesController.agregar(ReportesController.TIPO_DISTANCIA, recorridoIndividual.distancia);
-            /* @Reportes */ Reporte rTiempo = ReportesController.agregar(ReportesController.TIPO_TIEMPO, recorridoIndividual.duracion);
-            /* @Reportes */ ReportesController.reemplazar(ReportesController.TIPO_VELOCIDAD, rDistancia.cantidad/(rTiempo.cantidad/60));
-            /* @Reportes */ ReportesController.agregar(ReportesController.TIPO_CALORIAS, recorridoIndividual.calorias);
+            /* @Reportes({"key":"TIPO_INDIVIDUAL","value":1}) */ ReportesController.registrar(ReportesController.TIPO_INDIVIDUAL, 1);
+            /* @Reportes({"key":"TIPO_DISTANCIA","value":"recorridoIndividual.distancia"}) */ ReportesController.registrar(ReportesController.TIPO_DISTANCIA, recorridoIndividual.distancia);
+            /* @Reportes({"key":"TIPO_TIEMPO","value":"recorridoIndividual.duracion"}) */ ReportesController.registrar(ReportesController.TIPO_TIEMPO, recorridoIndividual.duracion);
+            /* @Reportes({"key":"TIPO_CALORIAS","value":"recorridoIndividual.calorias"}) */ ReportesController.registrar(ReportesController.TIPO_CALORIAS, recorridoIndividual.calorias);
             return ok(GSON.toJson(recorridoIndividual));
 
         }
