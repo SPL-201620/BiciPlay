@@ -87,10 +87,8 @@ POST    /api/recorridos/registrarRecorrido        controllers.recorridos.Recorri
 POST  /api/recorridos/ingresarUbicacionesIndividuales               controllers.ruta.UbicacionController.ingresarUbicacionesIndividuales
 
 
-# Cnto   ingresarUbicacionesIndividuales
+# @CONFIGURACION
 POST  /api/recorridos/configuracion               controllers.configurador.ConfiguradorController.validarConfiguracion
-
-
 
 
 # @RETOS
@@ -114,6 +112,9 @@ POST /api/reportes/list                 controllers.reportes.ReportesController.
 
 # @REPORTES
 GET /api/reportes/individuales/:periodo                 controllers.reportes.ReportesController.darIndividualesEnPeriodo(periodo:Integer)
+
+
+
 
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
