@@ -2,7 +2,7 @@
 angular.module('app').service('Facebook', function($rootScope, $route, $window, $location, $q, Http) {
     var self = this;
     FB.init({
-        appId: '646051245577345',
+        appId: '368338780170899',
         cookie: true,
         xfbml: true,
         version: 'v2.5'
