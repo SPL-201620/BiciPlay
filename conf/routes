@@ -3,7 +3,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET / controllers.Assets.at(path="/public", file="index.html")
 
 # ejemplo  postman GET
 GET     /api/usuarios/registroGet                       controllers.usuarios.UsuariosController.registroGet
